@@ -16,6 +16,7 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 
 public class InicioSesion extends JFrame {
 
@@ -24,7 +25,7 @@ public class InicioSesion extends JFrame {
 	//Elementos dinámicos
 	private JPanel contenedor;
 	private JTextField txtUsuario;
-	private JTextField txtContrasena;
+	private JPasswordField txtContrasena;
 	
 	//Inicialización de la ventana
 	public static void main(String[] args) {
@@ -83,11 +84,10 @@ public class InicioSesion extends JFrame {
 		txtUsuario.setBounds(348, 336, 314, 36);
 		contenedor.add(txtUsuario);
 		
-		txtContrasena = new JTextField();
+		txtContrasena = new JPasswordField();
 		txtContrasena.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
 		txtContrasena.setHorizontalAlignment(SwingConstants.CENTER);
-		txtContrasena.setColumns(10);
-		txtContrasena.setBounds(348, 425, 314, 36);
+		txtContrasena.setBounds(349, 425, 312, 36);
 		contenedor.add(txtContrasena);
 		
 		//CONFIGURACIÓN DE BOTONES
@@ -100,13 +100,15 @@ public class InicioSesion extends JFrame {
 			}
 		});
 		contenedor.add(btnIniciarSesion);
+		
 	}
 	
 	public void iniciarSesion() {
 		//Variables
 		String usuario = txtUsuario.getText();
-		String contrasena = txtContrasena.getText();
-				
+		char[] contrasenaArray = txtContrasena.getPassword();
+		String contrasena = new String(contrasenaArray);
+		
 		ResultSet datos = null;
 		
 		boolean encontrado = false;
@@ -153,5 +155,4 @@ public class InicioSesion extends JFrame {
 		}
 			
 	}
-	
 }
