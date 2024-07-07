@@ -1,22 +1,26 @@
 package frontend;
 import backend.ManejoSQL;
+import backend.OrganismoReceptor;
+import backend.DSSU;
+import backend.Estudiante;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
 
 public class InicioSesion extends JFrame {
 
@@ -42,13 +46,12 @@ public class InicioSesion extends JFrame {
 	}
 
 	public InicioSesion() {
-		setResizable(false);
 		//Configurar el Jframe
 		setTitle("Inicio de Sesión");					//Título
 		setSize(1024, 768);								//Dimensiones
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);					//Centrar en la pantalla
-		
 		
 		//Configurar el contenedor
 		contenedor = new JPanel();								//Inicializar
@@ -61,7 +64,7 @@ public class InicioSesion extends JFrame {
 		etiquetaSGdP.setFont(new Font("Artifakt Element", Font.BOLD, 40));			//Fuente
 		etiquetaSGdP.setForeground(new Color(127, 127, 127));						//Color
 		etiquetaSGdP.setHorizontalAlignment(SwingConstants.CENTER);					//Alinear al centro
-		etiquetaSGdP.setBounds(142, 227, 726, 36);									//Posición
+		etiquetaSGdP.setBounds(142, 215, 726, 48);									//Posición
 		contenedor.add(etiquetaSGdP);
 		
 		JLabel etiquetaUsuario = new JLabel("Usuario");
@@ -115,7 +118,7 @@ public class InicioSesion extends JFrame {
 		
 		try {
 			//Consulta de datos
-			datos = ManejoSQL.consultarDatos("SELECT usuario, contrasena, tipo FROM Usuarios");
+			datos = ManejoSQL.consultarDatos("SELECT * FROM Usuarios");
 			
 			//Búsqueda de credenciales
 			while(datos.next()) {
@@ -139,6 +142,9 @@ public class InicioSesion extends JFrame {
 				break;
 			case 1:
 				System.out.print("Bienvenido DSSU: ");
+				dispose();
+				MenuPrincipalDSSU menuDSSU = new MenuPrincipalDSSU(new DSSU(datos.getInt("id"), datos.getInt("tipo"), datos.getString("usuario"), datos.getString("contrasena"), datos.getString("correo"), datos.getString("telefono")));
+				menuDSSU.setVisible(true);
 				break;
 			case 2:
 				System.out.print("Bienvenido Estudiante: ");
