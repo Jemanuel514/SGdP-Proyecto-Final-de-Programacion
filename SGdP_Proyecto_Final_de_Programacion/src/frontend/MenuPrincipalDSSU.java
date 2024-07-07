@@ -67,6 +67,13 @@ public class MenuPrincipalDSSU extends JFrame {
 		JButton btnPublicarConvocatoria = new JButton("Publicar Convocatoria");
 		btnPublicarConvocatoria.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
 		btnPublicarConvocatoria.setBounds(302, 341, 406, 91);
+		btnPublicarConvocatoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				HacerConvocatoria hacerConvocatoria = new HacerConvocatoria(usuario);
+				hacerConvocatoria.setVisible(true);
+			}
+		});
 		contenedor.add(btnPublicarConvocatoria);
 		
 		JButton btnVerConvocatoria = new JButton("Ver Convocatorias");

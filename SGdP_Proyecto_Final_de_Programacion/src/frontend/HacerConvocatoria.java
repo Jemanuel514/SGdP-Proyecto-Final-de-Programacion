@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import backend.DSSU;
 import backend.ManejoSQL;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
@@ -15,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
@@ -32,20 +35,7 @@ import java.awt.Color;
 
 public class HacerConvocatoria extends JFrame{
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HacerConvocatoria frame = new HacerConvocatoria(new DSSU (1,1,"asd","asdw", "qwer", "gkgkg"));
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	
+
 	private JPanel contenedor;
 	private JTable proyectosAprobados;
 	private DefaultTableModel proyectosAprobadosModelo;
@@ -55,7 +45,6 @@ public class HacerConvocatoria extends JFrame{
 		setSize(1024, 768);								//Dimensiones
 		setResizable(false);
 		setLocationRelativeTo(null);	
-		setBounds(100, 100, 894, 666);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		contenedor = new JPanel();							//Inicializar
@@ -79,17 +68,23 @@ public class HacerConvocatoria extends JFrame{
 		lblNewLabel.setForeground(new Color(128, 128, 128));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblNewLabel.setBounds(171, 70, 532, 59);
+		lblNewLabel.setBounds(239, 70, 532, 59);
 		contenedor.add(lblNewLabel);
 		
+		JLabel lblSeleccione = new JLabel("Seleccione el proyecto a convocar [Haga doble clic en 'Convocar']");
+		lblSeleccione.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		lblSeleccione.setBounds(40, 160, 600, 38);
+		contenedor.add(lblSeleccione);
+		
 		proyectosAprobados = new JTable();
+		proyectosAprobados.setCellSelectionEnabled(true);
+		proyectosAprobados.setEnabled(false);
 		proyectosAprobados.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
 		proyectosAprobados.setBounds(40, 224, 929, 497);
-		proyectosAprobados.setEnabled(false);		//Desactivar edición de celdas
 		
         //Modelo de tabla (definición de columnas)
 		proyectosAprobadosModelo = new DefaultTableModel();
-		proyectosAprobadosModelo.setColumnIdentifiers(new String[] {"Título", "Organismo Receptor", ""});
+		proyectosAprobadosModelo.setColumnIdentifiers(new String[] {"ID","Título", "Organismo Receptor", ""});
 		proyectosAprobados.setModel(proyectosAprobadosModelo);
 		
 		//Títulos de columna
@@ -100,10 +95,14 @@ public class HacerConvocatoria extends JFrame{
 		DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
 		centrarCelda.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		proyectosAprobados.getColumnModel().getColumn(0).setPreferredWidth(600);
-		proyectosAprobados.getColumnModel().getColumn(1).setPreferredWidth(200);
-		proyectosAprobados.getColumnModel().getColumn(1).setCellRenderer(centrarCelda);
+		
+		proyectosAprobados.getColumnModel().getColumn(0).setPreferredWidth(50);
+		proyectosAprobados.getColumnModel().getColumn(1).setPreferredWidth(475);
+		proyectosAprobados.getColumnModel().getColumn(2).setPreferredWidth(250);
+		proyectosAprobados.getColumnModel().getColumn(0).setCellRenderer(centrarCelda);
 		proyectosAprobados.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
+		proyectosAprobados.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
+		
 		
 		//Personalizar filas
 		proyectosAprobados.setRowHeight(30);
@@ -115,8 +114,10 @@ public class HacerConvocatoria extends JFrame{
                     int fila = proyectosAprobados.rowAtPoint(e.getPoint());
                     int columna = proyectosAprobados.columnAtPoint(e.getPoint());
 
-                    if (columna == 2) {											//Columna de acción
-                        JOptionPane.showMessageDialog(null, "Evaluando proyecto: " + proyectosAprobados.getValueAt(fila, 0));
+                    if (columna == 3) {											//Columna de acción
+                        dispose();
+                        Convocatoria convocatoria = new Convocatoria(usuario, (int) proyectosAprobados.getValueAt(fila, 0));
+                        convocatoria.setVisible(true);
                     }
                 }
             }
@@ -127,6 +128,18 @@ public class HacerConvocatoria extends JFrame{
         contenedor.add(contenedorTabla);
 		
         buscarProyectosAprobados();
+        
+        JButton btnVolver = new JButton("Volver");
+  		btnVolver.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
+  		btnVolver.setBounds(30, 30, 199, 36);
+  		btnVolver.addActionListener(new ActionListener() {
+  			public void actionPerformed(ActionEvent e) {
+  				dispose();
+				MenuPrincipalDSSU menuDSSU = new MenuPrincipalDSSU(usuario);
+				menuDSSU.setVisible(true);
+  			}
+  		});
+  		contenedor.add(btnVolver);
 	}
 	
 	public void buscarProyectosAprobados() {
@@ -135,11 +148,11 @@ public class HacerConvocatoria extends JFrame{
 		
 		try {
 			//Consulta de datos
-			datos = ManejoSQL.consultarDatos("SELECT titulo, usuario FROM Proyectos INNER JOIN Usuarios, Evaluaciones ON Proyectos.or_id = Usuarios.id WHERE Evaluaciones.aprobado = 1 AND Proyectos.evaluacion_id NOT NULL");
+			datos = ManejoSQL.consultarDatos("SELECT Proyectos.id, titulo, usuario FROM Proyectos INNER JOIN Usuarios, Evaluaciones ON Proyectos.or_id = Usuarios.id WHERE Evaluaciones.aprobado = 1 AND Proyectos.evaluacion_id NOT NULL");
 			
 			//Búsqueda de credenciales
 			while(datos.next()) {
-				Object[] propuesta = {datos.getString("titulo"), datos.getString("usuario"), "Convocar"};
+				Object[] propuesta = {datos.getInt("id"), datos.getString("titulo"), datos.getString("usuario"), "Convocar"};
 		        proyectosAprobadosModelo.addRow(propuesta);
 		        }
 			}
