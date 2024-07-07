@@ -4,9 +4,12 @@ import backend.DSSU;
 import backend.ManejoSQL;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -115,6 +118,19 @@ public class EvaluarPropuesta extends JFrame {
         contenedor.add(contenedorTabla);
 		
         buscarPropuestas();
+        
+        //CONFIGURACIÓN DE BOTONES
+        JButton btnVolver = new JButton("Volver");
+  		btnVolver.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
+  		btnVolver.setBounds(30, 30, 199, 36);
+  		btnVolver.addActionListener(new ActionListener() {
+  			public void actionPerformed(ActionEvent e) {
+  				dispose();
+				MenuPrincipalDSSU menuDSSU = new MenuPrincipalDSSU(usuario);
+				menuDSSU.setVisible(true);
+  			}
+  		});
+  		contenedor.add(btnVolver);
 				
 	}
 	

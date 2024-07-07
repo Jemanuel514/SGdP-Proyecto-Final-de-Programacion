@@ -51,6 +51,7 @@ public class MenuPrincipalDSSU extends JFrame {
 		lblTipoUsuario.setBounds(822, 39, 178, 38);
 		contenedor.add(lblTipoUsuario);
 		
+		//CONFIGURACIÓN DE BOTONES
 		JButton btnEvaluarPropuesta = new JButton("Evaluar Propuestas");
 		btnEvaluarPropuesta.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
 		btnEvaluarPropuesta.setBounds(302, 219, 406, 91);
@@ -72,6 +73,18 @@ public class MenuPrincipalDSSU extends JFrame {
 		btnVerConvocatoria.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
 		btnVerConvocatoria.setBounds(302, 463, 406, 91);
 		contenedor.add(btnVerConvocatoria);
+		
+		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
+		btnCerrarSesion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
+		btnCerrarSesion.setBounds(10, 683, 242, 38);
+		btnCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				InicioSesion iniciarSesion = new InicioSesion();
+				iniciarSesion.setVisible(true);
+			}
+		});
+		contenedor.add(btnCerrarSesion);
 		
 	}
 }
