@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
-public class VerConvocatoriasOR extends JFrame {
+public class ORVerConvocatorias extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contenedorPrincipal;
@@ -30,7 +30,7 @@ public class VerConvocatoriasOR extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VerConvocatoriasOR frame = new VerConvocatoriasOR();
+					ORVerConvocatorias frame = new ORVerConvocatorias();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class VerConvocatoriasOR extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VerConvocatoriasOR() {
+	public ORVerConvocatorias() {
 		setMaximumSize(new Dimension(1024, 768));
 		setSize(new Dimension(1014, 737));
 		setTitle("Ver convocatorias");

@@ -17,11 +17,11 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
-public class VerProyectosOR extends JFrame {
+public class ORVerInscripciones extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contenedorPrincipal;
-    private JTable tablaProyectos;
+    private JTable tablaInscripciones;
 
 	/**
 	 * Launch the application.
@@ -30,7 +30,7 @@ public class VerProyectosOR extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VerProyectosOR frame = new VerProyectosOR();
+					ORVerInscripciones frame = new ORVerInscripciones();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,10 +42,10 @@ public class VerProyectosOR extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VerProyectosOR() {
+	public ORVerInscripciones() {
 		setMaximumSize(new Dimension(1024, 768));
 		setSize(new Dimension(1014, 737));
-		setTitle("Ver proyectos");
+		setTitle("Ver inscripciones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1024,768);
         setResizable(false);
@@ -59,7 +59,7 @@ public class VerProyectosOR extends JFrame {
 
 		setContentPane(contenedorPrincipal);
 		
-		JLabel lblNewLabel = new JLabel("PROYECTOS");
+		JLabel lblNewLabel = new JLabel("INSCRPCIONES");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Artifakt Element", Font.BOLD, 40));
 		
@@ -68,6 +68,9 @@ public class VerProyectosOR extends JFrame {
 		
 		JButton botonMenu = new JButton("Men\u00FA");
 		botonMenu.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
+		
+		JButton botonVolver = new JButton("Volver");
+		botonVolver.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
 		GroupLayout gl_contenedorPrincipal = new GroupLayout(contenedorPrincipal);
 		gl_contenedorPrincipal.setHorizontalGroup(
 			gl_contenedorPrincipal.createParallelGroup(Alignment.TRAILING)
@@ -76,7 +79,10 @@ public class VerProyectosOR extends JFrame {
 					.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
 						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
 						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
-						.addComponent(botonMenu))
+						.addGroup(gl_contenedorPrincipal.createSequentialGroup()
+							.addComponent(botonMenu)
+							.addPreferredGap(ComponentPlacement.RELATED, 800, Short.MAX_VALUE)
+							.addComponent(botonVolver)))
 					.addContainerGap())
 		);
 		gl_contenedorPrincipal.setVerticalGroup(
@@ -87,43 +93,44 @@ public class VerProyectosOR extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 562, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(botonMenu)
+					.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
+						.addComponent(botonMenu)
+						.addComponent(botonVolver, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(16, Short.MAX_VALUE))
 		);
 		
-		tablaProyectos = new JTable();
-		tablaProyectos.setModel(new DefaultTableModel(
+		tablaInscripciones = new JTable();
+		tablaInscripciones.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
 			},
 			new String[] {
-				"ID", "NOMBRE", "ESTADO", "EVALUACI\u00D3N"
+				"ESTUDIANTE", "CORREO", "FACULTAD"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false
+				false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
-		tablaProyectos.getColumnModel().getColumn(0).setResizable(false);
-		tablaProyectos.getColumnModel().getColumn(1).setResizable(false);
-		tablaProyectos.getColumnModel().getColumn(2).setResizable(false);
-		tablaProyectos.getColumnModel().getColumn(3).setResizable(false);
-		tablaProyectos.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		scrollPane.setViewportView(tablaProyectos);
+		tablaInscripciones.getColumnModel().getColumn(0).setResizable(false);
+		tablaInscripciones.getColumnModel().getColumn(1).setResizable(false);
+		tablaInscripciones.getColumnModel().getColumn(2).setResizable(false);
+		tablaInscripciones.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		scrollPane.setViewportView(tablaInscripciones);
 		contenedorPrincipal.setLayout(gl_contenedorPrincipal);
-		
+
     }
 }
 

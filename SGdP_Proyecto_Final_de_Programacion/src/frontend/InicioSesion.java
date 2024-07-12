@@ -1,12 +1,11 @@
 package frontend;
+
 import backend.ManejoSQL;
 import backend.OrganismoReceptor;
 import backend.DSSU;
 import backend.Estudiante;
 
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,7 +25,6 @@ public class InicioSesion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-	//Elementos dinámicos
 	private JPanel contenedor;
 	private JTextField txtUsuario;
 	private JPasswordField txtContrasena;
@@ -46,56 +44,54 @@ public class InicioSesion extends JFrame {
 	}
 
 	public InicioSesion() {
-		//Configurar el Jframe
-		setTitle("Inicio de Sesión");					//Título
-		setSize(1024, 768);								//Dimensiones
+		//JFRAME
+		setSize(ConstantesEstilo.ventana);					//Dimensiones
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);					//Centrar en la pantalla
+		setLocationRelativeTo(null);						//Centrar en la pantalla
 		
-		//Configurar el contenedor
-		contenedor = new JPanel();								//Inicializar
-		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));		//Bordes
-		contenedor.setLayout(null);								//Layout (absoluto)
-		setContentPane(contenedor);								//Establecer en la ventana
+		//CONTENEDOR
+		contenedor = new JPanel();
+		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contenedor.setLayout(null);
+		setContentPane(contenedor);
 		
-		//CONFIGURACIÓN DE ETIQUETAS
+		//ETIQUETAS
 		JLabel etiquetaSGdP = new JLabel("SISTEMA DE GESTIÓN DE PROYECTOS");		//Inicializar y texto
-		etiquetaSGdP.setFont(new Font("Artifakt Element", Font.BOLD, 40));			//Fuente
-		etiquetaSGdP.setForeground(new Color(127, 127, 127));						//Color
-		etiquetaSGdP.setHorizontalAlignment(SwingConstants.CENTER);					//Alinear al centro
+		etiquetaSGdP.setFont(ConstantesEstilo.titulo);								//Fuente
+		etiquetaSGdP.setHorizontalAlignment(SwingConstants.CENTER);					//Alineación
 		etiquetaSGdP.setBounds(142, 215, 726, 48);									//Posición
 		contenedor.add(etiquetaSGdP);
 		
 		JLabel etiquetaUsuario = new JLabel("Usuario");
-		etiquetaUsuario.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		etiquetaUsuario.setFont(ConstantesEstilo.texto);
 		etiquetaUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		etiquetaUsuario.setBounds(349, 290, 312, 36);
 		contenedor.add(etiquetaUsuario);
 		
 		JLabel lblContrasena = new JLabel("Contraseña");
-		lblContrasena.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		lblContrasena.setFont(ConstantesEstilo.texto);
 		lblContrasena.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContrasena.setBounds(349, 379, 312, 36);
 		contenedor.add(lblContrasena);
 		
-		//CONFIGURACIÓN DE CAMPOS DE TEXTO
+		//CAMPOS DE TEXTO
 		txtUsuario = new JTextField();
-		txtUsuario.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		txtUsuario.setFont(ConstantesEstilo.texto);
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		txtUsuario.setColumns(10);
 		txtUsuario.setBounds(348, 336, 314, 36);
 		contenedor.add(txtUsuario);
 		
 		txtContrasena = new JPasswordField();
-		txtContrasena.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+		txtContrasena.setFont(ConstantesEstilo.texto);
 		txtContrasena.setHorizontalAlignment(SwingConstants.CENTER);
 		txtContrasena.setBounds(349, 425, 312, 36);
 		contenedor.add(txtContrasena);
 		
-		//CONFIGURACIÓN DE BOTONES
+		//BOTONES
 		JButton btnIniciarSesion = new JButton("Iniciar Sesión");
-		btnIniciarSesion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
+		btnIniciarSesion.setFont(ConstantesEstilo.boton);
 		btnIniciarSesion.setBounds(405, 501, 199, 36);
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -143,7 +139,7 @@ public class InicioSesion extends JFrame {
 			case 1:
 				System.out.print("Bienvenido DSSU: ");
 				dispose();
-				MenuPrincipalDSSU menuDSSU = new MenuPrincipalDSSU(new DSSU(datos.getInt("id"), datos.getInt("tipo"), datos.getString("usuario"), datos.getString("contrasena"), datos.getString("correo"), datos.getString("telefono")));
+				DSSUMenuPrincipal menuDSSU = new DSSUMenuPrincipal(new DSSU(datos.getInt("id"), datos.getInt("tipo"), datos.getString("usuario"), datos.getString("contrasena"), datos.getString("correo"), datos.getString("telefono")));
 				menuDSSU.setVisible(true);
 				break;
 			case 2:

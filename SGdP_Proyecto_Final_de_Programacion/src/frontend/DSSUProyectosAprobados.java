@@ -33,7 +33,7 @@ import java.awt.Color;
 
 
 
-public class HacerConvocatoria extends JFrame{
+public class DSSUProyectosAprobados extends JFrame{
 	
 
 	private JPanel contenedor;
@@ -41,7 +41,7 @@ public class HacerConvocatoria extends JFrame{
 	private DefaultTableModel proyectosAprobadosModelo;
 	private JScrollPane contenedorTabla;
 
-	public HacerConvocatoria(DSSU usuario) {
+	public DSSUProyectosAprobados(DSSU usuario) {
 		setSize(1024, 768);								//Dimensiones
 		setResizable(false);
 		setLocationRelativeTo(null);	
@@ -76,6 +76,7 @@ public class HacerConvocatoria extends JFrame{
 		lblSeleccione.setBounds(40, 160, 600, 38);
 		contenedor.add(lblSeleccione);
 		
+		//CONFIGURACIÓN DE TABLA
 		proyectosAprobados = new JTable();
 		proyectosAprobados.setCellSelectionEnabled(true);
 		proyectosAprobados.setEnabled(false);
@@ -95,14 +96,12 @@ public class HacerConvocatoria extends JFrame{
 		DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
 		centrarCelda.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		
 		proyectosAprobados.getColumnModel().getColumn(0).setPreferredWidth(50);
 		proyectosAprobados.getColumnModel().getColumn(1).setPreferredWidth(475);
 		proyectosAprobados.getColumnModel().getColumn(2).setPreferredWidth(250);
 		proyectosAprobados.getColumnModel().getColumn(0).setCellRenderer(centrarCelda);
 		proyectosAprobados.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
 		proyectosAprobados.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
-		
 		
 		//Personalizar filas
 		proyectosAprobados.setRowHeight(30);
@@ -116,7 +115,7 @@ public class HacerConvocatoria extends JFrame{
 
                     if (columna == 3) {											//Columna de acción
                         dispose();
-                        Convocatoria convocatoria = new Convocatoria(usuario, (int) proyectosAprobados.getValueAt(fila, 0));
+                        DSSUPublicarConvocatoria convocatoria = new DSSUPublicarConvocatoria(usuario, (int) proyectosAprobados.getValueAt(fila, 0));
                         convocatoria.setVisible(true);
                     }
                 }
@@ -135,7 +134,7 @@ public class HacerConvocatoria extends JFrame{
   		btnVolver.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
-				MenuPrincipalDSSU menuDSSU = new MenuPrincipalDSSU(usuario);
+				DSSUMenuPrincipal menuDSSU = new DSSUMenuPrincipal(usuario);
 				menuDSSU.setVisible(true);
   			}
   		});

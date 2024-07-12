@@ -22,7 +22,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-public class ProponerProyecto extends JFrame {
+public class ORProponerProyecto extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contenedorPrincipal;
@@ -44,7 +44,7 @@ public class ProponerProyecto extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ProponerProyecto frame = new ProponerProyecto();
+                    ORProponerProyecto frame = new ORProponerProyecto();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -56,7 +56,7 @@ public class ProponerProyecto extends JFrame {
     /**
      * Create the frame.
      */
-    public ProponerProyecto() {
+    public ORProponerProyecto() {
     	setSize(new Dimension(1024, 768));
         setTitle("Proponer proyecto");
         setResizable(false);

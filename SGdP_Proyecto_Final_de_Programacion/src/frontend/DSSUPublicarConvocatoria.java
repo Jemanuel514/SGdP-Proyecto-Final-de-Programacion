@@ -20,7 +20,7 @@ import backend.ManejoSQL;
 
 import javax.swing.JButton;
 
-public class Convocatoria extends JFrame {
+public class DSSUPublicarConvocatoria extends JFrame {
 
 	private JTextField txtNombreProyecto;
 	private JTextField textField_1;
@@ -37,14 +37,14 @@ public class Convocatoria extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public Convocatoria(DSSU usuario, int id) {
+	public DSSUPublicarConvocatoria(DSSU usuario, int id) {
 		setSize(1024, 768);								//Dimensiones
 		setResizable(false);
 		setLocationRelativeTo(null);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		contenedor = new JPanel();							//Inicializar
+		contenedor = new JPanel();								//Inicializar
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));		//Bordes
 		contenedor.setLayout(null);								//Layout (absoluto)
 		setContentPane(contenedor);	
@@ -126,7 +126,7 @@ public class Convocatoria extends JFrame {
 	  		btnVolver.addActionListener(new ActionListener() {
 	  			public void actionPerformed(ActionEvent e) {
 	  				dispose();
-					HacerConvocatoria hacerConvocatoria = new HacerConvocatoria(usuario);
+					DSSUProyectosAprobados hacerConvocatoria = new DSSUProyectosAprobados(usuario);
 					hacerConvocatoria.setVisible(true);
 	  			}
 	  		});
