@@ -137,13 +137,14 @@ public class InicioSesion extends JFrame {
 				System.out.print("Bienvenido Organismo Receptor: ");
 				break;
 			case 1:
-				System.out.print("Bienvenido DSSU: ");
 				dispose();
 				DSSUMenuPrincipal menuDSSU = new DSSUMenuPrincipal(new DSSU(datos.getInt("id"), datos.getInt("tipo"), datos.getString("usuario"), datos.getString("contrasena"), datos.getString("correo"), datos.getString("telefono")));
 				menuDSSU.setVisible(true);
 				break;
 			case 2:
-				System.out.print("Bienvenido Estudiante: ");
+				dispose();
+				MenuPrincipalE menuEstudiante = new MenuPrincipalE(new Estudiante(datos.getInt("id"), datos.getInt("tipo"), datos.getString("usuario"), datos.getString("contrasena"), datos.getString("correo"), datos.getString("telefono"), datos.getString("facultad")));
+				menuEstudiante.setVisible(true);
 				break;
 			default:
 				System.out.print("Usuario no reconocido.");
