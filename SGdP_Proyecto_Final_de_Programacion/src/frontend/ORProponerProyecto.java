@@ -21,6 +21,7 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import javax.swing.ScrollPaneConstants;
 
 public class ORProponerProyecto extends JFrame {
 
@@ -36,6 +37,8 @@ public class ORProponerProyecto extends JFrame {
     private JTextField tituloProyecto;
     private JTextField lugarProyecto;
     private JTextField cantidadEstudiantesPP;
+    private JTextField inicioHorario;
+    private JTextField finalHorario;
 
     /**
      * Launch the application.
@@ -57,6 +60,7 @@ public class ORProponerProyecto extends JFrame {
      * Create the frame.
      */
     public ORProponerProyecto() {
+    	setPreferredSize(new Dimension(1024, 768));
     	setSize(new Dimension(1024, 768));
         setTitle("Proponer proyecto");
         setResizable(false);
@@ -72,6 +76,7 @@ public class ORProponerProyecto extends JFrame {
         setContentPane(contenedorPrincipal);
         
         scrollPane = new JScrollPane();
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setSize(new Dimension(1024, 768));
         scrollPane.setPreferredSize(new Dimension(1024, 768));
         contenedorPrincipal.add(scrollPane, BorderLayout.CENTER);
@@ -122,11 +127,10 @@ public class ORProponerProyecto extends JFrame {
         perfilEstudiantil.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
         GroupLayout gl_contenedorContribuyentes = new GroupLayout(contenedorContribuyentes);
         gl_contenedorContribuyentes.setHorizontalGroup(
-        	gl_contenedorContribuyentes.createParallelGroup(Alignment.TRAILING)
+        	gl_contenedorContribuyentes.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_contenedorContribuyentes.createSequentialGroup()
         			.addContainerGap()
         			.addGroup(gl_contenedorContribuyentes.createParallelGroup(Alignment.LEADING)
-        				.addComponent(perfilEstudiantil)
         				.addComponent(lblNewLabel_1_1_2_1, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         				.addGroup(gl_contenedorContribuyentes.createSequentialGroup()
         					.addComponent(lblNewLabel_1_1_6)
@@ -136,13 +140,13 @@ public class ORProponerProyecto extends JFrame {
         				.addGroup(gl_contenedorContribuyentes.createSequentialGroup()
         					.addComponent(lblNewLabel_1_1_1_1)
         					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(facultadPP, 0, 333, Short.MAX_VALUE)))
+        					.addComponent(facultadPP, 0, 333, Short.MAX_VALUE))
+        				.addComponent(perfilEstudiantil, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
         			.addContainerGap())
         );
         gl_contenedorContribuyentes.setVerticalGroup(
         	gl_contenedorContribuyentes.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_contenedorContribuyentes.createSequentialGroup()
-        			.addContainerGap()
         			.addComponent(lblNewLabel_1_3)
         			.addGap(18)
         			.addGroup(gl_contenedorContribuyentes.createParallelGroup(Alignment.LEADING)
@@ -155,7 +159,7 @@ public class ORProponerProyecto extends JFrame {
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addComponent(lblNewLabel_1_1_2_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(perfilEstudiantil, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+        			.addComponent(perfilEstudiantil)
         			.addContainerGap())
         );
         contenedorContribuyentes.setLayout(gl_contenedorContribuyentes);
@@ -238,8 +242,8 @@ public class ORProponerProyecto extends JFrame {
         );
         
         ButtonGroup transporte = new ButtonGroup();
-        tipoProyecto.add(botonSiTransporte);
-        tipoProyecto.add(botonNoTransporte);
+        transporte.add(botonSiTransporte);
+        transporte.add(botonNoTransporte);
         
         contenedorTransporte.setLayout(gl_contenedorTransporte);
         
@@ -283,15 +287,15 @@ public class ORProponerProyecto extends JFrame {
         			.addComponent(lblNewLabel_1_1_5)
         			.addGap(5)
         			.addComponent(contenedorTipo, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
-        			.addGap(164)
+        			.addGap(72)
         			.addComponent(lblNewLabel_1_1_5_3)
         			.addGap(5)
         			.addComponent(contenedorTransporte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(180)
+        			.addGap(92)
         			.addComponent(lblNewLabel_1_1_5_4)
         			.addGap(5)
         			.addComponent(contenedorAlmuerzo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap())
+        			.addGap(190))
         );
         gl_contenedorRoundBottons.setVerticalGroup(
         	gl_contenedorRoundBottons.createParallelGroup(Alignment.LEADING)
@@ -300,12 +304,12 @@ public class ORProponerProyecto extends JFrame {
         			.addGroup(gl_contenedorRoundBottons.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_contenedorRoundBottons.createSequentialGroup()
         					.addGap(6)
-        					.addComponent(lblNewLabel_1_1_5_3))
-        				.addComponent(contenedorTransporte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(gl_contenedorRoundBottons.createSequentialGroup()
-        					.addGap(6)
         					.addComponent(lblNewLabel_1_1_5_4))
         				.addComponent(contenedorAlmuerzo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_contenedorRoundBottons.createSequentialGroup()
+        					.addGap(6)
+        					.addComponent(lblNewLabel_1_1_5_3))
+        				.addComponent(contenedorTransporte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(contenedorTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addGroup(gl_contenedorRoundBottons.createSequentialGroup()
         					.addGap(6)
@@ -314,8 +318,8 @@ public class ORProponerProyecto extends JFrame {
         );
         
         ButtonGroup almuerzo = new ButtonGroup();
-        tipoProyecto.add(botonSiAlmuerzo);
-        tipoProyecto.add(botonNoAlmuerzo);
+        almuerzo.add(botonSiAlmuerzo);
+        almuerzo.add(botonNoAlmuerzo);
         
         contenedorRoundBottons.setLayout(gl_contenedorRoundBottons);
         
@@ -387,47 +391,41 @@ public class ORProponerProyecto extends JFrame {
         			.addContainerGap()
         			.addGroup(gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
-        					.addGroup(gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblNewLabel_1_2, GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
-        						.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
-        							.addGroup(gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.LEADING)
-        								.addComponent(lblNewLabel_1_1_5_1)
-        								.addComponent(lblNewLabel_1_1_5_1_1))
-        							.addGap(11)
-        							.addGroup(gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.LEADING, false)
-        								.addComponent(lugarProyecto)
-        								.addComponent(tituloProyecto, GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE))))
-        					.addContainerGap())
-        				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
         					.addComponent(lblNewLabel_1_1_5_1_5, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap(563, Short.MAX_VALUE))
+        					.addContainerGap(379, Short.MAX_VALUE))
         				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
         					.addComponent(lblNewLabel_1_1_5_1_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         					.addGap(556))
         				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
         					.addComponent(lblNewLabel_1_1_5_2)
-        					.addContainerGap(598, Short.MAX_VALUE))
-        				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
-        					.addComponent(objetivo, GroupLayout.PREFERRED_SIZE, 650, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap())
+        					.addContainerGap(414, Short.MAX_VALUE))
         				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
         					.addComponent(lblNewLabel_1_1_5_1_2, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap(574, Short.MAX_VALUE))
-        				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
-        					.addComponent(resumen, GroupLayout.PREFERRED_SIZE, 650, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap(27, Short.MAX_VALUE))
+        					.addContainerGap(390, Short.MAX_VALUE))
         				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
         					.addComponent(lblNewLabel_1_1_5_1_4)
-        					.addContainerGap(514, Short.MAX_VALUE))
+        					.addContainerGap(330, Short.MAX_VALUE))
         				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
-        					.addComponent(beneficiarios, GroupLayout.PREFERRED_SIZE, 650, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap(27, Short.MAX_VALUE))
-        				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
-        					.addComponent(contribucionODS, GroupLayout.PREFERRED_SIZE, 650, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap(27, Short.MAX_VALUE))
-        				.addGroup(gl_contenedorDescripcionDeProyecto.createSequentialGroup()
-        					.addComponent(materiales, GroupLayout.PREFERRED_SIZE, 650, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap(27, Short.MAX_VALUE))))
+        					.addGroup(gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.TRAILING)
+        						.addGroup(Alignment.LEADING, gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.TRAILING, false)
+        							.addComponent(objetivo, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+        							.addComponent(resumen, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+        							.addComponent(beneficiarios, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+        							.addComponent(contribucionODS, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+        							.addComponent(materiales, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
+        						.addGroup(Alignment.LEADING, gl_contenedorDescripcionDeProyecto.createSequentialGroup()
+        							.addGroup(gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.TRAILING, false)
+        								.addComponent(lblNewLabel_1_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addGroup(Alignment.LEADING, gl_contenedorDescripcionDeProyecto.createSequentialGroup()
+        									.addGroup(gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.LEADING)
+        										.addComponent(lblNewLabel_1_1_5_1)
+        										.addComponent(lblNewLabel_1_1_5_1_1))
+        									.addGap(11)
+        									.addGroup(gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.LEADING, false)
+        										.addComponent(lugarProyecto)
+        										.addComponent(tituloProyecto, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))))
+        							.addPreferredGap(ComponentPlacement.RELATED, 185, Short.MAX_VALUE)))
+        					.addContainerGap())))
         );
         gl_contenedorDescripcionDeProyecto.setVerticalGroup(
         	gl_contenedorDescripcionDeProyecto.createParallelGroup(Alignment.LEADING)
@@ -445,23 +443,23 @@ public class ORProponerProyecto extends JFrame {
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addComponent(lblNewLabel_1_1_5_2, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(objetivo, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+        			.addComponent(objetivo, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addComponent(lblNewLabel_1_1_5_1_2, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(resumen, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+        			.addComponent(resumen, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addComponent(lblNewLabel_1_1_5_1_3, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
         			.addGap(9)
-        			.addComponent(beneficiarios, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+        			.addComponent(beneficiarios, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(lblNewLabel_1_1_5_1_4, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(contribucionODS, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+        			.addComponent(contribucionODS, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
         			.addGap(18)
         			.addComponent(lblNewLabel_1_1_5_1_5, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(materiales, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+        			.addComponent(materiales, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
         			.addGap(14))
         );
         contenedorDescripcionDeProyecto.setLayout(gl_contenedorDescripcionDeProyecto);
@@ -521,37 +519,39 @@ public class ORProponerProyecto extends JFrame {
         			.addContainerGap()
         			.addGroup(gl_contenedorEncargado.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_contenedorEncargado.createSequentialGroup()
-        					.addComponent(lblNewLabel_1_1)
-        					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(nombreEncargado, GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
-        				.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-        				.addGroup(gl_contenedorEncargado.createSequentialGroup()
-        					.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(cedulaEncargado, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(gl_contenedorEncargado.createSequentialGroup()
-        					.addComponent(lblNewLabel_1_1_4)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(telefonoEncargado, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(gl_contenedorEncargado.createSequentialGroup()
-        					.addGroup(gl_contenedorEncargado.createParallelGroup(Alignment.TRAILING, false)
-        						.addComponent(lblNewLabel_1_1_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        						.addComponent(lblNewLabel_1_1_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-        					.addGroup(gl_contenedorEncargado.createParallelGroup(Alignment.TRAILING)
-        						.addComponent(cargoEncargado, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(correoEncargado, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE))))
-        			.addContainerGap())
+        					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED, 7, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_contenedorEncargado.createParallelGroup(Alignment.LEADING)
+        					.addGroup(gl_contenedorEncargado.createSequentialGroup()
+        						.addComponent(lblNewLabel_1_1)
+        						.addPreferredGap(ComponentPlacement.UNRELATED)
+        						.addComponent(nombreEncargado, GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
+        					.addGroup(gl_contenedorEncargado.createSequentialGroup()
+        						.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+        						.addPreferredGap(ComponentPlacement.UNRELATED)
+        						.addComponent(cedulaEncargado, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE))
+        					.addGroup(gl_contenedorEncargado.createSequentialGroup()
+        						.addComponent(lblNewLabel_1_1_4)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(telefonoEncargado, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE))
+        					.addGroup(gl_contenedorEncargado.createSequentialGroup()
+        						.addGroup(gl_contenedorEncargado.createParallelGroup(Alignment.TRAILING, false)
+        							.addComponent(lblNewLabel_1_1_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(lblNewLabel_1_1_3, Alignment.LEADING))
+        						.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+        						.addGroup(gl_contenedorEncargado.createParallelGroup(Alignment.TRAILING)
+        							.addComponent(cargoEncargado, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(correoEncargado, GroupLayout.PREFERRED_SIZE, 339, GroupLayout.PREFERRED_SIZE)))))
+        			.addGap(3))
         );
         gl_contenedorEncargado.setVerticalGroup(
         	gl_contenedorEncargado.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_contenedorEncargado.createSequentialGroup()
-        			.addContainerGap()
         			.addComponent(lblNewLabel_1)
-        			.addGap(18)
+        			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(gl_contenedorEncargado.createParallelGroup(Alignment.LEADING)
         				.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(nombreEncargado))
+        				.addComponent(nombreEncargado, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(gl_contenedorEncargado.createParallelGroup(Alignment.LEADING)
         				.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
@@ -568,9 +568,11 @@ public class ORProponerProyecto extends JFrame {
         			.addGroup(gl_contenedorEncargado.createParallelGroup(Alignment.LEADING)
         				.addComponent(lblNewLabel_1_1_4, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
         				.addComponent(telefonoEncargado, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap(369, Short.MAX_VALUE))
+        			.addContainerGap(44, Short.MAX_VALUE))
         );
         contenedorEncargado.setLayout(gl_contenedorEncargado);
+        
+        JPanel contenedorHorario = new JPanel();
         GroupLayout gl_contenedorFormulario = new GroupLayout(contenedorFormulario);
         gl_contenedorFormulario.setHorizontalGroup(
         	gl_contenedorFormulario.createParallelGroup(Alignment.LEADING)
@@ -578,36 +580,99 @@ public class ORProponerProyecto extends JFrame {
         			.addGap(10)
         			.addGroup(gl_contenedorFormulario.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_contenedorFormulario.createSequentialGroup()
-        					.addGroup(gl_contenedorFormulario.createParallelGroup(Alignment.LEADING)
-        						.addComponent(contenedorEncargado, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(contenedorContribuyentes, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE))
-        					.addGap(18)
-        					.addComponent(contenedorDescripcionDeProyecto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(contenedorRoundBottons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(gl_contenedorFormulario.createSequentialGroup()
         					.addComponent(botonMenu)
-        					.addGap(945)
-        					.addComponent(botonEnviarPP))))
+        					.addPreferredGap(ComponentPlacement.RELATED, 772, Short.MAX_VALUE)
+        					.addComponent(botonEnviarPP)
+        					.addGap(36))
+        				.addGroup(gl_contenedorFormulario.createParallelGroup(Alignment.TRAILING, false)
+        					.addComponent(contenedorRoundBottons, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+        					.addGroup(Alignment.LEADING, gl_contenedorFormulario.createSequentialGroup()
+        						.addGroup(gl_contenedorFormulario.createParallelGroup(Alignment.TRAILING)
+        							.addComponent(contenedorHorario, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
+        							.addGroup(gl_contenedorFormulario.createParallelGroup(Alignment.LEADING)
+        								.addComponent(contenedorEncargado, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
+        								.addGroup(gl_contenedorFormulario.createSequentialGroup()
+        									.addPreferredGap(ComponentPlacement.RELATED)
+        									.addComponent(contenedorContribuyentes, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE))))
+        						.addGap(18)
+        						.addComponent(contenedorDescripcionDeProyecto, GroupLayout.PREFERRED_SIZE, 503, GroupLayout.PREFERRED_SIZE)))))
         );
         gl_contenedorFormulario.setVerticalGroup(
         	gl_contenedorFormulario.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_contenedorFormulario.createSequentialGroup()
         			.addGroup(gl_contenedorFormulario.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_contenedorFormulario.createSequentialGroup()
-        					.addComponent(contenedorEncargado, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addComponent(contenedorContribuyentes, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+        					.addComponent(contenedorEncargado, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(contenedorContribuyentes, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(contenedorHorario, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED))
         				.addGroup(gl_contenedorFormulario.createSequentialGroup()
         					.addComponent(contenedorDescripcionDeProyecto, GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
         					.addGap(4)))
         			.addGap(2)
         			.addComponent(contenedorRoundBottons, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-        			.addGap(6)
-        			.addGroup(gl_contenedorFormulario.createParallelGroup(Alignment.LEADING)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_contenedorFormulario.createParallelGroup(Alignment.BASELINE)
         				.addComponent(botonMenu)
         				.addComponent(botonEnviarPP))
         			.addGap(9))
         );
+        
+        JLabel lblNewLabel_1_3_1 = new JLabel("Horario");
+        lblNewLabel_1_3_1.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel_1_3_1.setFont(new Font("Arial Unicode MS", Font.BOLD, 20));
+        
+        JLabel lblNewLabel_1_1_2_1_1 = new JLabel("Inicio:");
+        lblNewLabel_1_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+        lblNewLabel_1_1_2_1_1.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+        
+        JLabel lblNewLabel_1_1_2_1_1_1 = new JLabel("Final:");
+        lblNewLabel_1_1_2_1_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+        lblNewLabel_1_1_2_1_1_1.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+        
+        inicioHorario = new JTextField();
+        inicioHorario.setHorizontalAlignment(SwingConstants.LEFT);
+        inicioHorario.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+        inicioHorario.setColumns(10);
+        
+        finalHorario = new JTextField();
+        finalHorario.setHorizontalAlignment(SwingConstants.LEFT);
+        finalHorario.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+        finalHorario.setColumns(10);
+        GroupLayout gl_contenedorHorario = new GroupLayout(contenedorHorario);
+        gl_contenedorHorario.setHorizontalGroup(
+        	gl_contenedorHorario.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_contenedorHorario.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_contenedorHorario.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblNewLabel_1_3_1, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_contenedorHorario.createSequentialGroup()
+        					.addComponent(lblNewLabel_1_1_2_1_1)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(inicioHorario, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE))
+        				.addGroup(gl_contenedorHorario.createSequentialGroup()
+        					.addComponent(lblNewLabel_1_1_2_1_1_1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(finalHorario, GroupLayout.PREFERRED_SIZE, 363, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(10))
+        );
+        gl_contenedorHorario.setVerticalGroup(
+        	gl_contenedorHorario.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_contenedorHorario.createSequentialGroup()
+        			.addComponent(lblNewLabel_1_3_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_contenedorHorario.createParallelGroup(Alignment.LEADING, false)
+        				.addComponent(inicioHorario, 0, 0, Short.MAX_VALUE)
+        				.addComponent(lblNewLabel_1_1_2_1_1, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_contenedorHorario.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblNewLabel_1_1_2_1_1_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(finalHorario, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap())
+        );
+        contenedorHorario.setLayout(gl_contenedorHorario);
         contenedorFormulario.setLayout(gl_contenedorFormulario);
         GroupLayout gl_contenedorPrincipal = new GroupLayout(contenedorPrincipal);
         gl_contenedorPrincipal.setHorizontalGroup(
