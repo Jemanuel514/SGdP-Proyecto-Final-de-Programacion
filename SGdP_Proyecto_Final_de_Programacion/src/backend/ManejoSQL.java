@@ -10,12 +10,15 @@ import java.sql.Statement;
 
 public class ManejoSQL {
 	
-	public static Connection conectar() {
+	public Connection conexion = null;
+	public Statement consulta = null;
+	public ResultSet datos = null;
+	
+	public Connection conectar() {
 		//Variables
 		Path rutaProyecto = Paths.get(".").toAbsolutePath().normalize();
 		Path rutaDB = rutaProyecto.resolve("db/SGdP_DB.db");
 		String ruta = "jdbc:sqlite:" + rutaDB.toString();
-		Connection conexion = null;
 		
 		try {
 			conexion = DriverManager.getConnection(ruta);
@@ -28,11 +31,7 @@ public class ManejoSQL {
 		return conexion;
 	}
 	
-	public static ResultSet consultarDatos(String instruccion) {
-		//Variables
-		Connection conexion = null;
-		Statement consulta = null;
-		ResultSet datos = null;
+	public void consultarDatos(String instruccion) {
 		
 		try {
 			conexion = conectar();
@@ -44,6 +43,48 @@ public class ManejoSQL {
 			System.out.println("Error al consultar la base de datos. " + e.getMessage());
 		}
 		
-		return datos;
 	}
+	
+	
+	public int insertarDatos(String instruccion) {
+		//Variables
+	    int idGenerado = -1;
+
+	    try {
+	        conexion = conectar();
+	        consulta = conexion.createStatement();
+	        consulta.executeUpdate(instruccion, Statement.RETURN_GENERATED_KEYS);
+	        System.out.println("Consulta realizada.");
+	        
+	        datos = consulta.getGeneratedKeys();
+	        idGenerado = datos.getInt(1);
+	        
+	    }
+	    catch (SQLException e) {
+	        System.out.println("Error al consultar la base de datos. " + e.getMessage());
+	    }
+	    
+	    return idGenerado;
+	    
+	}
+	
+	public void cerrarConexion() {
+        try {
+        	if (datos != null) {
+        		datos.close();
+        	}
+            if (consulta != null) {
+                consulta.close();
+            }
+
+            if (conexion != null) {
+                conexion.close();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al cerrar la conexión: " + e.getMessage());
+        }
+        
+    }
+	
 }

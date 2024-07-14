@@ -21,18 +21,22 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DSSUPropuestasSinEvaluar extends JFrame {
-
+	
+	private ManejoSQL db;
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contenedor;
 	private JScrollPane contenedorTabla;
 	private JTable propuestas;
 	private DefaultTableModel propuestasModelo;
 
-	public DSSUPropuestasSinEvaluar(DSSU usuario) {
+	public DSSUPropuestasSinEvaluar(DSSU usuario, ManejoSQL db) {
+		
+		this.db = db;
+		
 		//JFRAME
 		setSize(ConstantesEstilo.ventana);				//Dimensiones
 		setResizable(false);
@@ -108,7 +112,7 @@ public class DSSUPropuestasSinEvaluar extends JFrame {
 
                     if (columna == 3) {											//Columna de acción
                     	dispose();
-        				DSSUEvaluarPropuesta evaluarPropuesta = new DSSUEvaluarPropuesta(usuario, (int) propuestas.getValueAt(fila, 0));
+        				DSSUEvaluarPropuesta evaluarPropuesta = new DSSUEvaluarPropuesta(usuario, (int) propuestas.getValueAt(fila, 0), db);
         				evaluarPropuesta.setVisible(true);
                     }
                 }
@@ -128,7 +132,7 @@ public class DSSUPropuestasSinEvaluar extends JFrame {
   		btnVolver.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
-				DSSUMenuPrincipal menuDSSU = new DSSUMenuPrincipal(usuario);
+				DSSUMenuPrincipal menuDSSU = new DSSUMenuPrincipal(usuario, db);
 				menuDSSU.setVisible(true);
   			}
   		});
@@ -137,22 +141,24 @@ public class DSSUPropuestasSinEvaluar extends JFrame {
 	}
 	
 	public void buscarPropuestas() {
-		//Variables
-		ResultSet datos = null;
-		
+
 		try {
 			//Consulta de datos
-			datos = ManejoSQL.consultarDatos("SELECT Proyectos.id, titulo, usuario FROM Proyectos INNER JOIN Usuarios ON Proyectos.or_id = Usuarios.id WHERE Proyectos.evaluacion_id IS NULL");
+			db.consultarDatos("SELECT Proyectos.id, titulo, usuario FROM Proyectos INNER JOIN Usuarios ON Proyectos.or_id = Usuarios.id WHERE Proyectos.evaluacion_id IS NULL");
 			
 			//Búsqueda de credenciales
-			while(datos.next()) {
-				Object[] propuesta = {datos.getInt("id"), datos.getString("titulo"), datos.getString("usuario"), "Evaluar"};
+			while(db.datos.next()) {
+				Object[] propuesta = {db.datos.getInt("id"), db.datos.getString("titulo"), db.datos.getString("usuario"), "Evaluar"};
 		        propuestasModelo.addRow(propuesta);
 		        }
 			}
 		
 		catch(SQLException e){
 			System.out.println("Error al consultar la base de datos. " + e.getMessage());
+		}
+		
+		finally {
+			db.cerrarConexion();
 		}
 			
 	}

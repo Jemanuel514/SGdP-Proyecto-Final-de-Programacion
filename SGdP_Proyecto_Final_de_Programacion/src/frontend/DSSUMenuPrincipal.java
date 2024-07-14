@@ -1,5 +1,6 @@
 package frontend;
 import backend.DSSU;
+import backend.ManejoSQL;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,11 +13,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
 public class DSSUMenuPrincipal extends JFrame {
-
 	private static final long serialVersionUID = 1L;
 	private JPanel contenedor;
 
-	public DSSUMenuPrincipal(DSSU usuario) {
+	public DSSUMenuPrincipal(DSSU usuario, ManejoSQL db) {	
 		//JFRAME
 		setSize(ConstantesEstilo.ventana);				//Dimensiones
 		setResizable(false);
@@ -55,7 +55,7 @@ public class DSSUMenuPrincipal extends JFrame {
 		btnEvaluarPropuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				DSSUPropuestasSinEvaluar propuestasSinEvaluar = new DSSUPropuestasSinEvaluar(usuario);
+				DSSUPropuestasSinEvaluar propuestasSinEvaluar = new DSSUPropuestasSinEvaluar(usuario, db);
 				propuestasSinEvaluar.setVisible(true);
 			}
 		});
@@ -67,7 +67,7 @@ public class DSSUMenuPrincipal extends JFrame {
 		btnPublicarConvocatoria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				DSSUProyectosAprobados proyectosAprobados = new DSSUProyectosAprobados(usuario);
+				DSSUProyectosAprobados proyectosAprobados = new DSSUProyectosAprobados(usuario, db);
 				proyectosAprobados.setVisible(true);
 			}
 		});
