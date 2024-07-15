@@ -135,6 +135,9 @@ public class InicioSesion extends JFrame {
 			switch(db.datos.getInt("tipo")) {
 			case 0:
 				System.out.print("Bienvenido Organismo Receptor: ");
+				dispose();
+				ORMenuPrincipal menuOR = new ORMenuPrincipal(new OrganismoReceptor(db.datos.getInt("id"), db.datos.getInt("tipo"), db.datos.getString("usuario"), db.datos.getString("contrasena"), db.datos.getString("correo"), db.datos.getString("telefono"), db.datos.getString("max_autoridad"), db.datos.getString("direccion")), db);
+				menuOR.setVisible(true);
 				break;
 			case 1:
 				dispose();
