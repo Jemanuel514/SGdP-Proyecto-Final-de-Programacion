@@ -146,8 +146,8 @@ public class InicioSesion extends JFrame {
 				break;
 			case 2:
 				dispose();
-				MenuPrincipalE menuEstudiante = new MenuPrincipalE(new Estudiante(db.datos.getInt("id"), db.datos.getInt("tipo"), db.datos.getString("usuario"), db.datos.getString("contrasena"), db.datos.getString("correo"), db.datos.getString("telefono"), db.datos.getString("facultad")), db);
-				menuEstudiante.setVisible(true);
+				//MenuPrincipalE menuEstudiante = new MenuPrincipalE(new Estudiante(db.datos.getInt("id"), db.datos.getInt("tipo"), db.datos.getString("usuario"), db.datos.getString("contrasena"), db.datos.getString("correo"), db.datos.getString("telefono"), db.datos.getString("facultad")), db);
+				//menuEstudiante.setVisible(true);
 				break;
 			default:
 				System.out.print("Usuario no reconocido.");

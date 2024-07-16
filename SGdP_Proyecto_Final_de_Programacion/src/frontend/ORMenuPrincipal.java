@@ -56,8 +56,8 @@ public class ORMenuPrincipal extends JFrame {
 		btnProponerProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ORProponerProyecto proponerProyecto = new ORProponerProyecto(usuario, db);
-				proponerProyecto.setVisible(true);
+				//ORProponerProyecto proponerProyecto = new ORProponerProyecto(usuario, db);
+				//proponerProyecto.setVisible(true);
 			}
 		});
 		contenedor.add(btnProponerProyecto);
@@ -89,7 +89,7 @@ public class ORMenuPrincipal extends JFrame {
 		
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
 		btnCerrarSesion.setFont(ConstantesEstilo.boton);
-		btnCerrarSesion.setBounds(10, 683, 242, 38);
+		btnCerrarSesion.setBounds(10, 651, 242, 38);
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
