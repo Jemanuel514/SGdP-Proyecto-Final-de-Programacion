@@ -1,6 +1,6 @@
 package backend;
 
-abstract class Usuario {
+public class Usuario {
 	//Atributos
 	private int id;
 	private int tipo;
