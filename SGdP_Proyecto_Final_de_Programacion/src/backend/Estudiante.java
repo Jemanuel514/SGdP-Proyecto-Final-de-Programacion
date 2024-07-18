@@ -14,7 +14,7 @@ public class Estudiante extends Usuario{
 	
 	public void inscribirseConvocatoria(int id_estudiante, int id_convocatoria, ManejoSQL db) {
 		
-		db.insertarDatos("INSERT INTO Inscripciones (id_estudiante, id_convocatoria) VALUES (" + id_estudiante + ", " + id_convocatoria + ")");
+		db.insertarDatos("INSERT INTO Inscripciones (estudiante_id, convocatoria_id) VALUES (" + id_estudiante + ", " + id_convocatoria + ")");
 		
 		db.cerrarConexion();
 		

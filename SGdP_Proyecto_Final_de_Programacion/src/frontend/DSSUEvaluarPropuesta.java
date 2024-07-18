@@ -69,145 +69,151 @@ public class DSSUEvaluarPropuesta extends JFrame {
 		
 		// General
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setFont(ConstantesEstilo.TEXTO);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JLabel lbl_tipo_usuario = new JLabel("DSSU");
-		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setFont(ConstantesEstilo.TEXTO);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JLabel lbl_evaluar_propuesta = new JLabel("Evaluar Propuesta");
-		lbl_evaluar_propuesta.setFont(ConstantesEstilo.titulo);
+		lbl_evaluar_propuesta.setFont(ConstantesEstilo.TITULO);
 		lbl_evaluar_propuesta.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		// Información de propuesta
 		// Título
 		lbl_titulo = new JLabel("Título: ");
-		lbl_titulo.setFont(ConstantesEstilo.texto);
+		lbl_titulo.setFont(ConstantesEstilo.TEXTO);
 		
 		// Organismo receptor
 		lbl_organismo_receptor = new JLabel("Organismo Receptor: ");
-		lbl_organismo_receptor.setFont(ConstantesEstilo.texto);
+		lbl_organismo_receptor.setFont(ConstantesEstilo.TEXTO);
 		
 		// Tipo de proyecto
 		lbl_tipo = new JLabel("Tipo: ");
-		lbl_tipo.setFont(ConstantesEstilo.texto);
+		lbl_tipo.setFont(ConstantesEstilo.TEXTO);
 		
 		// Resumen
 		JLabel lbl_resumen = new JLabel("Resumen: ");
-		lbl_resumen.setFont(ConstantesEstilo.texto);
+		lbl_resumen.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_resumen = new JTextArea();
 		txt_resumen.setEditable(false);
 		txt_resumen.setLineWrap(true);
-		txt_resumen.setFont(ConstantesEstilo.texto);
+		txt_resumen.setWrapStyleWord(true);
+		txt_resumen.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_resumen = new JScrollPane(txt_resumen);
 		
 		// Objetivo
 		JLabel lbl_objetivo = new JLabel("Objetivo: ");
-		lbl_objetivo.setFont(ConstantesEstilo.texto);	
+		lbl_objetivo.setFont(ConstantesEstilo.TEXTO);	
 		
 		txt_objetivo = new JTextArea();
 		txt_objetivo.setEditable(false);
 		txt_objetivo.setLineWrap(true);
-		txt_objetivo.setFont(ConstantesEstilo.texto);
+		txt_objetivo.setWrapStyleWord(true);
+		txt_objetivo.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_objetivo = new JScrollPane(txt_objetivo);
 		
 		// Beneficiarios
 		JLabel lbl_beneficiarios = new JLabel("Beneficiarios: ");
-		lbl_beneficiarios.setFont(ConstantesEstilo.texto);
+		lbl_beneficiarios.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_beneficiarios = new JTextArea();
 		txt_beneficiarios.setEditable(false);
 		txt_beneficiarios.setLineWrap(true);
-		txt_beneficiarios.setFont(ConstantesEstilo.texto);
+		txt_beneficiarios.setWrapStyleWord(true);
+		txt_beneficiarios.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_beneficiarios = new JScrollPane(txt_beneficiarios);
 		
 		// Objetivos de desarrollo sostenible
 		JLabel lbl_objetivosODS = new JLabel("Objetivos de desarrollo sostenible:");
-		lbl_objetivosODS.setFont(ConstantesEstilo.texto);
+		lbl_objetivosODS.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_objetivosODS = new JTextArea();
 		txt_objetivosODS.setEditable(false);
 		txt_objetivosODS.setLineWrap(true);
-		txt_objetivosODS.setFont(ConstantesEstilo.texto);
+		txt_objetivosODS.setWrapStyleWord(true);
+		txt_objetivosODS.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_objetivosODS = new JScrollPane(txt_objetivosODS);
 		
 		// Lugar
 		lbl_lugar = new JLabel("Lugar: ");
-		lbl_lugar.setFont(ConstantesEstilo.texto);
+		lbl_lugar.setFont(ConstantesEstilo.TEXTO);
 		
 		// Horario	
 		lbl_horario = new JLabel("Horario: ");
-		lbl_horario.setFont(ConstantesEstilo.texto);
+		lbl_horario.setFont(ConstantesEstilo.TEXTO);
 				
 		// Estudiantes
 		lbl_estudiantes = new JLabel("Cupos: ");
-		lbl_estudiantes.setFont(ConstantesEstilo.texto);
+		lbl_estudiantes.setFont(ConstantesEstilo.TEXTO);
 		
 		// Facultad
 		lbl_facultad = new JLabel("Facultad: ");
-		lbl_facultad.setFont(ConstantesEstilo.texto);
+		lbl_facultad.setFont(ConstantesEstilo.TEXTO);
 		
 		// Perfil de estudiante
 		JLabel lbl_perfil_estudiante = new JLabel("Perfil de estudiante:");
-		lbl_perfil_estudiante.setFont(ConstantesEstilo.texto);
+		lbl_perfil_estudiante.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_perfil_estudiante = new JTextArea();
 		txt_perfil_estudiante.setEditable(false);
 		txt_perfil_estudiante.setLineWrap(true);
-		txt_perfil_estudiante.setFont(ConstantesEstilo.texto);
+		txt_perfil_estudiante.setWrapStyleWord(true);
+		txt_perfil_estudiante.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_perfil_estudiante = new JScrollPane(txt_perfil_estudiante);
 		
 		// Materiales
 		JLabel lbl_materiales = new JLabel("Materiales: ");
-		lbl_materiales.setFont(ConstantesEstilo.texto);
+		lbl_materiales.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_materiales = new JTextArea();
 		txt_materiales.setEditable(false);
 		txt_materiales.setLineWrap(true);
-		txt_materiales.setFont(ConstantesEstilo.texto);
+		txt_materiales.setWrapStyleWord(true);
+		txt_materiales.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_materiales = new JScrollPane(txt_materiales);
 		
 		// Transporte
 		JLabel lbl_transporte = new JLabel("Transporte ");
-		lbl_transporte.setFont(ConstantesEstilo.texto);
+		lbl_transporte.setFont(ConstantesEstilo.TEXTO);
 		
 		check_transporte = new JCheckBox();
 		check_transporte.setEnabled(false);
 		
 		// Almuerzo
 		JLabel lbl_almuerzo = new JLabel("Almuerzo ");
-		lbl_almuerzo.setFont(ConstantesEstilo.texto);
+		lbl_almuerzo.setFont(ConstantesEstilo.TEXTO);
 		
 		check_almuerzo = new JCheckBox();
 		check_almuerzo.setEnabled(false);
 		
 		// Datos del encargado
 		lbl_encargado = new JLabel("Encargado: ");
-		lbl_encargado.setFont(ConstantesEstilo.texto);
+		lbl_encargado.setFont(ConstantesEstilo.TEXTO);
 		
 		lbl_cargo = new JLabel("Cargo: ");
-		lbl_cargo.setFont(ConstantesEstilo.texto);
+		lbl_cargo.setFont(ConstantesEstilo.TEXTO);
 		
 		lbl_cedula = new JLabel("Cédula: ");
-		lbl_cedula.setFont(ConstantesEstilo.texto);
+		lbl_cedula.setFont(ConstantesEstilo.TEXTO);
 		
 		lbl_correo = new JLabel("Correo: ");
-		lbl_correo.setFont(ConstantesEstilo.texto);
+		lbl_correo.setFont(ConstantesEstilo.TEXTO);
 		
 		lbl_telefono = new JLabel("Teléfono: ");
-		lbl_telefono.setFont(ConstantesEstilo.texto);
+		lbl_telefono.setFont(ConstantesEstilo.TEXTO);
 		
 		// Botones
         JButton btn_volver = new JButton("Volver");
-  		btn_volver.setFont(ConstantesEstilo.boton);
+  		btn_volver.setFont(ConstantesEstilo.BOTON);
   		btn_volver.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
@@ -217,7 +223,7 @@ public class DSSUEvaluarPropuesta extends JFrame {
   		});
   		
   		JButton btn_aprobar = new JButton("Aprobar");
-  		btn_aprobar.setFont(ConstantesEstilo.boton);
+  		btn_aprobar.setFont(ConstantesEstilo.BOTON);
   		btn_aprobar.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				usuario.evaluarPropuesta(id_propuesta, true, null, db);
@@ -230,7 +236,7 @@ public class DSSUEvaluarPropuesta extends JFrame {
   		});
   		
   		JButton btn_rechazar = new JButton("Rechazar");
-  		btn_rechazar.setFont(ConstantesEstilo.boton);
+  		btn_rechazar.setFont(ConstantesEstilo.BOTON);
   		btn_rechazar.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				String motivo = JOptionPane.showInputDialog(null, "Motivo del rechazo:", "", JOptionPane.QUESTION_MESSAGE);

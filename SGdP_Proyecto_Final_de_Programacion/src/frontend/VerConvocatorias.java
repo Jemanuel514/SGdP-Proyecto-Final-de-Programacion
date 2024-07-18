@@ -49,7 +49,7 @@ public class VerConvocatorias extends JFrame {
 		
 		// Etiquetas
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setFont(ConstantesEstilo.TEXTO);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		String tipo_usuario = "";
@@ -71,16 +71,16 @@ public class VerConvocatorias extends JFrame {
 		}
 		
 		JLabel lbl_tipo_usuario = new JLabel(tipo_usuario);
-		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setFont(ConstantesEstilo.TEXTO);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 	
 		JLabel lbl_convocatorias = new JLabel("Convocatorias");
 		lbl_convocatorias.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_convocatorias.setFont(ConstantesEstilo.titulo);
+		lbl_convocatorias.setFont(ConstantesEstilo.TITULO);
 		
 		// Botones
 		JButton boton_menu = new JButton("Menú");
-		boton_menu.setFont(ConstantesEstilo.boton);
+		boton_menu.setFont(ConstantesEstilo.BOTON);
 		boton_menu.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
@@ -111,7 +111,7 @@ public class VerConvocatorias extends JFrame {
 		// Tabla
 		tabla_convocatorias = new JTable();
 		tabla_convocatorias.setEnabled(false);
-		tabla_convocatorias.setFont(ConstantesEstilo.texto);
+		tabla_convocatorias.setFont(ConstantesEstilo.TEXTO);
 		
         // Modelo de tabla (definición de columnas)
 		convocatorias_modelo = new DefaultTableModel();
@@ -120,7 +120,7 @@ public class VerConvocatorias extends JFrame {
 		
 		// Títulos de columna
 		JTableHeader encabezado = tabla_convocatorias.getTableHeader();
-        encabezado.setFont(ConstantesEstilo.subtitulo);
+        encabezado.setFont(ConstantesEstilo.SUBTITULO);
         encabezado.setReorderingAllowed(false);
 		
 		// Personalizar columnas
@@ -197,7 +197,7 @@ public class VerConvocatorias extends JFrame {
 			break;
 		// Estudiante: solo puede ver las convocatorias de su facultad
 		case 2:
-			consulta = "SELECT Convocatorias.id, Proyectos.titulo FROM Convocatorias INNER JOIN Proyectos on Convocatorias.proyecto_id = Proyectos.id WHERE Proyectos.facultades IN ('TODAS', " + ((Estudiante) usuario).getFacultad() + ")";
+			consulta = "SELECT Convocatorias.id, Proyectos.titulo FROM Convocatorias INNER JOIN Proyectos on Convocatorias.proyecto_id = Proyectos.id WHERE Proyectos.facultades IN ('TODAS', '" + ((Estudiante) usuario).getFacultad() + "')";
 			break;
 		default: break;
 		}

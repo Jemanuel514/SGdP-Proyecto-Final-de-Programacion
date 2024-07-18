@@ -46,20 +46,20 @@ public class ORVerPropuestas extends JFrame {
 		
 		// Etiquetas
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setFont(ConstantesEstilo.TEXTO);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		JLabel lbl_tipo_usuario = new JLabel("ORGANISMO RECEPTOR");
-		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setFont(ConstantesEstilo.TEXTO);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 	
 		JLabel lbl_propuestas = new JLabel("Propuestas");
-		lbl_propuestas.setFont(ConstantesEstilo.titulo);
+		lbl_propuestas.setFont(ConstantesEstilo.TITULO);
 		lbl_propuestas.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		// Botones		
 		JButton boton_menu = new JButton("Menú");
-		boton_menu.setFont(ConstantesEstilo.boton);
+		boton_menu.setFont(ConstantesEstilo.BOTON);
 		boton_menu.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
@@ -71,7 +71,7 @@ public class ORVerPropuestas extends JFrame {
 		// Tabla
 		tabla_propuestas = new JTable();
 		tabla_propuestas.setEnabled(false);
-		tabla_propuestas.setFont(ConstantesEstilo.texto);
+		tabla_propuestas.setFont(ConstantesEstilo.TEXTO);
 		tabla_propuestas.getTableHeader().setReorderingAllowed(false);
 		
         // Modelo de tabla (definición de columnas)
@@ -81,7 +81,7 @@ public class ORVerPropuestas extends JFrame {
 		
 		// Títulos de columna
 		JTableHeader encabezado = tabla_propuestas.getTableHeader();
-        encabezado.setFont(ConstantesEstilo.subtitulo);
+        encabezado.setFont(ConstantesEstilo.SUBTITULO);
 		
 		// Personalizar columnas
 		DefaultTableCellRenderer centrar_celda = new DefaultTableCellRenderer();

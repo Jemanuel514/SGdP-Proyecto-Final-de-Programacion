@@ -77,7 +77,7 @@ public class ORProponerProyecto extends JFrame {
 		
 		// Título de la ventana
 		JLabel lbl_propuesta_de_proyecto = new JLabel("Propuesta de Proyecto");
-        lbl_propuesta_de_proyecto.setFont(ConstantesEstilo.titulo);
+        lbl_propuesta_de_proyecto.setFont(ConstantesEstilo.TITULO);
         lbl_propuesta_de_proyecto.setHorizontalAlignment(SwingConstants.CENTER);
 		
         
@@ -85,83 +85,88 @@ public class ORProponerProyecto extends JFrame {
         JPanel contenedor_descripcion_proyecto = new JPanel();
         
         JLabel lbl_descripcion_proyecto = new JLabel("Descripción del proyecto");
-        lbl_descripcion_proyecto.setFont(ConstantesEstilo.subtitulo);
+        lbl_descripcion_proyecto.setFont(ConstantesEstilo.SUBTITULO);
         lbl_descripcion_proyecto.setHorizontalAlignment(SwingConstants.CENTER);
         
         // Título
         JLabel lbl_titulo = new JLabel("Título:");
-        lbl_titulo.setFont(ConstantesEstilo.texto);
+        lbl_titulo.setFont(ConstantesEstilo.TEXTO);
         
         txt_titulo = new JTextField();
-        txt_titulo.setFont(ConstantesEstilo.texto);
+        txt_titulo.setFont(ConstantesEstilo.TEXTO);
         
         // Lugar
         JLabel lbl_lugar = new JLabel("Lugar:");
-        lbl_lugar.setFont(ConstantesEstilo.texto);
+        lbl_lugar.setFont(ConstantesEstilo.TEXTO);
         
         txt_lugar = new JTextField();
-        txt_lugar.setFont(ConstantesEstilo.texto);
+        txt_lugar.setFont(ConstantesEstilo.TEXTO);
         
         // Objetivo
         JLabel lbl_objetivo = new JLabel("Objetivo:");
-        lbl_objetivo.setFont(ConstantesEstilo.texto);
+        lbl_objetivo.setFont(ConstantesEstilo.TEXTO);
        
         txt_objetivo = new JTextArea();
-        txt_objetivo.setFont(ConstantesEstilo.texto);
+        txt_objetivo.setFont(ConstantesEstilo.TEXTO);
         txt_objetivo.setLineWrap(true);
+        txt_objetivo.setWrapStyleWord(true);
         
         JScrollPane scroll_objetivo = new JScrollPane(txt_objetivo);
         
         // Resumen        
         JLabel lbl_resumen = new JLabel("Resumen:");
-        lbl_resumen.setFont(ConstantesEstilo.texto);
+        lbl_resumen.setFont(ConstantesEstilo.TEXTO);
         
         txt_resumen = new JTextArea();
-        txt_resumen.setFont(ConstantesEstilo.texto);
+        txt_resumen.setFont(ConstantesEstilo.TEXTO);
         txt_resumen.setLineWrap(true);
+        txt_resumen.setWrapStyleWord(true);
         
         JScrollPane scroll_resumen = new JScrollPane(txt_resumen);
         
         // Beneficiarios
         JLabel lbl_beneficiarios = new JLabel("Beneficiarios:");
-        lbl_beneficiarios.setFont(ConstantesEstilo.texto);
+        lbl_beneficiarios.setFont(ConstantesEstilo.TEXTO);
         
         txt_beneficiarios = new JTextArea();
-        txt_beneficiarios.setFont(ConstantesEstilo.texto);
+        txt_beneficiarios.setFont(ConstantesEstilo.TEXTO);
         txt_beneficiarios.setLineWrap(true);
+        txt_beneficiarios.setWrapStyleWord(true);
         
         JScrollPane scroll_beneficiarios = new JScrollPane(txt_beneficiarios);
         
         // Contribución ODS
         JLabel lbl_contribucion_ods = new JLabel("Contribución ODS:");
-        lbl_contribucion_ods.setFont(ConstantesEstilo.texto);
+        lbl_contribucion_ods.setFont(ConstantesEstilo.TEXTO);
         
         txt_contribucionODS = new JTextArea();
-        txt_contribucionODS.setFont(ConstantesEstilo.texto);
+        txt_contribucionODS.setFont(ConstantesEstilo.TEXTO);
         txt_contribucionODS.setLineWrap(true);
+        txt_contribucionODS.setWrapStyleWord(true);
         
         JScrollPane scroll_contribucion_ods = new JScrollPane(txt_contribucionODS);
         
         // Materiales
         JLabel lbl_materiales = new JLabel("Materiales:");
-        lbl_materiales.setFont(ConstantesEstilo.texto);
+        lbl_materiales.setFont(ConstantesEstilo.TEXTO);
 
         txt_materiales = new JTextArea();
-        txt_materiales.setFont(ConstantesEstilo.texto);
+        txt_materiales.setFont(ConstantesEstilo.TEXTO);
         txt_materiales.setLineWrap(true);
+        txt_materiales.setWrapStyleWord(true);
         
         JScrollPane scroll_materiales = new JScrollPane(txt_materiales);
         
         // Tipo
         JLabel lbl_tipo = new JLabel("Tipo:");
-        lbl_tipo.setFont(ConstantesEstilo.texto);
+        lbl_tipo.setFont(ConstantesEstilo.TEXTO);
         
         btn_servicio_social = new JRadioButton("Servicio social");
-        btn_servicio_social.setFont(ConstantesEstilo.boton);
+        btn_servicio_social.setFont(ConstantesEstilo.BOTON);
         btn_servicio_social.setSelected(true);
         
         btn_voluntariado = new JRadioButton("Voluntariado");
-        btn_voluntariado.setFont(ConstantesEstilo.boton);
+        btn_voluntariado.setFont(ConstantesEstilo.BOTON);
         
         ButtonGroup tipo_proyecto = new ButtonGroup();
         tipo_proyecto.add(btn_servicio_social);
@@ -247,43 +252,43 @@ public class ORProponerProyecto extends JFrame {
         JPanel contenedor_encargado = new JPanel();
         
         JLabel lbl_encargado = new JLabel("Encargado");
-        lbl_encargado.setFont(ConstantesEstilo.subtitulo);
+        lbl_encargado.setFont(ConstantesEstilo.SUBTITULO);
         lbl_encargado.setHorizontalAlignment(SwingConstants.CENTER);
         
         // Nombre
         JLabel lbl_nombre_encargado = new JLabel("Nombre:");
-        lbl_nombre_encargado.setFont(ConstantesEstilo.texto);
+        lbl_nombre_encargado.setFont(ConstantesEstilo.TEXTO);
         
         txt_nombre_encargado = new JTextField();
-        txt_nombre_encargado.setFont(ConstantesEstilo.texto);
+        txt_nombre_encargado.setFont(ConstantesEstilo.TEXTO);
         
         // Cédula
         JLabel lbl_cedula_encargado = new JLabel("Cédula:");
-        lbl_cedula_encargado.setFont(ConstantesEstilo.texto);
+        lbl_cedula_encargado.setFont(ConstantesEstilo.TEXTO);
         
         txt_cedula_encargado = new JTextField();
-        txt_cedula_encargado.setFont(ConstantesEstilo.texto);
+        txt_cedula_encargado.setFont(ConstantesEstilo.TEXTO);
         
         // Cargo
         JLabel lbl_cargo_encargado = new JLabel("Cargo:");
-        lbl_cargo_encargado.setFont(ConstantesEstilo.texto);
+        lbl_cargo_encargado.setFont(ConstantesEstilo.TEXTO);
         
         txt_cargo_encargado = new JTextField();
-        txt_cargo_encargado.setFont(ConstantesEstilo.texto);
+        txt_cargo_encargado.setFont(ConstantesEstilo.TEXTO);
         
         // Correo
         JLabel lbl_correo_encargado = new JLabel("Correo:");
-        lbl_correo_encargado.setFont(ConstantesEstilo.texto);
+        lbl_correo_encargado.setFont(ConstantesEstilo.TEXTO);
         
         txt_correo_encargado = new JTextField();
-        txt_correo_encargado.setFont(ConstantesEstilo.texto);
+        txt_correo_encargado.setFont(ConstantesEstilo.TEXTO);
         
         // Teléfono
         JLabel lbl_telefono_encargado = new JLabel("Teléfono:");
-        lbl_telefono_encargado.setFont(ConstantesEstilo.texto);
+        lbl_telefono_encargado.setFont(ConstantesEstilo.TEXTO);
         
         txt_telefono_encargado = new JTextField();
-        txt_telefono_encargado.setFont(ConstantesEstilo.texto);
+        txt_telefono_encargado.setFont(ConstantesEstilo.TEXTO);
         
         GroupLayout gl_encargado = new GroupLayout(contenedor_encargado);
         
@@ -345,44 +350,45 @@ public class ORProponerProyecto extends JFrame {
         JPanel contenedor_contribuyentes = new JPanel();
         
         JLabel lbl_contribuyentes = new JLabel("Contribuyentes");
-        lbl_contribuyentes.setFont(ConstantesEstilo.subtitulo);
+        lbl_contribuyentes.setFont(ConstantesEstilo.SUBTITULO);
         lbl_contribuyentes.setHorizontalAlignment(SwingConstants.CENTER);
         
         // Cantidad
         JLabel lbl_cantidad_estudiantes = new JLabel("Cantidad de estudiantes:");
-        lbl_cantidad_estudiantes.setFont(ConstantesEstilo.texto);
+        lbl_cantidad_estudiantes.setFont(ConstantesEstilo.TEXTO);
         
         txt_cantidad_estudiantes = new JTextField();
-        txt_cantidad_estudiantes.setFont(ConstantesEstilo.texto);
+        txt_cantidad_estudiantes.setFont(ConstantesEstilo.TEXTO);
         
         // Facultad
         JLabel lbl_facultad = new JLabel("Facultad:");
-        lbl_facultad.setFont(ConstantesEstilo.texto);
+        lbl_facultad.setFont(ConstantesEstilo.TEXTO);
         
         comboBox_facultad = new JComboBox<String>();
         comboBox_facultad.setModel(new DefaultComboBoxModel<>(new String[] {"TODAS", "FCT", "FIC", "FIE", "FII", "FIM", "FISC"}));
-        comboBox_facultad.setFont(ConstantesEstilo.texto);
+        comboBox_facultad.setFont(ConstantesEstilo.TEXTO);
         
         // Perfil de estudiante
         JLabel lbl_perfil_estudiantil = new JLabel("Perfil estudiantil:");
-        lbl_perfil_estudiantil.setFont(ConstantesEstilo.texto);
+        lbl_perfil_estudiantil.setFont(ConstantesEstilo.TEXTO);
         
         txt_perfil_estudiantil = new JTextArea();
-        txt_perfil_estudiantil.setFont(ConstantesEstilo.texto);
+        txt_perfil_estudiantil.setFont(ConstantesEstilo.TEXTO);
         txt_perfil_estudiantil.setLineWrap(true);
+        txt_perfil_estudiantil.setWrapStyleWord(true);
         
         JScrollPane scroll_perfil_estudiantil = new JScrollPane(txt_perfil_estudiantil);
         
         // Transporte
         JLabel lbl_transporte = new JLabel("Brindará transporte:");
-        lbl_transporte.setFont(ConstantesEstilo.texto);
+        lbl_transporte.setFont(ConstantesEstilo.TEXTO);
         
         btn_si_transporte = new JRadioButton("Sí");
-        btn_si_transporte.setFont(ConstantesEstilo.boton);
+        btn_si_transporte.setFont(ConstantesEstilo.BOTON);
         btn_si_transporte.setSelected(true);
         
         btn_no_transporte = new JRadioButton("No");
-        btn_no_transporte.setFont(ConstantesEstilo.boton);
+        btn_no_transporte.setFont(ConstantesEstilo.BOTON);
         
         ButtonGroup transporte = new ButtonGroup();
         transporte.add(btn_si_transporte);
@@ -390,14 +396,14 @@ public class ORProponerProyecto extends JFrame {
         
         // Almuerzo
         JLabel lbl_almuerzo = new JLabel("Brindará almuerzo:");
-        lbl_almuerzo.setFont(ConstantesEstilo.texto);
+        lbl_almuerzo.setFont(ConstantesEstilo.TEXTO);
         
         btn_si_almuerzo = new JRadioButton("Sí");
-        btn_si_almuerzo.setFont(ConstantesEstilo.boton);
+        btn_si_almuerzo.setFont(ConstantesEstilo.BOTON);
         btn_si_almuerzo.setSelected(true);
         
         btn_no_almuerzo = new JRadioButton("No");
-        btn_no_almuerzo.setFont(ConstantesEstilo.boton);
+        btn_no_almuerzo.setFont(ConstantesEstilo.BOTON);
         
         ButtonGroup almuerzo = new ButtonGroup();
         almuerzo.add(btn_si_almuerzo);
@@ -467,29 +473,29 @@ public class ORProponerProyecto extends JFrame {
         JPanel contenedor_horario = new JPanel();
         
         JLabel lbl_horario = new JLabel("HORARIO");
-        lbl_horario.setFont(ConstantesEstilo.subtitulo);
+        lbl_horario.setFont(ConstantesEstilo.SUBTITULO);
         lbl_horario.setHorizontalAlignment(SwingConstants.CENTER);
         
         // Día
         JLabel lbl_dia = new JLabel("Día [dd/mm/aaaa]");
-        lbl_dia.setFont(ConstantesEstilo.subtitulo);
+        lbl_dia.setFont(ConstantesEstilo.SUBTITULO);
         
         txt_dia = new JTextField();
-        txt_dia.setFont(ConstantesEstilo.texto);
+        txt_dia.setFont(ConstantesEstilo.TEXTO);
         
         // Hora de inicio
         JLabel lbl_hora_inicio = new JLabel("Hora de inicio [24:00]");
-        lbl_hora_inicio.setFont(ConstantesEstilo.subtitulo);
+        lbl_hora_inicio.setFont(ConstantesEstilo.SUBTITULO);
         
         txt_hora_inicio = new JTextField();
-        txt_hora_inicio.setFont(ConstantesEstilo.texto);
+        txt_hora_inicio.setFont(ConstantesEstilo.TEXTO);
         
         // Hora de finalización
         JLabel lbl_hora_final = new JLabel("Hora de finalización [24:00]");
-        lbl_hora_final.setFont(ConstantesEstilo.subtitulo);
+        lbl_hora_final.setFont(ConstantesEstilo.SUBTITULO);
         
         txt_hora_final = new JTextField();
-        txt_hora_final.setFont(ConstantesEstilo.texto);
+        txt_hora_final.setFont(ConstantesEstilo.TEXTO);
         
         GroupLayout gl_horario = new GroupLayout(contenedor_horario);
         
@@ -541,10 +547,16 @@ public class ORProponerProyecto extends JFrame {
 												Integer.parseInt(txt_cantidad_estudiantes.getText()), comboBox_facultad.getSelectedItem().toString(), txt_perfil_estudiantil.getText(), transporte, almuerzo, 
 												txt_dia.getText(), txt_hora_inicio.getText(), txt_hora_final.getText(),
 												db);
+					
+					JOptionPane.showMessageDialog(null, "Propuesta enviada.", "", JOptionPane.INFORMATION_MESSAGE);
+					
+					dispose();
+					ORMenuPrincipal menu_or = new ORMenuPrincipal(usuario, db);
+					menu_or.setVisible(true);
 				}
 			}
 		});
-        btn_enviar.setFont(ConstantesEstilo.boton);
+        btn_enviar.setFont(ConstantesEstilo.BOTON);
         
         JButton btn_menu = new JButton("Menú");
         btn_menu.addActionListener(new ActionListener() {
@@ -554,7 +566,7 @@ public class ORProponerProyecto extends JFrame {
 				menu_or.setVisible(true);
 			}
 		});
-        btn_menu.setFont(ConstantesEstilo.boton);
+        btn_menu.setFont(ConstantesEstilo.BOTON);
         
         GroupLayout gl_general = new GroupLayout(contenedor_general);
         

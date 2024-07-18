@@ -14,7 +14,7 @@ public class Validaciones {
 	public static boolean soloLetras(String cadena) {
 		for (char caracter : cadena.toCharArray()) {
 			
-			if (!Character.isLetter(caracter)) {
+			if (!(Character.isLetter(caracter) || caracter == ' ')) {
 				return false;
 			}
 			
@@ -157,6 +157,9 @@ public class Validaciones {
 		}
 		catch(SQLException e) {
 			System.out.println("Error al consultar la base de datos: " + e.getMessage());
+		}
+		finally {
+			db.cerrarConexion();
 		}
 		
 		return false;

@@ -13,7 +13,7 @@ public class DSSU extends Usuario{
 		int id_evaluacion;
 		
 		evaluacion_db = evaluacion ? 1 : 0;
-		id_evaluacion = db.insertarDatos("INSERT INTO Evaluaciones (aprobado, motivo) VALUES (" + evaluacion_db + ", " + motivo + ")");
+		id_evaluacion = db.insertarDatos("INSERT INTO Evaluaciones (aprobado, motivo) VALUES (" + evaluacion_db + ", '" + motivo + "')");
 		
 		db.insertarDatos("UPDATE Proyectos SET evaluacion_id = " + id_evaluacion + " WHERE id = " + id_propuesta);
 		
