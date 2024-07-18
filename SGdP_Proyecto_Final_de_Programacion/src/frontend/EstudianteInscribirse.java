@@ -31,7 +31,7 @@ import javax.swing.JButton;
 
 import java.awt.Color;
 
-public class InscribirseE extends JFrame {
+public class EstudianteInscribirse extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -41,7 +41,7 @@ public class InscribirseE extends JFrame {
 
 
 	
-	public InscribirseE(Estudiante usuario) {
+	public EstudianteInscribirse(Estudiante usuario) {
 		setTitle("Inscribir en Proyecto");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1024, 768);
@@ -62,7 +62,7 @@ public class InscribirseE extends JFrame {
   		btnVolver.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
-				MenuPrincipalE menuEstudiante = new MenuPrincipalE(usuario);
+				EstudianteMenuPrincipal menuEstudiante = new EstudianteMenuPrincipal(usuario);
 				menuEstudiante.setVisible(true);
   			}
   		});

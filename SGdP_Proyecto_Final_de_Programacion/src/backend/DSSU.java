@@ -17,6 +17,8 @@ public class DSSU extends Usuario{
 		
 		db.insertarDatos("UPDATE Proyectos SET evaluacion_id = " + idEvaluacion + " WHERE id = " + id);
 		
+		db.cerrarConexion();
+		
 	}
 	
 }

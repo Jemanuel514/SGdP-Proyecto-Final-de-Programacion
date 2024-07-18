@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import backend.Estudiante;
+import backend.ManejoSQL;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -16,13 +17,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-public class MenuPrincipalE extends JFrame {
+public class EstudianteMenuPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	
-	public MenuPrincipalE(Estudiante usuario) {
+	public EstudianteMenuPrincipal(Estudiante usuario, ManejoSQL db) {
 		setTitle("Menú Estudiante");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1025, 749);
@@ -60,7 +61,7 @@ public class MenuPrincipalE extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				InscribirseE convocatorias = new InscribirseE(usuario);
+				EstudianteInscribirse convocatorias = new EstudianteInscribirse(usuario);
 				convocatorias.setVisible(true);
 			}
 		});

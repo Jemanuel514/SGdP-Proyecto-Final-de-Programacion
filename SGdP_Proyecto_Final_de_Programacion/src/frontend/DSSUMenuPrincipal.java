@@ -1,94 +1,95 @@
 package frontend;
+
 import backend.DSSU;
 import backend.ManejoSQL;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
 
 public class DSSUMenuPrincipal extends JFrame {
+	
 	private static final long serialVersionUID = 1L;
-	private JPanel contenedor;
-
+	
 	public DSSUMenuPrincipal(DSSU usuario, ManejoSQL db) {	
-		//JFRAME
-		setSize(ConstantesEstilo.ventana);				//Dimensiones
+		// JFrame
+		setSize(ConstantesEstilo.ventana);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);					//Centrar en la pantalla
+		setLocationRelativeTo(null);
 		
-		//CONTENEDOR
-		contenedor = new JPanel();
-		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
+		// Contenedor
+		JPanel contenedor = new JPanel();
+		contenedor.setBorder(new EmptyBorder(20, 20, 20, 20));
 		contenedor.setLayout(null);
 		setContentPane(contenedor);
 		
-		//ETIQUETAS
-		JLabel etiquetaSGdP = new JLabel("SISTEMA DE GESTIÓN DE PROYECTOS");		//Inicializar y texto
-		etiquetaSGdP.setFont(ConstantesEstilo.titulo);								//Fuente
-		etiquetaSGdP.setHorizontalAlignment(SwingConstants.CENTER);					//Alineación
-		etiquetaSGdP.setBounds(142, 140, 726, 48);									//Posición
-		contenedor.add(etiquetaSGdP);
+		// Etiquetas
+		JLabel etiqueta_SGdP = new JLabel("SISTEMA DE GESTIÓN DE PROYECTOS");
+		etiqueta_SGdP.setFont(ConstantesEstilo.titulo);
+		etiqueta_SGdP.setHorizontalAlignment(SwingConstants.CENTER);
+		etiqueta_SGdP.setBounds(142, 140, 726, 48);
+		contenedor.add(etiqueta_SGdP);
 		
-		JLabel lblBienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lblBienvenida.setFont(ConstantesEstilo.texto);
-		lblBienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblBienvenida.setBounds(822, 10, 178, 38);
-		contenedor.add(lblBienvenida);
+		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
+		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbl_bienvenida.setBounds(683, 10, 317, 38);
+		contenedor.add(lbl_bienvenida);
 		
-		JLabel lblTipoUsuario = new JLabel("DSSU");
-		lblTipoUsuario.setFont(ConstantesEstilo.texto);
-		lblTipoUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTipoUsuario.setBounds(822, 39, 178, 38);
-		contenedor.add(lblTipoUsuario);
+		JLabel lbl_tipo_usuario = new JLabel("DSSU");
+		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbl_tipo_usuario.setBounds(733, 39, 267, 38);
+		contenedor.add(lbl_tipo_usuario);
 		
 		//BOTONES
-		JButton btnEvaluarPropuesta = new JButton("Evaluar Propuestas");
-		btnEvaluarPropuesta.setFont(ConstantesEstilo.boton);
-		btnEvaluarPropuesta.setBounds(302, 219, 406, 91);
-		btnEvaluarPropuesta.addActionListener(new ActionListener() {
+		JButton btn_evaluar_propuesta = new JButton("Evaluar Propuestas");
+		btn_evaluar_propuesta.setFont(ConstantesEstilo.boton);
+		btn_evaluar_propuesta.setBounds(302, 219, 406, 91);
+		btn_evaluar_propuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				DSSUPropuestasSinEvaluar propuestasSinEvaluar = new DSSUPropuestasSinEvaluar(usuario, db);
 				propuestasSinEvaluar.setVisible(true);
 			}
 		});
-		contenedor.add(btnEvaluarPropuesta);
+		contenedor.add(btn_evaluar_propuesta);
 		
-		JButton btnPublicarConvocatoria = new JButton("Publicar Convocatoria");
-		btnPublicarConvocatoria.setFont(ConstantesEstilo.boton);
-		btnPublicarConvocatoria.setBounds(302, 341, 406, 91);
-		btnPublicarConvocatoria.addActionListener(new ActionListener() {
+		JButton btn_publicar_convocatoria = new JButton("Publicar Convocatoria");
+		btn_publicar_convocatoria.setFont(ConstantesEstilo.boton);
+		btn_publicar_convocatoria.setBounds(302, 341, 406, 91);
+		btn_publicar_convocatoria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				DSSUProyectosAprobados proyectosAprobados = new DSSUProyectosAprobados(usuario, db);
 				proyectosAprobados.setVisible(true);
 			}
 		});
-		contenedor.add(btnPublicarConvocatoria);
+		contenedor.add(btn_publicar_convocatoria);
 		
-		JButton btnVerConvocatoria = new JButton("Ver Convocatorias");
-		btnVerConvocatoria.setFont(ConstantesEstilo.boton);
-		btnVerConvocatoria.setBounds(302, 463, 406, 91);
-		contenedor.add(btnVerConvocatoria);
+		JButton btn_ver_convocatoria = new JButton("Ver Convocatorias");
+		btn_ver_convocatoria.setFont(ConstantesEstilo.boton);
+		btn_ver_convocatoria.setBounds(302, 463, 406, 91);
+		contenedor.add(btn_ver_convocatoria);
 		
-		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
-		btnCerrarSesion.setFont(ConstantesEstilo.boton);
-		btnCerrarSesion.setBounds(10, 683, 242, 38);
-		btnCerrarSesion.addActionListener(new ActionListener() {
+		JButton btn_cerrar_sesion = new JButton("Cerrar Sesión");
+		btn_cerrar_sesion.setFont(ConstantesEstilo.boton);
+		btn_cerrar_sesion.setBounds(10, 683, 242, 38);
+		btn_cerrar_sesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				InicioSesion iniciarSesion = new InicioSesion();
-				iniciarSesion.setVisible(true);
+				InicioSesion iniciar_sesion = new InicioSesion();
+				iniciar_sesion.setVisible(true);
 			}
 		});
-		contenedor.add(btnCerrarSesion);
+		contenedor.add(btn_cerrar_sesion);
 		
 	}
 }

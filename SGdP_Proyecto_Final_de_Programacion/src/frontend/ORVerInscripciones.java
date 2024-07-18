@@ -1,179 +1,140 @@
 package frontend;
 
-import java.awt.EventQueue;
+import backend.ManejoSQL;
+import backend.OrganismoReceptor;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import backend.ManejoSQL;
-import backend.OrganismoReceptor;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JScrollPane;
-import java.awt.Dimension;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
-
-import javax.swing.JTable;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JButton;
 
 public class ORVerInscripciones extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    private JPanel contenedorPrincipal;
-    private JTable tablaInscripciones;
-    private DefaultTableModel inscripcionesModelo;
-    private JScrollPane contenedorTabla;
-    private ManejoSQL db;
-    private OrganismoReceptor usuario;
+    
+    private JTable tabla_inscripciones;
+    private DefaultTableModel inscripciones_modelo;
 
-	/**
-	 * Create the frame.
-	 */
 	public ORVerInscripciones(OrganismoReceptor usuario, int idConvocatoria, ManejoSQL db) {
-		this.db = db;
-		this.usuario = usuario;
 		
-		setMaximumSize(new Dimension(1024, 768));
-		setSize(new Dimension(1014, 737));
-		setTitle("Ver inscripciones");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1024,768);
+		// JFrame
+		setSize(ConstantesEstilo.ventana);
+        setPreferredSize(ConstantesEstilo.ventana);
         setResizable(false);
-		setBounds(100, 100, 1024, 768);
-		contenedorPrincipal = new JPanel();
-		contenedorPrincipal.setPreferredSize(new Dimension(1010, 764));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 		
-		contenedorPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contenedorPrincipal.setLayout(null);
+        // Contenedor
+		JPanel contenedor_principal = new JPanel();
+		contenedor_principal.setBorder(new EmptyBorder(20, 20, 20, 20));
+		setContentPane(contenedor_principal);
+		
+		// Etiquetas
+		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
+		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 
-		setContentPane(contenedorPrincipal);
-		
-		JLabel lblBienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lblBienvenida.setFont(ConstantesEstilo.texto);
-		lblBienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
-
-		JLabel lblTipoUsuario = new JLabel("ORGANISMO RECEPTOR");
-		lblTipoUsuario.setFont(ConstantesEstilo.texto);
-		lblTipoUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
-		
-		JLabel lblNewLabel = new JLabel("INSCRPCIONES");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Artifakt Element", Font.BOLD, 40));
-		
-		//JScrollPane scrollPane = new JScrollPane();
-		//scrollPane.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		
-		JButton botonMenu = new JButton("Men\u00FA");
-		botonMenu.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
-		botonMenu.addActionListener(new ActionListener() {
-  			public void actionPerformed(ActionEvent e) {
-  				dispose();
-				ORMenuPrincipal menuOR = new ORMenuPrincipal(usuario, db);
-				menuOR.setVisible(true);
-  			}
-  		});
-		
-		JButton botonVolver = new JButton("Volver");
-		botonVolver.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
-		botonVolver.addActionListener(new ActionListener() {
-  			public void actionPerformed(ActionEvent e) {
-  				dispose();
-				ORVerConvocatorias convocatoriasOR = new ORVerConvocatorias(usuario, db);
-				convocatoriasOR.setVisible(true);
-  			}
-  		});
+		JLabel lbl_tipo_usuario = new JLabel("ORGANISMO RECEPTOR");
+		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 	
-		//TABLA
-		//General
-			tablaInscripciones = new JTable();
-			tablaInscripciones.setEnabled(false);
-			tablaInscripciones.setFont(ConstantesEstilo.texto);
-			tablaInscripciones.setBounds(40, 224, 929, 497);
-			tablaInscripciones.getTableHeader().setReorderingAllowed(false);
+		JLabel lbl_inscripciones = new JLabel("INSCRIPCIONES");
+		lbl_inscripciones.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_inscripciones.setFont(ConstantesEstilo.titulo);
+		
+		// Botones
+		JButton btn_volver = new JButton("Volver");
+		btn_volver.setFont(ConstantesEstilo.boton);
+		btn_volver.addActionListener(new ActionListener() {
+  			public void actionPerformed(ActionEvent e) {
+  				dispose();
+				//ORMenuPrincipal menuOR = new ORMenuPrincipal(usuario, db);
+				//menuOR.setVisible(true);
+  			}
+  		});
+		
+		// Tabla
+		tabla_inscripciones = new JTable();
+		tabla_inscripciones.setEnabled(false);
+		tabla_inscripciones.setFont(ConstantesEstilo.texto);
+		tabla_inscripciones.getTableHeader().setReorderingAllowed(false);
 						
 		//Modelo de tabla (definición de columnas)
-			inscripcionesModelo = new DefaultTableModel();
-			inscripcionesModelo.setColumnIdentifiers(new String[] {"Estudiante", "Correo", "Facultad"});
-			tablaInscripciones.setModel(inscripcionesModelo);
+		inscripciones_modelo = new DefaultTableModel();
+		inscripciones_modelo.setColumnIdentifiers(new String[] {"Estudiante", "Correo", "Facultad"});
+		tabla_inscripciones.setModel(inscripciones_modelo);
 						
 		//Títulos de columna
-			JTableHeader encabezado = tablaInscripciones.getTableHeader();
-			encabezado.setFont(new Font("Arial Unicode MS", Font.BOLD, 20));
+		JTableHeader encabezado = tabla_inscripciones.getTableHeader();
+		encabezado.setFont(ConstantesEstilo.subtitulo);
 						
 		//Personalizar columnas
-			DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
-			centrarCelda.setHorizontalAlignment(SwingConstants.CENTER);
+		DefaultTableCellRenderer centrar_celda = new DefaultTableCellRenderer();
+		centrar_celda.setHorizontalAlignment(SwingConstants.CENTER);
 						
-			tablaInscripciones.getColumnModel().getColumn(0).setPreferredWidth(50);
-			tablaInscripciones.getColumnModel().getColumn(1).setPreferredWidth(475);
-			tablaInscripciones.getColumnModel().getColumn(2).setPreferredWidth(250);
-			tablaInscripciones.getColumnModel().getColumn(0).setCellRenderer(centrarCelda);
-			tablaInscripciones.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
+		tabla_inscripciones.getColumnModel().getColumn(0).setCellRenderer(centrar_celda);
+		tabla_inscripciones.getColumnModel().getColumn(1).setCellRenderer(centrar_celda);
+		tabla_inscripciones.getColumnModel().getColumn(2).setCellRenderer(centrar_celda);
 						
-			contenedorTabla = new JScrollPane(tablaInscripciones);
+		JScrollPane contenedor_tabla = new JScrollPane(tabla_inscripciones);
 		
-			verInscritos(idConvocatoria);
+		buscarInscritos(idConvocatoria, db);
 			
-		GroupLayout gl_contenedorPrincipal = new GroupLayout(contenedorPrincipal);
-		gl_contenedorPrincipal.setHorizontalGroup(
-			gl_contenedorPrincipal.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblBienvenida, 0, Short.MAX_VALUE, Short.MAX_VALUE)
-							.addComponent(lblTipoUsuario, 0, Short.MAX_VALUE, Short.MAX_VALUE)
-							.addComponent(contenedorTabla, GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
-						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
-						.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-							.addComponent(botonMenu)
-							.addPreferredGap(ComponentPlacement.RELATED, 800, Short.MAX_VALUE)
-							.addComponent(botonVolver)))
-					.addContainerGap())
-		);
-		gl_contenedorPrincipal.setVerticalGroup(
-			gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblBienvenida)
-					.addComponent(lblTipoUsuario)
-					.addComponent(lblNewLabel)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(contenedorTabla, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
-						.addComponent(botonMenu)
-						.addComponent(botonVolver, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(16, Short.MAX_VALUE))
-		);
+		GroupLayout gl_contenedor_principal = new GroupLayout(contenedor_principal);
 		
-	contenedorPrincipal.setLayout(gl_contenedorPrincipal);
+	    gl_contenedor_principal.setHorizontalGroup(gl_contenedor_principal.createParallelGroup()
+	    		.addGroup(gl_contenedor_principal.createSequentialGroup()
+	    				.addComponent(btn_volver, 150, 150, 150)
+	    				.addGroup(gl_contenedor_principal.createParallelGroup()
+	    						.addComponent(lbl_bienvenida, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    						.addComponent(lbl_tipo_usuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+	    		
+				.addComponent(lbl_inscripciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(contenedor_tabla, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+				
+		gl_contenedor_principal.setVerticalGroup(gl_contenedor_principal.createSequentialGroup()
+				.addGroup(gl_contenedor_principal.createParallelGroup()
+						.addComponent(btn_volver)
+						.addGroup(gl_contenedor_principal.createSequentialGroup()
+								.addComponent(lbl_bienvenida)
+	    						.addComponent(lbl_tipo_usuario)))
+				
+				.addComponent(lbl_bienvenida)
+				.addComponent(lbl_tipo_usuario)
+				.addComponent(lbl_inscripciones)
+				.addComponent(contenedor_tabla, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		
+		contenedor_principal.setLayout(gl_contenedor_principal);
 
     }
-	public void verInscritos(int id) {
+	public void buscarInscritos(int id, ManejoSQL db) {
+		
 		try {
-			//Consulta de datos
-			db.consultarDatos("SELECT usuario,Usuarios.correo,facultad FROM Usuarios INNER JOIN Inscripciones on Inscripciones.estudiante_id = Usuarios.id WHERE Inscripciones.convocatoria_id = " + id); 
-			//B�squeda de credenciales
+			// Consulta de datos
+			db.consultarDatos("SELECT usuario, Usuarios.correo, facultad FROM Usuarios INNER JOIN Inscripciones on Inscripciones.estudiante_id = Usuarios.id WHERE Inscripciones.convocatoria_id = " + id); 
+			
 			while(db.datos.next()) {
-				
 				Object[] inscripciones = {db.datos.getString("usuario"), db.datos.getString("correo"),db.datos.getString("facultad")};
-		        inscripcionesModelo.addRow(inscripciones);
+		        inscripciones_modelo.addRow(inscripciones);
 		        }
 			}
 		
 		catch(SQLException e){
-			System.out.println("Error al consultar la base de datos. " + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		finally {

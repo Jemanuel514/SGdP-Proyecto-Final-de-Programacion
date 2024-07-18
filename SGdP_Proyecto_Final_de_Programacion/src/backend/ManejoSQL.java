@@ -15,7 +15,6 @@ public class ManejoSQL {
 	public ResultSet datos = null;
 	
 	public Connection conectar() {
-		//Variables
 		Path rutaProyecto = Paths.get(".").toAbsolutePath().normalize();
 		Path rutaDB = rutaProyecto.resolve("db/SGdP_DB.db");
 		String ruta = "jdbc:sqlite:" + rutaDB.toString();
@@ -45,9 +44,8 @@ public class ManejoSQL {
 		
 	}
 	
-	
+	//Insertar o actualizar
 	public int insertarDatos(String instruccion) {
-		//Variables
 	    int idGenerado = -1;
 
 	    try {
