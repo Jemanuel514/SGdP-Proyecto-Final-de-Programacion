@@ -1,163 +1,171 @@
 package frontend;
 
-import java.awt.EventQueue;
 import backend.DSSU;
 import backend.ManejoSQL;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-
+import java.sql.SQLException;
 
 public class DSSUProyectosAprobados extends JFrame{
 	
+	private static final long serialVersionUID = 1L;
+	private JTable proyectos_aprobados;
+	private DefaultTableModel proyectos_aprobados_modelo;
 
-	private JPanel contenedor;
-	private JTable proyectosAprobados;
-	private DefaultTableModel proyectosAprobadosModelo;
-	private JScrollPane contenedorTabla;
+	public DSSUProyectosAprobados(DSSU usuario, ManejoSQL db) {
+		
+		// JFrame
+		setSize(ConstantesEstilo.ventana);
+        setPreferredSize(ConstantesEstilo.ventana);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+		
+        // Contenedor
+        JPanel contenedor = new JPanel();
+        contenedor.setBorder(new EmptyBorder(20, 20, 20, 20));
+		setContentPane(contenedor);
+		
+		// Etiquetas
+		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
+		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 
-	public DSSUProyectosAprobados(DSSU usuario) {
-		setSize(1024, 768);								//Dimensiones
-		setResizable(false);
-		setLocationRelativeTo(null);	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JLabel lbl_tipo_usuario = new JLabel("DSSU");
+		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
+	
+		JLabel lbl_propuestas = new JLabel("Proyectos Aprobados");
+		lbl_propuestas.setFont(ConstantesEstilo.titulo);
+		lbl_propuestas.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		contenedor = new JPanel();							//Inicializar
-		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));		//Bordes
-		contenedor.setLayout(null);								//Layout (absoluto)
-		setContentPane(contenedor);	
+		// Botones		
+		JButton boton_menu = new JButton("Menú");
+		boton_menu.setFont(ConstantesEstilo.boton);
+		boton_menu.addActionListener(new ActionListener() {
+  			public void actionPerformed(ActionEvent e) {
+  				dispose();
+				DSSUMenuPrincipal menu_dssu = new DSSUMenuPrincipal(usuario, db);
+				menu_dssu.setVisible(true);
+  			}
+  		});
 		
-		JLabel lblBienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lblBienvenida.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		lblBienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblBienvenida.setBounds(822, 10, 178, 38);
-		contenedor.add(lblBienvenida);
+		// Tabla
+		proyectos_aprobados = new JTable();
+		proyectos_aprobados.setEnabled(false);
+		proyectos_aprobados.setFont(ConstantesEstilo.texto);
 		
-		JLabel lblTipoUsuario = new JLabel("DSSU");
-		lblTipoUsuario.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		lblTipoUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTipoUsuario.setBounds(822, 39, 178, 38);
-		contenedor.add(lblTipoUsuario);
+        // Modelo de tabla (definición de columnas)
+		proyectos_aprobados_modelo = new DefaultTableModel();
+		proyectos_aprobados_modelo.setColumnIdentifiers(new String[] {"ID", "Título", "Organismo Receptor", ""});
+		proyectos_aprobados.setModel(proyectos_aprobados_modelo);
 		
-		JLabel lblNewLabel = new JLabel("PROYECTOS APROBADOS");
-		lblNewLabel.setForeground(new Color(128, 128, 128));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblNewLabel.setBounds(239, 70, 532, 59);
-		contenedor.add(lblNewLabel);
+		// Títulos de columna
+		JTableHeader encabezado = proyectos_aprobados.getTableHeader();
+        encabezado.setFont(ConstantesEstilo.subtitulo);
+        encabezado.setReorderingAllowed(false);
 		
-		JLabel lblSeleccione = new JLabel("Seleccione el proyecto a convocar [Haga doble clic en 'Convocar']");
-		lblSeleccione.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		lblSeleccione.setBounds(40, 160, 600, 38);
-		contenedor.add(lblSeleccione);
+		// Personalizar columnas
+		DefaultTableCellRenderer centrar_celda = new DefaultTableCellRenderer();
+		centrar_celda.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		//CONFIGURACIÓN DE TABLA
-		proyectosAprobados = new JTable();
-		proyectosAprobados.setCellSelectionEnabled(true);
-		proyectosAprobados.setEnabled(false);
-		proyectosAprobados.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
-		proyectosAprobados.setBounds(40, 224, 929, 497);
+		proyectos_aprobados.getColumnModel().getColumn(0).setPreferredWidth(50);
+		proyectos_aprobados.getColumnModel().getColumn(1).setPreferredWidth(475);
+		proyectos_aprobados.getColumnModel().getColumn(2).setPreferredWidth(250);
+		proyectos_aprobados.getColumnModel().getColumn(0).setCellRenderer(centrar_celda);
+		proyectos_aprobados.getColumnModel().getColumn(2).setCellRenderer(centrar_celda);
+		proyectos_aprobados.getColumnModel().getColumn(3).setCellRenderer(centrar_celda);
 		
-        //Modelo de tabla (definición de columnas)
-		proyectosAprobadosModelo = new DefaultTableModel();
-		proyectosAprobadosModelo.setColumnIdentifiers(new String[] {"ID","Título", "Organismo Receptor", ""});
-		proyectosAprobados.setModel(proyectosAprobadosModelo);
+		// Personalizar filas
+		proyectos_aprobados.setRowHeight(30);
 		
-		//Títulos de columna
-		JTableHeader encabezado = proyectosAprobados.getTableHeader();
-        encabezado.setFont(new Font("Arial Unicode MS", Font.BOLD, 20));
-		
-		//Personalizar columnas
-		DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
-		centrarCelda.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		proyectosAprobados.getColumnModel().getColumn(0).setPreferredWidth(50);
-		proyectosAprobados.getColumnModel().getColumn(1).setPreferredWidth(475);
-		proyectosAprobados.getColumnModel().getColumn(2).setPreferredWidth(250);
-		proyectosAprobados.getColumnModel().getColumn(0).setCellRenderer(centrarCelda);
-		proyectosAprobados.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
-		proyectosAprobados.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
-		
-		//Personalizar filas
-		proyectosAprobados.setRowHeight(30);
-		
-		//Celda clickeable
-		proyectosAprobados.addMouseListener(new MouseAdapter() {
+		// Celda clickeable
+		proyectos_aprobados.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {									//Doble clic
-                    int fila = proyectosAprobados.rowAtPoint(e.getPoint());
-                    int columna = proyectosAprobados.columnAtPoint(e.getPoint());
+                if (e.getClickCount() == 1) {
+                    int fila = proyectos_aprobados.rowAtPoint(e.getPoint());
+                    int columna = proyectos_aprobados.columnAtPoint(e.getPoint());
 
-                    if (columna == 3) {											//Columna de acción
-                        dispose();
-                        DSSUPublicarConvocatoria convocatoria = new DSSUPublicarConvocatoria(usuario, (int) proyectosAprobados.getValueAt(fila, 0));
-                        convocatoria.setVisible(true);
+                    if (columna == 3) {
+                    	dispose();
+        				DSSUPublicarConvocatoria publicar_convocatoria = new DSSUPublicarConvocatoria(usuario, (int) proyectos_aprobados.getValueAt(fila, 0), db);
+        				publicar_convocatoria.setVisible(true);
                     }
                 }
             }
         });
 		
-        contenedorTabla = new JScrollPane(proyectosAprobados);
-        contenedorTabla.setBounds(40, 224, 929, 497);
-        contenedor.add(contenedorTabla);
+		JScrollPane contenedor_tabla = new JScrollPane(proyectos_aprobados);
 		
-        buscarProyectosAprobados();
-        
-        JButton btnVolver = new JButton("Volver");
-  		btnVolver.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
-  		btnVolver.setBounds(30, 30, 199, 36);
-  		btnVolver.addActionListener(new ActionListener() {
-  			public void actionPerformed(ActionEvent e) {
-  				dispose();
-				DSSUMenuPrincipal menuDSSU = new DSSUMenuPrincipal(usuario);
-				menuDSSU.setVisible(true);
-  			}
-  		});
-  		contenedor.add(btnVolver);
+		buscarProyectosAprobados(db);
+		
+		GroupLayout gl_contenedor_principal = new GroupLayout(contenedor);
+		
+	    gl_contenedor_principal.setHorizontalGroup(gl_contenedor_principal.createParallelGroup()
+	    		.addGroup(gl_contenedor_principal.createSequentialGroup()
+	    				.addComponent(boton_menu, 150, 150, 150)
+	    				.addGroup(gl_contenedor_principal.createParallelGroup()
+	    						.addComponent(lbl_bienvenida, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    						.addComponent(lbl_tipo_usuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+	    		
+				.addComponent(lbl_propuestas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(contenedor_tabla, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+				
+		gl_contenedor_principal.setVerticalGroup(gl_contenedor_principal.createSequentialGroup()
+				.addGroup(gl_contenedor_principal.createParallelGroup()
+						.addComponent(boton_menu)
+						.addGroup(gl_contenedor_principal.createSequentialGroup()
+								.addComponent(lbl_bienvenida)
+	    						.addComponent(lbl_tipo_usuario)))
+				
+				.addComponent(lbl_bienvenida)
+				.addComponent(lbl_tipo_usuario)
+				.addComponent(lbl_propuestas)
+				.addComponent(contenedor_tabla, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		
+		contenedor.setLayout(gl_contenedor_principal);		
 	}
 	
-	public void buscarProyectosAprobados() {
-		//Variables
-		ResultSet datos = null;
+	public void buscarProyectosAprobados(ManejoSQL db) {
 		
 		try {
-			//Consulta de datos
-			datos = ManejoSQL.consultarDatos("SELECT Proyectos.id, titulo, usuario FROM Proyectos INNER JOIN Usuarios, Evaluaciones ON Proyectos.or_id = Usuarios.id WHERE Evaluaciones.aprobado = 1 AND Proyectos.evaluacion_id NOT NULL");
+			// Consulta de datos
+			db.consultarDatos("SELECT Proyectos.id, titulo, usuario FROM Proyectos "
+					+ "INNER JOIN Usuarios ON Usuarios.id = or_id "
+					+ "INNER JOIN Evaluaciones ON Evaluaciones.id = evaluacion_id "
+					+ "LEFT JOIN Convocatorias ON Convocatorias.proyecto_id = Proyectos.id "
+					+ "WHERE Evaluaciones.aprobado = 1 AND Convocatorias.id IS NULL");
 			
-			//Búsqueda de credenciales
-			while(datos.next()) {
-				Object[] propuesta = {datos.getInt("id"), datos.getString("titulo"), datos.getString("usuario"), "Convocar"};
-		        proyectosAprobadosModelo.addRow(propuesta);
+			while(db.datos.next()) {
+				Object[] propuesta = {db.datos.getInt("id"), db.datos.getString("titulo"), db.datos.getString("usuario"), "Convocar"};
+				proyectos_aprobados_modelo.addRow(propuesta);
 		        }
 			}
 		
 		catch(SQLException e){
-			System.out.println("Error al consultar la base de datos. " + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		finally {
+			db.cerrarConexion();
 		}
 			
 	}

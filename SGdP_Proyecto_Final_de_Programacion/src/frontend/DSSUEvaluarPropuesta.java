@@ -1,8 +1,10 @@
 package frontend;
 
+import backend.DSSU;
+import backend.ManejoSQL;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -11,414 +13,380 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import backend.DSSU;
-import backend.ManejoSQL;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
+import java.sql.SQLException;
 
 public class DSSUEvaluarPropuesta extends JFrame {
 	
-	private ManejoSQL db;
-	
 	private static final long serialVersionUID = 1L;
-	private JLabel lblTitulo;
-	private JLabel lblOrganismoReceptor;
-	private JLabel lblTipo;
 	
-	private JTextArea txtResumen;
-	private JTextArea txtObjetivo;
-	private JTextArea txtBeneficiarios;
-	private JTextArea txtObjetivosODS;
+	private JLabel lbl_titulo;
+	private JLabel lbl_organismo_receptor;
+	private JLabel lbl_tipo;
 	
-	private JLabel lblLugar;
-	private JTextArea txtHorario;
+	private JTextArea txt_resumen;
+	private JTextArea txt_objetivo;
+	private JTextArea txt_beneficiarios;
+	private JTextArea txt_objetivosODS;
 	
-	private JLabel lblEstudiantes;
-	private JLabel lblFacultad;
-	private JTextArea txtPerfilEstudiante;
+	private JLabel lbl_lugar;
+	private JLabel lbl_horario;
 	
-	private JTextArea txtMateriales;
-	private JCheckBox checkTransporte;
-	private JCheckBox checkAlmuerzo;
+	private JLabel lbl_estudiantes;
+	private JLabel lbl_facultad;
+	private JTextArea txt_perfil_estudiante;
 	
-	private JLabel lblEncargado;
-	private JLabel lblCargo;
-	private JLabel lblCedula;
-	private JLabel lblCorreo;
-	private JLabel lblTelefono;
+	private JTextArea txt_materiales;
+	private JCheckBox check_transporte;
+	private JCheckBox check_almuerzo;
+	
+	private JLabel lbl_encargado;
+	private JLabel lbl_cargo;
+	private JLabel lbl_cedula;
+	private JLabel lbl_correo;
+	private JLabel lbl_telefono;
 
-	public DSSUEvaluarPropuesta(DSSU usuario, int id, ManejoSQL db) {
+	public DSSUEvaluarPropuesta(DSSU usuario, int id_propuesta, ManejoSQL db) {
 		
-		this.db = db;
-		
-		//JFRAME
-		setSize(ConstantesEstilo.ventana);				//Dimensiones
+		// JFrame
+		setSize(ConstantesEstilo.ventana);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);					//Centrar en la pantalla
+		setLocationRelativeTo(null);
+    	
+		// Contenedor
+		JPanel contenedor_general = new JPanel();
+		contenedor_general.setBorder(new EmptyBorder(20, 20, 20, 20));
 		
-		//CONTENEDOR DE CONTENIDO
-		JPanel contenedorGeneral = new JPanel();
-		contenedorGeneral.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//Contenedor scrolleable
+		JScrollPane contenedor_scrolleable = new JScrollPane(contenedor_general);
+		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.ventana);
+		setContentPane(contenedor_scrolleable);
 		
-		//CONTENEDOR SCROLLEABLE
-		JScrollPane contenedorScrolleable = new JScrollPane(contenedorGeneral);
-		contenedorScrolleable.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		contenedorScrolleable.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		contenedorScrolleable.setPreferredSize(ConstantesEstilo.ventana);
-		setContentPane(contenedorScrolleable);
+		// General
+		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
+		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		//GROUP LAYOUT
-		GroupLayout layout = new GroupLayout(contenedorGeneral);
-		contenedorGeneral.setLayout(layout);
-		layout.setAutoCreateGaps(true);
-		layout.setAutoCreateContainerGaps(true);
+		JLabel lbl_tipo_usuario = new JLabel("DSSU");
+		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JLabel lblBienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());	//Inicializar y texto
-		lblBienvenida.setFont(ConstantesEstilo.texto);								//Fuente
-		lblBienvenida.setHorizontalAlignment(SwingConstants.RIGHT);					//Alineación
+		JLabel lbl_evaluar_propuesta = new JLabel("Evaluar Propuesta");
+		lbl_evaluar_propuesta.setFont(ConstantesEstilo.titulo);
+		lbl_evaluar_propuesta.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblTipoUsuario = new JLabel("DSSU");
-		lblTipoUsuario.setFont(ConstantesEstilo.texto);
-		lblTipoUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
+		// Información de propuesta
+		// Título
+		lbl_titulo = new JLabel("Título: ");
+		lbl_titulo.setFont(ConstantesEstilo.texto);
 		
-		JLabel lblEvaluarPropuesta = new JLabel("Evaluar Propuesta");
-		lblEvaluarPropuesta.setFont(ConstantesEstilo.titulo);
-		lblEvaluarPropuesta.setHorizontalAlignment(SwingConstants.CENTER);
+		// Organismo receptor
+		lbl_organismo_receptor = new JLabel("Organismo Receptor: ");
+		lbl_organismo_receptor.setFont(ConstantesEstilo.texto);
 		
-		//Información de propuesta
-		//Título
-		lblTitulo = new JLabel("Título: ");
-		lblTitulo.setFont(ConstantesEstilo.texto);
+		// Tipo de proyecto
+		lbl_tipo = new JLabel("Tipo: ");
+		lbl_tipo.setFont(ConstantesEstilo.texto);
 		
-		//Organismo receptor
-		lblOrganismoReceptor = new JLabel("Organismo Receptor: ");
-		lblOrganismoReceptor.setFont(ConstantesEstilo.texto);
+		// Resumen
+		JLabel lbl_resumen = new JLabel("Resumen: ");
+		lbl_resumen.setFont(ConstantesEstilo.texto);
 		
-		//Tipo de proyecto
-		lblTipo = new JLabel("Tipo: ");
-		lblTipo.setFont(ConstantesEstilo.texto);
+		txt_resumen = new JTextArea();
+		txt_resumen.setEditable(false);
+		txt_resumen.setLineWrap(true);
+		txt_resumen.setFont(ConstantesEstilo.texto);
 		
-		//Resumen
-		JLabel lblResumen = new JLabel("Resumen: ");
-		lblResumen.setFont(ConstantesEstilo.texto);
+		JScrollPane contenedor_resumen = new JScrollPane(txt_resumen);
 		
-		txtResumen = new JTextArea();
-		txtResumen.setEditable(false);
-		txtResumen.setWrapStyleWord(true);
-		txtResumen.setLineWrap(true);
-		txtResumen.setFont(ConstantesEstilo.texto);
+		// Objetivo
+		JLabel lbl_objetivo = new JLabel("Objetivo: ");
+		lbl_objetivo.setFont(ConstantesEstilo.texto);	
 		
-		JScrollPane contenedorResumen = new JScrollPane(txtResumen);
-		contenedorResumen.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		contenedorResumen.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		txt_objetivo = new JTextArea();
+		txt_objetivo.setEditable(false);
+		txt_objetivo.setLineWrap(true);
+		txt_objetivo.setFont(ConstantesEstilo.texto);
 		
-		//Objetivo
-		JLabel lblObjetivo = new JLabel("Objetivo: ");
-		lblObjetivo.setFont(ConstantesEstilo.texto);	
+		JScrollPane contenedor_objetivo = new JScrollPane(txt_objetivo);
 		
-		txtObjetivo = new JTextArea();
-		txtObjetivo.setEditable(false);
-		txtObjetivo.setWrapStyleWord(true);
-		txtObjetivo.setLineWrap(true);
-		txtObjetivo.setFont(ConstantesEstilo.texto);
+		// Beneficiarios
+		JLabel lbl_beneficiarios = new JLabel("Beneficiarios: ");
+		lbl_beneficiarios.setFont(ConstantesEstilo.texto);
 		
-		JScrollPane contenedorObjetivo = new JScrollPane(txtObjetivo);
-		contenedorObjetivo.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		contenedorObjetivo.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		txt_beneficiarios = new JTextArea();
+		txt_beneficiarios.setEditable(false);
+		txt_beneficiarios.setLineWrap(true);
+		txt_beneficiarios.setFont(ConstantesEstilo.texto);
 		
-		//Beneficiarios
-		JLabel lblBeneficiarios = new JLabel("Beneficiarios: ");
-		lblBeneficiarios.setFont(ConstantesEstilo.texto);
+		JScrollPane contenedor_beneficiarios = new JScrollPane(txt_beneficiarios);
 		
-		txtBeneficiarios = new JTextArea();
-		txtBeneficiarios.setEditable(false);
-		txtBeneficiarios.setWrapStyleWord(true);
-		txtBeneficiarios.setLineWrap(true);
-		txtBeneficiarios.setFont(ConstantesEstilo.texto);
+		// Objetivos de desarrollo sostenible
+		JLabel lbl_objetivosODS = new JLabel("Objetivos de desarrollo sostenible:");
+		lbl_objetivosODS.setFont(ConstantesEstilo.texto);
 		
-		JScrollPane contenedorBeneficiarios = new JScrollPane(txtBeneficiarios);
-		contenedorBeneficiarios.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		contenedorBeneficiarios.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		txt_objetivosODS = new JTextArea();
+		txt_objetivosODS.setEditable(false);
+		txt_objetivosODS.setLineWrap(true);
+		txt_objetivosODS.setFont(ConstantesEstilo.texto);
 		
-		//Objetivos de desarrollo sostenible
-		JLabel lblObjetivosODS = new JLabel("Objetivos de desarrollo sostenible:");
-		lblObjetivosODS.setFont(ConstantesEstilo.texto);
+		JScrollPane contenedor_objetivosODS = new JScrollPane(txt_objetivosODS);
 		
-		txtObjetivosODS = new JTextArea();
-		txtObjetivosODS.setEditable(false);
-		txtObjetivosODS.setWrapStyleWord(true);
-		txtObjetivosODS.setLineWrap(true);
-		txtObjetivosODS.setFont(ConstantesEstilo.texto);
+		// Lugar
+		lbl_lugar = new JLabel("Lugar: ");
+		lbl_lugar.setFont(ConstantesEstilo.texto);
 		
-		JScrollPane contenedorObjetivosODS = new JScrollPane(txtObjetivosODS);
-		contenedorObjetivosODS.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		contenedorObjetivosODS.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		// Horario	
+		lbl_horario = new JLabel("Horario: ");
+		lbl_horario.setFont(ConstantesEstilo.texto);
+				
+		// Estudiantes
+		lbl_estudiantes = new JLabel("Cupos: ");
+		lbl_estudiantes.setFont(ConstantesEstilo.texto);
 		
-		//Lugar
-		lblLugar = new JLabel("Lugar: ");
-		lblLugar.setFont(ConstantesEstilo.texto);
+		// Facultad
+		lbl_facultad = new JLabel("Facultad: ");
+		lbl_facultad.setFont(ConstantesEstilo.texto);
 		
-		//Horario
-		JLabel lblHorario = new JLabel("Horario:");
-		lblHorario.setFont(ConstantesEstilo.texto);
+		// Perfil de estudiante
+		JLabel lbl_perfil_estudiante = new JLabel("Perfil de estudiante:");
+		lbl_perfil_estudiante.setFont(ConstantesEstilo.texto);
 		
-		txtHorario = new JTextArea();
-		txtHorario.setEditable(false);
-		txtHorario.setWrapStyleWord(true);
-		txtHorario.setLineWrap(true);
-		txtHorario.setFont(ConstantesEstilo.texto);
+		txt_perfil_estudiante = new JTextArea();
+		txt_perfil_estudiante.setEditable(false);
+		txt_perfil_estudiante.setLineWrap(true);
+		txt_perfil_estudiante.setFont(ConstantesEstilo.texto);
 		
-		JScrollPane contenedorHorario = new JScrollPane(txtHorario);
-		contenedorHorario.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		contenedorHorario.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane contenedor_perfil_estudiante = new JScrollPane(txt_perfil_estudiante);
 		
-		//Estudiantes
-		lblEstudiantes = new JLabel("Cupos: ");
-		lblEstudiantes.setFont(ConstantesEstilo.texto);
+		// Materiales
+		JLabel lbl_materiales = new JLabel("Materiales: ");
+		lbl_materiales.setFont(ConstantesEstilo.texto);
 		
-		//Facultad
-		lblFacultad = new JLabel("Facultad: ");
-		lblFacultad.setFont(ConstantesEstilo.texto);
+		txt_materiales = new JTextArea();
+		txt_materiales.setEditable(false);
+		txt_materiales.setLineWrap(true);
+		txt_materiales.setFont(ConstantesEstilo.texto);
 		
-		//Perfil de estudiante
-		JLabel lblPerfilEstudiante = new JLabel("Perfil de estudiante:");
-		lblPerfilEstudiante.setFont(ConstantesEstilo.texto);
+		JScrollPane contenedor_materiales = new JScrollPane(txt_materiales);
 		
-		txtPerfilEstudiante = new JTextArea();
-		txtPerfilEstudiante.setEditable(false);
-		txtPerfilEstudiante.setWrapStyleWord(true);
-		txtPerfilEstudiante.setLineWrap(true);
-		txtPerfilEstudiante.setFont(ConstantesEstilo.texto);
+		// Transporte
+		JLabel lbl_transporte = new JLabel("Transporte ");
+		lbl_transporte.setFont(ConstantesEstilo.texto);
 		
-		JScrollPane contenedorPerfilEstudiante = new JScrollPane(txtPerfilEstudiante);
-		contenedorPerfilEstudiante.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		contenedorPerfilEstudiante.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		check_transporte = new JCheckBox();
+		check_transporte.setEnabled(false);
 		
-		//Perfil de estudiante
-		JLabel lblMateriales = new JLabel("Materiales: ");
-		lblMateriales.setFont(ConstantesEstilo.texto);
+		// Almuerzo
+		JLabel lbl_almuerzo = new JLabel("Almuerzo ");
+		lbl_almuerzo.setFont(ConstantesEstilo.texto);
 		
-		txtMateriales = new JTextArea();
-		txtMateriales.setEditable(false);
-		txtMateriales.setWrapStyleWord(true);
-		txtMateriales.setLineWrap(true);
-		txtMateriales.setFont(ConstantesEstilo.texto);
+		check_almuerzo = new JCheckBox();
+		check_almuerzo.setEnabled(false);
 		
-		JScrollPane contenedorMateriales = new JScrollPane(txtMateriales);
-		contenedorMateriales.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		contenedorMateriales.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		// Datos del encargado
+		lbl_encargado = new JLabel("Encargado: ");
+		lbl_encargado.setFont(ConstantesEstilo.texto);
 		
-		//Transporte
-		JLabel lblTransporte = new JLabel("Transporte ");
-		lblTransporte.setFont(ConstantesEstilo.texto);
+		lbl_cargo = new JLabel("Cargo: ");
+		lbl_cargo.setFont(ConstantesEstilo.texto);
 		
-		checkTransporte = new JCheckBox();
-		checkTransporte.setEnabled(false);
+		lbl_cedula = new JLabel("Cédula: ");
+		lbl_cedula.setFont(ConstantesEstilo.texto);
 		
-		//Transporte
-		JLabel lblAlmuerzo = new JLabel("Almuerzo ");
-		lblAlmuerzo.setFont(ConstantesEstilo.texto);
+		lbl_correo = new JLabel("Correo: ");
+		lbl_correo.setFont(ConstantesEstilo.texto);
 		
-		checkAlmuerzo = new JCheckBox();
-		checkAlmuerzo.setEnabled(false);
+		lbl_telefono = new JLabel("Teléfono: ");
+		lbl_telefono.setFont(ConstantesEstilo.texto);
 		
-		//Datos del encargado
-		lblEncargado = new JLabel("Encargado: ");
-		lblEncargado.setFont(ConstantesEstilo.texto);
-		
-		lblCargo = new JLabel("Cargo: ");
-		lblCargo.setFont(ConstantesEstilo.texto);
-		
-		lblCedula = new JLabel("Cédula: ");
-		lblCedula.setFont(ConstantesEstilo.texto);
-		
-		lblCorreo = new JLabel("Correo: ");
-		lblCorreo.setFont(ConstantesEstilo.texto);
-		
-		lblTelefono = new JLabel("Teléfono: ");
-		lblTelefono.setFont(ConstantesEstilo.texto);
-		
-		//BOTONES
-        JButton btnVolver = new JButton("Volver");
-  		btnVolver.setFont(ConstantesEstilo.boton);
-  		btnVolver.addActionListener(new ActionListener() {
+		// Botones
+        JButton btn_volver = new JButton("Volver");
+  		btn_volver.setFont(ConstantesEstilo.boton);
+  		btn_volver.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
-				DSSUPropuestasSinEvaluar propuestasSinEvaluar = new DSSUPropuestasSinEvaluar(usuario, db);
-				propuestasSinEvaluar.setVisible(true);
+				DSSUPropuestasSinEvaluar propuestas_sin_evaluar = new DSSUPropuestasSinEvaluar(usuario, db);
+				propuestas_sin_evaluar.setVisible(true);
   			}
   		});
   		
-  		JButton btnAprobar = new JButton("Aprobar");
-  		btnAprobar.setFont(ConstantesEstilo.boton);
-  		btnAprobar.addActionListener(new ActionListener() {
+  		JButton btn_aprobar = new JButton("Aprobar");
+  		btn_aprobar.setFont(ConstantesEstilo.boton);
+  		btn_aprobar.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
-  				usuario.evaluarPropuesta(id, true, null, db);
+  				usuario.evaluarPropuesta(id_propuesta, true, null, db);
   				JOptionPane.showMessageDialog(null, "Proyecto aprobado", "", JOptionPane.INFORMATION_MESSAGE);
+  				
   				dispose();
 				DSSUPropuestasSinEvaluar propuestasSinEvaluar = new DSSUPropuestasSinEvaluar(usuario, db);
 				propuestasSinEvaluar.setVisible(true);
   			}
   		});
   		
-  		JButton btnRechazar = new JButton("Rechazar");
-  		btnRechazar.setFont(ConstantesEstilo.boton);
-  		btnRechazar.addActionListener(new ActionListener() {
+  		JButton btn_rechazar = new JButton("Rechazar");
+  		btn_rechazar.setFont(ConstantesEstilo.boton);
+  		btn_rechazar.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				String motivo = JOptionPane.showInputDialog(null, "Motivo del rechazo:", "", JOptionPane.QUESTION_MESSAGE);
-  				usuario.evaluarPropuesta(id, true, motivo, db);
+  				usuario.evaluarPropuesta(id_propuesta, false, motivo, db);
   				JOptionPane.showMessageDialog(null, "Proyecto rechazado", "", JOptionPane.INFORMATION_MESSAGE);
+  				
   				dispose();
 				DSSUPropuestasSinEvaluar propuestasSinEvaluar = new DSSUPropuestasSinEvaluar(usuario, db);
 				propuestasSinEvaluar.setVisible(true);
   			}
   		});
 		
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+  		consultarPropuesta(id_propuesta, db);
+  		
+  		GroupLayout layout = new GroupLayout(contenedor_general);
+  		
+		layout.setHorizontalGroup(layout.createParallelGroup()
 				
 				.addGroup(layout.createSequentialGroup()
-						.addComponent(btnVolver, 150, 150, 150)
-						.addComponent(lblBienvenida, 0, 0, Short.MAX_VALUE))
+						.addComponent(btn_volver, 150, 150, 150)
+						.addGroup(layout.createParallelGroup()
+								.addComponent(lbl_bienvenida, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lbl_tipo_usuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 				
-				.addComponent(lblTipoUsuario, 0, 0, Short.MAX_VALUE)
-				.addComponent(lblEvaluarPropuesta, 0, 0, Short.MAX_VALUE)
+				.addComponent(lbl_evaluar_propuesta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								
-				.addComponent(lblTitulo)
-		        .addComponent(lblOrganismoReceptor)
-		        .addComponent(lblTipo)
+				.addComponent(lbl_titulo)
+		        .addComponent(lbl_organismo_receptor)
+		        .addComponent(lbl_tipo)
 		        
 		        .addGroup(layout.createSequentialGroup()
-		                .addComponent(lblResumen, 480, 480, 480)
+		                .addComponent(lbl_resumen, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		                .addGap(10)
-		                .addComponent(lblObjetivo, 480, 480, 480))
+		                .addComponent(lbl_objetivo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        
 		        .addGroup(layout.createSequentialGroup()
-		                .addComponent(contenedorResumen, 480, 480, 480)
+		                .addComponent(contenedor_resumen, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		                .addGap(10)
-		                .addComponent(contenedorObjetivo, 480, 480, 480))
+		                .addComponent(contenedor_objetivo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        
 		        .addGroup(layout.createSequentialGroup()
-		                .addComponent(lblBeneficiarios, 480, 480, 480)
+		                .addComponent(lbl_beneficiarios, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		                .addGap(10)
-		                .addComponent(lblObjetivosODS, 480, 480, 480))
+		                .addComponent(lbl_objetivosODS, 475, 475, 475))
 		        
 		        .addGroup(layout.createSequentialGroup()
-		                .addComponent(contenedorBeneficiarios, 480, 480, 480)
+		                .addComponent(contenedor_beneficiarios, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		                .addGap(10)
-		                .addComponent(contenedorObjetivosODS, 480, 480, 480))
+		                .addComponent(contenedor_objetivosODS, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        
-		        .addComponent(lblLugar)
-		        .addComponent(lblHorario)
-		        .addComponent(contenedorHorario)
+		        .addComponent(lbl_lugar)
+		        .addComponent(lbl_horario)
 		        
-		        .addComponent(lblEstudiantes)
-		        .addComponent(lblFacultad)
-		        .addComponent(lblPerfilEstudiante)
-		        .addComponent(contenedorPerfilEstudiante)
+		        .addComponent(lbl_estudiantes)
+		        .addComponent(lbl_facultad)
+		        .addComponent(lbl_perfil_estudiante)
+		        .addComponent(contenedor_perfil_estudiante, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		        
-		        .addComponent(lblMateriales)
-		        .addComponent(contenedorMateriales)
+		        .addComponent(lbl_materiales)
+		        .addComponent(contenedor_materiales, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		        
 		        .addGroup(layout.createSequentialGroup()
-		                .addComponent(lblTransporte, 110, 110, 110)
-		                .addComponent(checkTransporte)
+		                .addComponent(lbl_transporte, 110, 110, 110)
+		                .addComponent(check_transporte)
 		                .addGap(360)
-		                .addComponent(lblAlmuerzo, 100, 100, 100)
-		                .addComponent(checkAlmuerzo))
+		                .addComponent(lbl_almuerzo, 100, 100, 100)
+		                .addComponent(check_almuerzo))
 		        
-		        .addComponent(lblEncargado)
-		        .addComponent(lblCargo)
-		        .addComponent(lblCedula)
-		        .addComponent(lblCorreo)
-		        .addComponent(lblTelefono)
+		        .addComponent(lbl_encargado)
+		        .addComponent(lbl_cargo)
+		        .addComponent(lbl_cedula)
+		        .addComponent(lbl_correo)
+		        .addComponent(lbl_telefono)
 		        
 		        .addGroup(layout.createSequentialGroup()
 		        		.addGap(200)
-		                .addComponent(btnAprobar, 200, 200, 200)
+		                .addComponent(btn_aprobar, 200, 200, 200)
 		                .addGap(150)
-		                .addComponent(btnRechazar, 200, 200, 200)
+		                .addComponent(btn_rechazar, 200, 200, 200)
 		                .addGap(200))
 		        
 		);
 
-		layout.setVerticalGroup(
-				layout.createSequentialGroup()
-				
+		layout.setVerticalGroup(layout.createSequentialGroup()
 				.addGroup(layout.createParallelGroup()
-						.addComponent(btnVolver)
-						.addComponent(lblBienvenida))
+						.addComponent(btn_volver)
+						
+						.addGroup(layout.createSequentialGroup()
+								.addComponent(lbl_bienvenida)
+								.addComponent(lbl_tipo_usuario)))
 				
-		        .addComponent(lblTipoUsuario)
-		        .addComponent(lblEvaluarPropuesta)
+		        .addComponent(lbl_evaluar_propuesta)
 		        
-		        .addComponent(lblTitulo)
-		        .addComponent(lblOrganismoReceptor)
-		        .addComponent(lblTipo)
-		        
-		        .addGroup(layout.createParallelGroup()
-		                .addComponent(lblResumen)
-		                .addComponent(lblObjetivo))
+		        .addComponent(lbl_titulo)
+		        .addComponent(lbl_organismo_receptor)
+		        .addComponent(lbl_tipo)
+		        .addGap(20)
 		        
 		        .addGroup(layout.createParallelGroup()
-		                .addComponent(contenedorResumen, 200, 200, 200)
-		                .addComponent(contenedorObjetivo, 200, 200, 200))
+		                .addComponent(lbl_resumen)
+		                .addComponent(lbl_objetivo))
 		        
 		        .addGroup(layout.createParallelGroup()
-		                .addComponent(lblBeneficiarios)
-		                .addComponent(lblObjetivosODS))
+		                .addComponent(contenedor_resumen, 200, 200, 200)
+		                .addComponent(contenedor_objetivo, 200, 200, 200))
+		        .addGap(10)
 		        
 		        .addGroup(layout.createParallelGroup()
-		                .addComponent(contenedorBeneficiarios, 200, 200, 200)
-		                .addComponent(contenedorObjetivosODS, 200, 200, 200))
+		                .addComponent(lbl_beneficiarios)
+		                .addComponent(lbl_objetivosODS))
+		        
+		        .addGroup(layout.createParallelGroup()
+		                .addComponent(contenedor_beneficiarios, 200, 200, 200)
+		                .addComponent(contenedor_objetivosODS, 200, 200, 200))
 		        
 		        .addGap(20)
-		        .addComponent(lblLugar)
-		        .addComponent(lblHorario)
-		        .addComponent(contenedorHorario, 200, 200, 200)
+		        .addComponent(lbl_lugar)
+		        .addComponent(lbl_horario)
 		        
 		        .addGap(20)
-		        .addComponent(lblEstudiantes)
-		        .addComponent(lblFacultad)
-		        .addComponent(lblPerfilEstudiante)
-		        .addComponent(contenedorPerfilEstudiante, 200, 200, 200)
+		        .addComponent(lbl_estudiantes)
+		        .addComponent(lbl_facultad)
+		        .addComponent(lbl_perfil_estudiante)
+		        .addComponent(contenedor_perfil_estudiante, 200, 200, 200)
 		        
 		        .addGap(20)
-		        .addComponent(lblMateriales)
-		        .addComponent(contenedorMateriales, 200, 200, 200)
+		        .addComponent(lbl_materiales)
+		        .addComponent(contenedor_materiales, 200, 200, 200)
 		        
 		        .addGroup(layout.createParallelGroup()
-		                .addComponent(lblTransporte)
-		                .addComponent(checkTransporte)
-		                .addComponent(lblAlmuerzo)
-		                .addComponent(checkAlmuerzo))
+		                .addComponent(lbl_transporte)
+		                .addComponent(check_transporte)
+		                .addComponent(lbl_almuerzo)
+		                .addComponent(check_almuerzo))
 		        
 		        .addGap(20)
-		        .addComponent(lblEncargado)
-		        .addComponent(lblCargo)
-		        .addComponent(lblCedula)
-		        .addComponent(lblCorreo)
-		        .addComponent(lblTelefono)
+		        .addComponent(lbl_encargado)
+		        .addComponent(lbl_cargo)
+		        .addComponent(lbl_cedula)
+		        .addComponent(lbl_correo)
+		        .addComponent(lbl_telefono)
 		        
 		        .addGap(20)
 		        .addGroup(layout.createParallelGroup()
-		                .addComponent(btnAprobar, 50, 50, 50)
-		                .addComponent(btnRechazar, 50, 50, 50))
+		                .addComponent(btn_aprobar, 50, 50, 50)
+		                .addComponent(btn_rechazar, 50, 50, 50))
 		        
 		);
 		
-		consultarPropuesta(id);
+		contenedor_general.setLayout(layout);
 	}
 	
-	public void consultarPropuesta(int id) {
+	public void consultarPropuesta(int id_propuesta, ManejoSQL db) {
 		
 		try {
-			//Consulta de datos
+			// Consulta de datos
 			db.consultarDatos("SELECT "
 					+ "titulo, "
 					+ "usuario, "
@@ -428,6 +396,9 @@ public class DSSUEvaluarPropuesta extends JFrame {
 					+ "beneficiarios, "
 					+ "contribucionODS, "
 					+ "lugar, "
+					+ "dia, "
+					+ "inicio, "
+					+ "final, "
 					+ "estudiantes, "
 					+ "facultades, "
 					+ "perfil_estudiante, "
@@ -441,33 +412,35 @@ public class DSSUEvaluarPropuesta extends JFrame {
 					+ "Encargados.telefono "
 					+ "FROM Proyectos "
 					+ "INNER JOIN Usuarios ON or_id = Usuarios.id "
+					+ "INNER JOIN Horarios ON proyecto_id = Proyectos.id "
 					+ "INNER JOIN Encargados ON encargado_id = Encargados.id "
-					+ "WHERE Proyectos.id = " + id);
+					+ "WHERE Proyectos.id = " + id_propuesta);
 			
-			lblTitulo.setText("Título: " + db.datos.getString("titulo"));
-			lblOrganismoReceptor.setText("Organismo Receptor: " + db.datos.getString("usuario"));
-			lblTipo.setText("Tipo: " + db.datos.getString("tipo"));
-			txtResumen.setText(db.datos.getString("resumen"));
-			txtObjetivo.setText(db.datos.getString("objetivo"));
-			txtBeneficiarios.setText(db.datos.getString("beneficiarios"));
-			txtObjetivosODS.setText(db.datos.getString("contribucionODS"));
-			lblLugar.setText("Lugar: " + db.datos.getString("lugar"));
-			lblEstudiantes.setText("Cupos: " + Integer.toString(db.datos.getInt("estudiantes")));
-			lblFacultad.setText("Facultad: " + db.datos.getString("facultades"));
-			txtPerfilEstudiante.setText(db.datos.getString("perfil_estudiante"));
-			txtMateriales.setText(db.datos.getString("materiales"));
-			checkTransporte.setSelected(db.datos.getInt("transporte") == 1 ? true : false);
-			checkAlmuerzo.setSelected(db.datos.getInt("almuerzo") == 1 ? true : false);
-			lblEncargado.setText("Encargado: " + db.datos.getString("nombre"));
-			lblCargo.setText("Cargo: " + db.datos.getString("cargo"));
-			lblCedula.setText("Cédula: " + db.datos.getString("cedula"));
-			lblCorreo.setText("Correo: " + db.datos.getString("correo"));
-			lblTelefono.setText("Teléfono: " + db.datos.getString("telefono"));
+			lbl_titulo.setText("Título: " + db.datos.getString("titulo"));
+			lbl_organismo_receptor.setText("Organismo Receptor: " + db.datos.getString("usuario"));
+			lbl_tipo.setText("Tipo: " + db.datos.getString("tipo"));
+			txt_resumen.setText(db.datos.getString("resumen"));
+			txt_objetivo.setText(db.datos.getString("objetivo"));
+			txt_beneficiarios.setText(db.datos.getString("beneficiarios"));
+			txt_objetivosODS.setText(db.datos.getString("contribucionODS"));
+			lbl_lugar.setText("Lugar: " + db.datos.getString("lugar"));
+			lbl_horario.setText("Horario: " + db.datos.getString("dia") + " [" + db.datos.getString("inicio") + " - " + db.datos.getString("final") + "]");
+			lbl_estudiantes.setText("Cupos: " + Integer.toString(db.datos.getInt("estudiantes")));
+			lbl_facultad.setText("Facultad: " + db.datos.getString("facultades"));
+			txt_perfil_estudiante.setText(db.datos.getString("perfil_estudiante"));
+			txt_materiales.setText(db.datos.getString("materiales"));
+			check_transporte.setSelected(db.datos.getInt("transporte") == 1 ? true : false);
+			check_almuerzo.setSelected(db.datos.getInt("almuerzo") == 1 ? true : false);
+			lbl_encargado.setText("Encargado: " + db.datos.getString("nombre"));
+			lbl_cargo.setText("Cargo: " + db.datos.getString("cargo"));
+			lbl_cedula.setText("Cédula: " + db.datos.getString("cedula"));
+			lbl_correo.setText("Correo: " + db.datos.getString("correo"));
+			lbl_telefono.setText("Teléfono: " + db.datos.getString("telefono"));
 
 		}
 		
 		catch(SQLException e){
-			System.out.println("Error al consultar la base de datos. " + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		finally {

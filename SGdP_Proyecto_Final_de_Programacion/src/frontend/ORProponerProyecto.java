@@ -76,7 +76,7 @@ public class ORProponerProyecto extends JFrame {
 		setContentPane(contenedor_scrolleable);
 		
 		// Título de la ventana
-		JLabel lbl_propuesta_de_proyecto = new JLabel("PROPUESTA DE PROYECTO");
+		JLabel lbl_propuesta_de_proyecto = new JLabel("Propuesta de Proyecto");
         lbl_propuesta_de_proyecto.setFont(ConstantesEstilo.titulo);
         lbl_propuesta_de_proyecto.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -470,21 +470,21 @@ public class ORProponerProyecto extends JFrame {
         lbl_horario.setFont(ConstantesEstilo.subtitulo);
         lbl_horario.setHorizontalAlignment(SwingConstants.CENTER);
         
-        //Día
+        // Día
         JLabel lbl_dia = new JLabel("Día [dd/mm/aaaa]");
         lbl_dia.setFont(ConstantesEstilo.subtitulo);
         
         txt_dia = new JTextField();
         txt_dia.setFont(ConstantesEstilo.texto);
         
-        //Hora de inicio
+        // Hora de inicio
         JLabel lbl_hora_inicio = new JLabel("Hora de inicio [24:00]");
         lbl_hora_inicio.setFont(ConstantesEstilo.subtitulo);
         
         txt_hora_inicio = new JTextField();
         txt_hora_inicio.setFont(ConstantesEstilo.texto);
         
-        //Hora de finalización
+        // Hora de finalización
         JLabel lbl_hora_final = new JLabel("Hora de finalización [24:00]");
         lbl_hora_final.setFont(ConstantesEstilo.subtitulo);
         

@@ -15,9 +15,9 @@ public class ManejoSQL {
 	public ResultSet datos = null;
 	
 	public Connection conectar() {
-		Path rutaProyecto = Paths.get(".").toAbsolutePath().normalize();
-		Path rutaDB = rutaProyecto.resolve("db/SGdP_DB.db");
-		String ruta = "jdbc:sqlite:" + rutaDB.toString();
+		Path ruta_proyecto = Paths.get(".").toAbsolutePath().normalize();
+		Path ruta_db = ruta_proyecto.resolve("db/SGdP_DB.db");
+		String ruta = "jdbc:sqlite:" + ruta_db.toString();
 		
 		try {
 			conexion = DriverManager.getConnection(ruta);
@@ -46,7 +46,7 @@ public class ManejoSQL {
 	
 	//Insertar o actualizar
 	public int insertarDatos(String instruccion) {
-	    int idGenerado = -1;
+	    int id_generado = -1;
 
 	    try {
 	        conexion = conectar();
@@ -55,14 +55,14 @@ public class ManejoSQL {
 	        System.out.println("Consulta realizada.");
 	        
 	        datos = consulta.getGeneratedKeys();
-	        idGenerado = datos.getInt(1);
+	        id_generado = datos.getInt(1);
 	        
 	    }
 	    catch (SQLException e) {
 	        System.out.println("Error al consultar la base de datos. " + e.getMessage());
 	    }
 	    
-	    return idGenerado;
+	    return id_generado;
 	    
 	}
 	

@@ -53,7 +53,7 @@ public class ORVerPropuestas extends JFrame {
 		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 	
-		JLabel lbl_propuestas = new JLabel("PROPUESTAS");
+		JLabel lbl_propuestas = new JLabel("Propuestas");
 		lbl_propuestas.setFont(ConstantesEstilo.titulo);
 		lbl_propuestas.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -113,7 +113,8 @@ public class ORVerPropuestas extends JFrame {
 	                    	
                     		try {
 								motivo = db.datos.getString("motivo");
-							} catch (SQLException e1) {
+							}
+                    		catch (SQLException e1) {
 								JOptionPane.showMessageDialog(null, "Error al consultar la base de datos.", "", JOptionPane.ERROR_MESSAGE);
 							}
                     		

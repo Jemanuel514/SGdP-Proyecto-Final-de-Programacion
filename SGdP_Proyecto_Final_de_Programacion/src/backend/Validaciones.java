@@ -1,5 +1,6 @@
 package backend;
 
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -56,11 +57,11 @@ public class Validaciones {
 	public static boolean validarTelefono(String cadena) {
         String patron = "^6\\d{3}-\\d{4}$";
 
-        Pattern pattern = Pattern.compile(patron);
+        Pattern patron_compilado = Pattern.compile(patron);
 
-        Matcher matcher = pattern.matcher(cadena);
+        Matcher comparador = patron_compilado.matcher(cadena);
 
-        if (matcher.matches()) {
+        if (comparador.matches()) {
             return true;
         }
         
@@ -138,5 +139,28 @@ public class Validaciones {
         return 1;
         
     }
+	
+	public static boolean estaInscrito(int id_estudiante, int id_convocatoria, ManejoSQL db) {
+		
+		try {
+			// Consulta de datos
+			db.consultarDatos("SELECT * FROM Inscripciones");
+			
+			while(db.datos.next()) {
+				if(db.datos.getInt("estudiante_id") == id_estudiante && db.datos.getInt("convocatoria_id") == id_convocatoria) {
+					return true;
+				}
+			}
+			
+			return false;
+			
+		}
+		catch(SQLException e) {
+			System.out.println("Error al consultar la base de datos: " + e.getMessage());
+		}
+		
+		return false;
+		
+	}
 	
 }

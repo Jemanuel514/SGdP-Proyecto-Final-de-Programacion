@@ -3,15 +3,16 @@ package frontend;
 import backend.DSSU;
 import backend.ManejoSQL;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,122 +26,125 @@ import java.sql.SQLException;
 
 public class DSSUPropuestasSinEvaluar extends JFrame {
 	
-	private ManejoSQL db;
-	
 	private static final long serialVersionUID = 1L;
-	private JPanel contenedor;
-	private JScrollPane contenedorTabla;
-	private JTable propuestas;
-	private DefaultTableModel propuestasModelo;
+	private JTable tabla_propuestas;
+	private DefaultTableModel propuestas_modelo;
 
 	public DSSUPropuestasSinEvaluar(DSSU usuario, ManejoSQL db) {
 		
-		this.db = db;
+		// JFrame
+		setSize(ConstantesEstilo.ventana);
+        setPreferredSize(ConstantesEstilo.ventana);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 		
-		//JFRAME
-		setSize(ConstantesEstilo.ventana);				//Dimensiones
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);					//Centrar en la pantalla
-		
-		//CONTENEDOR
-		contenedor = new JPanel();
-		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contenedor.setLayout(null);
+		// Contenedor
+        JPanel contenedor = new JPanel();
+        contenedor.setBorder(new EmptyBorder(20, 20, 20, 20));
 		setContentPane(contenedor);
 		
-		//ETIQUETAS
-		JLabel lblBienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());	//Inicializar y texto
-		lblBienvenida.setFont(ConstantesEstilo.texto);								//Fuente
-		lblBienvenida.setHorizontalAlignment(SwingConstants.RIGHT);					//Alineación
-		lblBienvenida.setBounds(822, 10, 178, 38);									//Posición
-		contenedor.add(lblBienvenida);
-		
-		JLabel lblTipoUsuario = new JLabel("DSSU");
-		lblTipoUsuario.setFont(ConstantesEstilo.texto);
-		lblTipoUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTipoUsuario.setBounds(822, 39, 178, 38);
-		contenedor.add(lblTipoUsuario);
-		
-		JLabel lblEvaluarPropuestas = new JLabel("Evaluar Propuestas");
-		lblEvaluarPropuestas.setFont(ConstantesEstilo.titulo);
-		lblEvaluarPropuestas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEvaluarPropuestas.setBounds(256, 100, 497, 56);
-		contenedor.add(lblEvaluarPropuestas);
-		
-		JLabel lblSeleccione = new JLabel("Seleccione el proyecto a evaluar [Haga doble clic en 'Evaluar']");
-		lblSeleccione.setFont(ConstantesEstilo.texto);
-		lblSeleccione.setBounds(40, 160, 600, 38);
-		contenedor.add(lblSeleccione);
-		
-		//TABLA
-		//General
-		propuestas = new JTable();
-		propuestas.setFont(ConstantesEstilo.texto);
-		propuestas.setBounds(40, 224, 929, 497);
-		propuestas.setEnabled(false);				//Desactivar edición de celdas
-		
-        //Modelo de tabla (definición de columnas)
-		propuestasModelo = new DefaultTableModel();
-		propuestasModelo.setColumnIdentifiers(new String[] {"ID", "Título", "Organismo Receptor", ""});
-		propuestas.setModel(propuestasModelo);
-		
-		//Títulos de columna
-		JTableHeader encabezado = propuestas.getTableHeader();
-        encabezado.setFont(new Font("Arial Unicode MS", Font.BOLD, 20));
-		
-		//Personalizar columnas
-		DefaultTableCellRenderer centrarCelda = new DefaultTableCellRenderer();
-		centrarCelda.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		propuestas.getColumnModel().getColumn(0).setPreferredWidth(50);
-		propuestas.getColumnModel().getColumn(1).setPreferredWidth(475);
-		propuestas.getColumnModel().getColumn(2).setPreferredWidth(250);
-		propuestas.getColumnModel().getColumn(0).setCellRenderer(centrarCelda);
-		propuestas.getColumnModel().getColumn(2).setCellRenderer(centrarCelda);
-		propuestas.getColumnModel().getColumn(3).setCellRenderer(centrarCelda);
-		
-		//Personalizar filas
-		propuestas.setRowHeight(30);
-		
-		//Celda clickeable
-		propuestas.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {									//Doble clic
-                    int fila = propuestas.rowAtPoint(e.getPoint());
-                    int columna = propuestas.columnAtPoint(e.getPoint());
+		// Etiquetas
+		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
+		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 
-                    if (columna == 3) {											//Columna de acción
+		JLabel lbl_tipo_usuario = new JLabel("DSSU");
+		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
+	
+		JLabel lbl_propuestas = new JLabel("Propuestas Sin Evaluar");
+		lbl_propuestas.setFont(ConstantesEstilo.titulo);
+		lbl_propuestas.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		// Botones		
+		JButton boton_menu = new JButton("Menú");
+		boton_menu.setFont(ConstantesEstilo.boton);
+		boton_menu.addActionListener(new ActionListener() {
+  			public void actionPerformed(ActionEvent e) {
+  				dispose();
+				DSSUMenuPrincipal menu_dssu = new DSSUMenuPrincipal(usuario, db);
+				menu_dssu.setVisible(true);
+  			}
+  		});
+		
+		// Tabla
+		tabla_propuestas = new JTable();
+		tabla_propuestas.setEnabled(false);
+		tabla_propuestas.setFont(ConstantesEstilo.texto);
+		
+        // Modelo de tabla (definición de columnas)
+		propuestas_modelo = new DefaultTableModel();
+		propuestas_modelo.setColumnIdentifiers(new String[] {"ID", "Título", "Organismo Receptor", ""});
+		tabla_propuestas.setModel(propuestas_modelo);
+		
+		// Títulos de columna
+		JTableHeader encabezado = tabla_propuestas.getTableHeader();
+        encabezado.setFont(ConstantesEstilo.subtitulo);
+        encabezado.setReorderingAllowed(false);
+		
+		// Personalizar columnas
+		DefaultTableCellRenderer centrar_celda = new DefaultTableCellRenderer();
+		centrar_celda.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		tabla_propuestas.getColumnModel().getColumn(0).setPreferredWidth(50);
+		tabla_propuestas.getColumnModel().getColumn(1).setPreferredWidth(475);
+		tabla_propuestas.getColumnModel().getColumn(2).setPreferredWidth(250);
+		tabla_propuestas.getColumnModel().getColumn(0).setCellRenderer(centrar_celda);
+		tabla_propuestas.getColumnModel().getColumn(2).setCellRenderer(centrar_celda);
+		tabla_propuestas.getColumnModel().getColumn(3).setCellRenderer(centrar_celda);
+		
+		// Personalizar filas
+		tabla_propuestas.setRowHeight(30);
+		
+		// Celda clickeable
+		tabla_propuestas.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    int fila = tabla_propuestas.rowAtPoint(e.getPoint());
+                    int columna = tabla_propuestas.columnAtPoint(e.getPoint());
+
+                    if (columna == 3) {
                     	dispose();
-        				DSSUEvaluarPropuesta evaluarPropuesta = new DSSUEvaluarPropuesta(usuario, (int) propuestas.getValueAt(fila, 0), db);
-        				evaluarPropuesta.setVisible(true);
+        				DSSUEvaluarPropuesta evaluar_propuesta = new DSSUEvaluarPropuesta(usuario, (int) tabla_propuestas.getValueAt(fila, 0), db);
+        				evaluar_propuesta.setVisible(true);
                     }
                 }
             }
         });
 		
-        contenedorTabla = new JScrollPane(propuestas);
-        contenedorTabla.setBounds(40, 224, 929, 497);
-        contenedor.add(contenedorTabla);
+		JScrollPane contenedor_tabla = new JScrollPane(tabla_propuestas);
 		
-        buscarPropuestas();
+        buscarPropuestas(db);
         
-        //BOTONES
-        JButton btnVolver = new JButton("Volver");
-  		btnVolver.setFont(ConstantesEstilo.boton);
-  		btnVolver.setBounds(30, 30, 199, 36);
-  		btnVolver.addActionListener(new ActionListener() {
-  			public void actionPerformed(ActionEvent e) {
-  				dispose();
-				DSSUMenuPrincipal menuDSSU = new DSSUMenuPrincipal(usuario, db);
-				menuDSSU.setVisible(true);
-  			}
-  		});
-  		contenedor.add(btnVolver);
+        GroupLayout gl_contenedor_principal = new GroupLayout(contenedor);
+		
+	    gl_contenedor_principal.setHorizontalGroup(gl_contenedor_principal.createParallelGroup()
+	    		.addGroup(gl_contenedor_principal.createSequentialGroup()
+	    				.addComponent(boton_menu, 150, 150, 150)
+	    				.addGroup(gl_contenedor_principal.createParallelGroup()
+	    						.addComponent(lbl_bienvenida, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    						.addComponent(lbl_tipo_usuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+	    		
+				.addComponent(lbl_propuestas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(contenedor_tabla, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 				
+		gl_contenedor_principal.setVerticalGroup(gl_contenedor_principal.createSequentialGroup()
+				.addGroup(gl_contenedor_principal.createParallelGroup()
+						.addComponent(boton_menu)
+						.addGroup(gl_contenedor_principal.createSequentialGroup()
+								.addComponent(lbl_bienvenida)
+	    						.addComponent(lbl_tipo_usuario)))
+				
+				.addComponent(lbl_bienvenida)
+				.addComponent(lbl_tipo_usuario)
+				.addComponent(lbl_propuestas)
+				.addComponent(contenedor_tabla, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		
+		contenedor.setLayout(gl_contenedor_principal);		
 	}
 	
-	public void buscarPropuestas() {
+	public void buscarPropuestas(ManejoSQL db) {
 
 		try {
 			//Consulta de datos
@@ -149,12 +153,12 @@ public class DSSUPropuestasSinEvaluar extends JFrame {
 			//Búsqueda de credenciales
 			while(db.datos.next()) {
 				Object[] propuesta = {db.datos.getInt("id"), db.datos.getString("titulo"), db.datos.getString("usuario"), "Evaluar"};
-		        propuestasModelo.addRow(propuesta);
+		        propuestas_modelo.addRow(propuesta);
 		        }
 			}
 		
 		catch(SQLException e){
-			System.out.println("Error al consultar la base de datos. " + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + e.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		finally {

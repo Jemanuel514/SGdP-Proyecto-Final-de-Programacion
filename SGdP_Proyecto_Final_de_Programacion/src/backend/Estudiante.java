@@ -12,4 +12,12 @@ public class Estudiante extends Usuario{
 	
 	public String getFacultad() {return facultad;}
 	
+	public void inscribirseConvocatoria(int id_estudiante, int id_convocatoria, ManejoSQL db) {
+		
+		db.insertarDatos("INSERT INTO Inscripciones (id_estudiante, id_convocatoria) VALUES (" + id_estudiante + ", " + id_convocatoria + ")");
+		
+		db.cerrarConexion();
+		
+	}
+	
 }

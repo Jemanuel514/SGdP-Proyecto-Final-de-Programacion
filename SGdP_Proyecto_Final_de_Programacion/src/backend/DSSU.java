@@ -7,15 +7,23 @@ public class DSSU extends Usuario{
 		super(id, tipo, usuario, contrasena, correo, telefono);
 	}
 	
-	public void evaluarPropuesta(int id, boolean evaluacion, String motivo, ManejoSQL db) {
+	public void evaluarPropuesta(int id_propuesta, boolean evaluacion, String motivo, ManejoSQL db) {
 		//Variables
-		int evaluacionDB;
-		int idEvaluacion;
+		int evaluacion_db;
+		int id_evaluacion;
 		
-		evaluacionDB = evaluacion ? 1 : 0;
-		idEvaluacion = db.insertarDatos("INSERT INTO Evaluaciones (aprobado, motivo) VALUES (" + evaluacionDB + ", " + motivo + ")");
+		evaluacion_db = evaluacion ? 1 : 0;
+		id_evaluacion = db.insertarDatos("INSERT INTO Evaluaciones (aprobado, motivo) VALUES (" + evaluacion_db + ", " + motivo + ")");
 		
-		db.insertarDatos("UPDATE Proyectos SET evaluacion_id = " + idEvaluacion + " WHERE id = " + id);
+		db.insertarDatos("UPDATE Proyectos SET evaluacion_id = " + id_evaluacion + " WHERE id = " + id_propuesta);
+		
+		db.cerrarConexion();
+		
+	}
+	
+	public void publicarConvocatoria(int id_proyecto, int horas, ManejoSQL db) {
+		
+		db.insertarDatos("INSERT INTO Convocatorias (proyecto_id, horas) VALUES (" + id_proyecto + ", " + horas + ")");
 		
 		db.cerrarConexion();
 		

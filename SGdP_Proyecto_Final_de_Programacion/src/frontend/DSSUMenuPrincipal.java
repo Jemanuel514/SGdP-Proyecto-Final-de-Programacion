@@ -18,6 +18,7 @@ public class DSSUMenuPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	public DSSUMenuPrincipal(DSSU usuario, ManejoSQL db) {	
+		
 		// JFrame
 		setSize(ConstantesEstilo.ventana);
 		setResizable(false);
@@ -49,15 +50,15 @@ public class DSSUMenuPrincipal extends JFrame {
 		lbl_tipo_usuario.setBounds(733, 39, 267, 38);
 		contenedor.add(lbl_tipo_usuario);
 		
-		//BOTONES
+		// Botones
 		JButton btn_evaluar_propuesta = new JButton("Evaluar Propuestas");
 		btn_evaluar_propuesta.setFont(ConstantesEstilo.boton);
 		btn_evaluar_propuesta.setBounds(302, 219, 406, 91);
 		btn_evaluar_propuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				DSSUPropuestasSinEvaluar propuestasSinEvaluar = new DSSUPropuestasSinEvaluar(usuario, db);
-				propuestasSinEvaluar.setVisible(true);
+				DSSUPropuestasSinEvaluar propuestas_sin_evaluar = new DSSUPropuestasSinEvaluar(usuario, db);
+				propuestas_sin_evaluar.setVisible(true);
 			}
 		});
 		contenedor.add(btn_evaluar_propuesta);
@@ -68,16 +69,23 @@ public class DSSUMenuPrincipal extends JFrame {
 		btn_publicar_convocatoria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				DSSUProyectosAprobados proyectosAprobados = new DSSUProyectosAprobados(usuario, db);
-				proyectosAprobados.setVisible(true);
+				DSSUProyectosAprobados proyectos_aprobados = new DSSUProyectosAprobados(usuario, db);
+				proyectos_aprobados.setVisible(true);
 			}
 		});
 		contenedor.add(btn_publicar_convocatoria);
 		
-		JButton btn_ver_convocatoria = new JButton("Ver Convocatorias");
-		btn_ver_convocatoria.setFont(ConstantesEstilo.boton);
-		btn_ver_convocatoria.setBounds(302, 463, 406, 91);
-		contenedor.add(btn_ver_convocatoria);
+		JButton btn_ver_convocatorias = new JButton("Ver Convocatorias");
+		btn_ver_convocatorias.setFont(ConstantesEstilo.boton);
+		btn_ver_convocatorias.setBounds(302, 463, 406, 91);
+		btn_ver_convocatorias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				VerConvocatorias ver_convocatorias = new VerConvocatorias(usuario, db);
+				ver_convocatorias.setVisible(true);
+			}
+		});
+		contenedor.add(btn_ver_convocatorias);
 		
 		JButton btn_cerrar_sesion = new JButton("Cerrar Sesión");
 		btn_cerrar_sesion.setFont(ConstantesEstilo.boton);

@@ -1,7 +1,10 @@
 package frontend;
 
+import backend.DSSU;
+import backend.Estudiante;
 import backend.ManejoSQL;
 import backend.OrganismoReceptor;
+import backend.Usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,13 +27,13 @@ import javax.swing.table.JTableHeader;
 
 import java.sql.SQLException;
 
-public class ORVerConvocatorias extends JFrame {
+public class VerConvocatorias extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JTable tabla_convocatorias;
     private DefaultTableModel convocatorias_modelo;
-
-	public ORVerConvocatorias(OrganismoReceptor usuario, ManejoSQL db) {
+    
+	public VerConvocatorias(Usuario usuario, ManejoSQL db) {
 		
 		// JFrame
 		setSize(ConstantesEstilo.ventana);
@@ -48,12 +51,30 @@ public class ORVerConvocatorias extends JFrame {
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
 		lbl_bienvenida.setFont(ConstantesEstilo.texto);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
-
-		JLabel lbl_tipo_usuario = new JLabel("ORGANISMO RECEPTOR");
+		
+		String tipo_usuario = "";
+		switch(usuario.getTipo()) {
+		case 0:
+			tipo_usuario = "ORGANISMO RECEPTOR";
+			break;
+		
+		case 1:
+			tipo_usuario = "DSSU";
+			break;
+		
+		case 2:
+			tipo_usuario = "ESTUDIANTE";
+			break;
+			
+		default:
+			break;
+		}
+		
+		JLabel lbl_tipo_usuario = new JLabel(tipo_usuario);
 		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 	
-		JLabel lbl_convocatorias = new JLabel("CONVOCATORIAS");
+		JLabel lbl_convocatorias = new JLabel("Convocatorias");
 		lbl_convocatorias.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_convocatorias.setFont(ConstantesEstilo.titulo);
 		
@@ -63,8 +84,27 @@ public class ORVerConvocatorias extends JFrame {
 		boton_menu.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
-				ORMenuPrincipal menu_or = new ORMenuPrincipal(usuario, db);
-				menu_or.setVisible(true);
+  				
+  				switch(usuario.getTipo()) {
+  				case 0:
+  					ORMenuPrincipal menu_or = new ORMenuPrincipal((OrganismoReceptor) usuario, db);
+  					menu_or.setVisible(true);
+  					break;
+  				
+  				case 1:
+  					DSSUMenuPrincipal menu_dssu = new DSSUMenuPrincipal((DSSU) usuario, db);
+  					menu_dssu.setVisible(true);
+  					break;
+  				
+  				case 2:
+  					EstudianteMenuPrincipal menu_estudiante = new EstudianteMenuPrincipal((Estudiante) usuario, db);
+  					menu_estudiante.setVisible(true);
+  					break;
+  					
+  				default:
+  					break;
+  				}
+  					
   			}
   		});
 		
@@ -72,7 +112,6 @@ public class ORVerConvocatorias extends JFrame {
 		tabla_convocatorias = new JTable();
 		tabla_convocatorias.setEnabled(false);
 		tabla_convocatorias.setFont(ConstantesEstilo.texto);
-		tabla_convocatorias.getTableHeader().setReorderingAllowed(false);
 		
         // Modelo de tabla (definición de columnas)
 		convocatorias_modelo = new DefaultTableModel();
@@ -82,6 +121,7 @@ public class ORVerConvocatorias extends JFrame {
 		// Títulos de columna
 		JTableHeader encabezado = tabla_convocatorias.getTableHeader();
         encabezado.setFont(ConstantesEstilo.subtitulo);
+        encabezado.setReorderingAllowed(false);
 		
 		// Personalizar columnas
 		DefaultTableCellRenderer centrar_celda = new DefaultTableCellRenderer();
@@ -104,8 +144,8 @@ public class ORVerConvocatorias extends JFrame {
                     
                     if (columna == 2) {
                     	dispose();
-        				//ORVerInscripciones verInscritos = new ORVerInscripciones(usuario, (int) tabla_convocatorias.getValueAt(fila, 0), db);
-        				//verInscritos.setVisible(true);
+        				VerConvocatoria ver_convocatoria = new VerConvocatoria(usuario, (int) tabla_convocatorias.getValueAt(fila, 0), db);
+        				ver_convocatoria.setVisible(true);
                     }
                 }
             }
@@ -143,11 +183,28 @@ public class ORVerConvocatorias extends JFrame {
 		
     }
 	
-	public void buscarConvocatorias(OrganismoReceptor usuario, ManejoSQL db) {
+	public void buscarConvocatorias(Usuario usuario, ManejoSQL db) {
+		String consulta = "";
+		
+		switch(usuario.getTipo()) {
+		// Organismo Receptor: solo puede ver las convocatorias de sus proyectos
+		case 0:
+			consulta = "SELECT Convocatorias.id, Proyectos.titulo FROM Convocatorias INNER JOIN Proyectos on Convocatorias.proyecto_id = Proyectos.id WHERE Proyectos.or_id = " + usuario.getId();
+			break;
+		// DSSU: puede ver todas las convocatorias
+		case 1:
+			consulta = "SELECT Convocatorias.id, Proyectos.titulo FROM Convocatorias INNER JOIN Proyectos on Convocatorias.proyecto_id = Proyectos.id";
+			break;
+		// Estudiante: solo puede ver las convocatorias de su facultad
+		case 2:
+			consulta = "SELECT Convocatorias.id, Proyectos.titulo FROM Convocatorias INNER JOIN Proyectos on Convocatorias.proyecto_id = Proyectos.id WHERE Proyectos.facultades IN ('TODAS', " + ((Estudiante) usuario).getFacultad() + ")";
+			break;
+		default: break;
+		}
 		
 		try {
 			// Consulta de datos
-			db.consultarDatos("SELECT Convocatorias.id, Proyectos.titulo FROM Convocatorias INNER JOIN Proyectos on Convocatorias.proyecto_id = Proyectos.id WHERE Proyectos.or_id = " + usuario.getId()); 
+			db.consultarDatos(consulta); 
 			
 			while(db.datos.next()) {
 				Object[] convocatoria = {db.datos.getInt("id"), db.datos.getString("titulo"), "Ver convocatoria"};

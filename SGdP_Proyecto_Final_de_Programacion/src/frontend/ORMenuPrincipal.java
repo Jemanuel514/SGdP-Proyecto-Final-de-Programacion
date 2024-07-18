@@ -75,17 +75,17 @@ public class ORMenuPrincipal extends JFrame {
 		});
 		contenedor.add(btn_ver_propuestas);
 		
-		JButton btn_ver_convocatoria = new JButton("Ver Convocatorias");
-		btn_ver_convocatoria.setFont(ConstantesEstilo.boton);
-		btn_ver_convocatoria.setBounds(302, 463, 406, 91);
-		btn_ver_convocatoria.addActionListener(new ActionListener() {
+		JButton btn_ver_convocatorias = new JButton("Ver Convocatorias");
+		btn_ver_convocatorias.setFont(ConstantesEstilo.boton);
+		btn_ver_convocatorias.setBounds(302, 463, 406, 91);
+		btn_ver_convocatorias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ORVerConvocatorias ver_convocatorias = new ORVerConvocatorias(usuario, db);
+				VerConvocatorias ver_convocatorias = new VerConvocatorias(usuario, db);
 				ver_convocatorias.setVisible(true);
 			}
 		});
-		contenedor.add(btn_ver_convocatoria);
+		contenedor.add(btn_ver_convocatorias);
 		
 		JButton btn_cerrar_sesion = new JButton("Cerrar Sesión");
 		btn_cerrar_sesion.setFont(ConstantesEstilo.boton);

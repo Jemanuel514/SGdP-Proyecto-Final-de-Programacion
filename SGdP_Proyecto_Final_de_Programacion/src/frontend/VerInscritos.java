@@ -1,7 +1,7 @@
 package frontend;
 
 import backend.ManejoSQL;
-import backend.OrganismoReceptor;
+import backend.Usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,14 +22,14 @@ import javax.swing.table.JTableHeader;
 
 import java.sql.SQLException;
 
-public class ORVerInscripciones extends JFrame {
+public class VerInscritos extends JFrame {
 
     private static final long serialVersionUID = 1L;
     
     private JTable tabla_inscripciones;
     private DefaultTableModel inscripciones_modelo;
-
-	public ORVerInscripciones(OrganismoReceptor usuario, int idConvocatoria, ManejoSQL db) {
+    
+	public VerInscritos(Usuario usuario, int id_convocatoria, ManejoSQL db) {
 		
 		// JFrame
 		setSize(ConstantesEstilo.ventana);
@@ -47,12 +47,26 @@ public class ORVerInscripciones extends JFrame {
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
 		lbl_bienvenida.setFont(ConstantesEstilo.texto);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
-
-		JLabel lbl_tipo_usuario = new JLabel("ORGANISMO RECEPTOR");
+		
+		String tipo_usuario = "";
+		switch(usuario.getTipo()) {
+		case 0:
+			tipo_usuario = "ORGANISMO RECEPTOR";
+			break;
+		
+		case 1:
+			tipo_usuario = "DSSU";
+			break;
+		
+		default:
+			break;
+		}
+		
+		JLabel lbl_tipo_usuario = new JLabel(tipo_usuario);
 		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 	
-		JLabel lbl_inscripciones = new JLabel("INSCRIPCIONES");
+		JLabel lbl_inscripciones = new JLabel("Inscripciones");
 		lbl_inscripciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_inscripciones.setFont(ConstantesEstilo.titulo);
 		
@@ -71,7 +85,6 @@ public class ORVerInscripciones extends JFrame {
 		tabla_inscripciones = new JTable();
 		tabla_inscripciones.setEnabled(false);
 		tabla_inscripciones.setFont(ConstantesEstilo.texto);
-		tabla_inscripciones.getTableHeader().setReorderingAllowed(false);
 						
 		//Modelo de tabla (definición de columnas)
 		inscripciones_modelo = new DefaultTableModel();
@@ -81,6 +94,7 @@ public class ORVerInscripciones extends JFrame {
 		//Títulos de columna
 		JTableHeader encabezado = tabla_inscripciones.getTableHeader();
 		encabezado.setFont(ConstantesEstilo.subtitulo);
+		encabezado.setReorderingAllowed(false);
 						
 		//Personalizar columnas
 		DefaultTableCellRenderer centrar_celda = new DefaultTableCellRenderer();
@@ -92,7 +106,7 @@ public class ORVerInscripciones extends JFrame {
 						
 		JScrollPane contenedor_tabla = new JScrollPane(tabla_inscripciones);
 		
-		buscarInscritos(idConvocatoria, db);
+		buscarInscritos(id_convocatoria, db);
 			
 		GroupLayout gl_contenedor_principal = new GroupLayout(contenedor_principal);
 		
@@ -121,11 +135,11 @@ public class ORVerInscripciones extends JFrame {
 		contenedor_principal.setLayout(gl_contenedor_principal);
 
     }
-	public void buscarInscritos(int id, ManejoSQL db) {
+	public void buscarInscritos(int id_convocatoria, ManejoSQL db) {
 		
 		try {
 			// Consulta de datos
-			db.consultarDatos("SELECT usuario, Usuarios.correo, facultad FROM Usuarios INNER JOIN Inscripciones on Inscripciones.estudiante_id = Usuarios.id WHERE Inscripciones.convocatoria_id = " + id); 
+			db.consultarDatos("SELECT usuario, Usuarios.correo, facultad FROM Usuarios INNER JOIN Inscripciones on Inscripciones.estudiante_id = Usuarios.id WHERE Inscripciones.convocatoria_id = " + id_convocatoria); 
 			
 			while(db.datos.next()) {
 				Object[] inscripciones = {db.datos.getString("usuario"), db.datos.getString("correo"),db.datos.getString("facultad")};
