@@ -169,7 +169,7 @@ public class VerConvocatoria extends JFrame {
 		lbl_horario.setFont(ConstantesEstilo.TEXTO);
 				
 		// Estudiantes
-		lbl_estudiantes = new JLabel("Cupos: ");
+		lbl_estudiantes = new JLabel("Inscritos: ");
 		lbl_estudiantes.setFont(ConstantesEstilo.TEXTO);
 		
 		// Facultad
@@ -243,6 +243,11 @@ public class VerConvocatoria extends JFrame {
   				// Comprobar si el estudiante está inscrito
   				if(Validaciones.estaInscrito(id_convocatoria, usuario.getId(), db)) {
   					JOptionPane.showMessageDialog(null, "Usted ya está inscrito en esta convocatoria.", "", JOptionPane.WARNING_MESSAGE);
+  					return;
+  				}
+  				
+  				if(!Validaciones.cuposDisponibles(id_convocatoria, db)) {
+  					JOptionPane.showMessageDialog(null, "La convocatoria está llena.", "", JOptionPane.WARNING_MESSAGE);
   					return;
   				}
   				
@@ -399,6 +404,7 @@ public class VerConvocatoria extends JFrame {
 					+ "inicio, "
 					+ "final, "
 					+ "estudiantes, "
+					+ "count(Inscripciones.id) as inscritos, "
 					+ "facultades, "
 					+ "perfil_estudiante, "
 					+ "materiales, "
@@ -408,6 +414,7 @@ public class VerConvocatoria extends JFrame {
 					+ "INNER JOIN Usuarios ON Proyectos.or_id = Usuarios.id "
 					+ "INNER JOIN Convocatorias ON Proyectos.id = Convocatorias.proyecto_id "
 					+ "INNER JOIN Horarios ON Proyectos.id = Horarios.proyecto_id "
+					+ "INNER JOIN Inscripciones ON Convocatorias.id = Inscripciones.convocatoria_id "
 					+ "WHERE Convocatorias.id = " + id_convocatoria);
 			
 			lbl_titulo.setText("Título: " + db.datos.getString("titulo"));
@@ -420,7 +427,7 @@ public class VerConvocatoria extends JFrame {
 			txt_objetivosODS.setText(db.datos.getString("contribucionODS"));
 			lbl_lugar.setText("Lugar: " + db.datos.getString("lugar"));
 			lbl_horario.setText("Horario: " + db.datos.getString("dia") + " [" + db.datos.getString("inicio") + " - " + db.datos.getString("final") + "]");
-			lbl_estudiantes.setText("Cupos: " + Integer.toString(db.datos.getInt("estudiantes")));
+			lbl_estudiantes.setText("Inscritos: " + Integer.toString(db.datos.getInt("inscritos")) + "/" + Integer.toString(db.datos.getInt("estudiantes")));
 			lbl_facultad.setText("Facultad: " + db.datos.getString("facultades"));
 			txt_perfil_estudiante.setText(db.datos.getString("perfil_estudiante"));
 			txt_materiales.setText(db.datos.getString("materiales"));
