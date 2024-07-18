@@ -89,7 +89,7 @@ public class ORMenuPrincipal extends JFrame {
 		
 		JButton btn_cerrar_sesion = new JButton("Cerrar Sesión");
 		btn_cerrar_sesion.setFont(ConstantesEstilo.boton);
-		btn_cerrar_sesion.setBounds(10, 683, 242, 38);
+		btn_cerrar_sesion.setBounds(10, 651, 242, 38);
 		btn_cerrar_sesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

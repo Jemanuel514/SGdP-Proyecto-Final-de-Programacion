@@ -8,34 +8,31 @@ import java.awt.EventQueue;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.border.LineBorder;
-
-import backend.ManejoSQL;
-import backend.OrganismoReceptor;
-
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
-public class Presentación extends JFrame {
+public class Presentacion extends JFrame {
 
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contenedorPresentacion;
-	private ManejoSQL db;
-    private OrganismoReceptor usuario;
+
 
   //InicializaciÃ³n de la ventana
   	public static void main(String[] args) {
   		EventQueue.invokeLater(new Runnable() {
   			public void run() {
   				try {
-  					Presentación frame = new Presentación();
+  					Presentacion frame = new Presentacion();
   					frame.setVisible(true);
   				} catch (Exception e) {
   					e.printStackTrace();
@@ -47,13 +44,16 @@ public class Presentación extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Presentación() {
+	public Presentacion() {
+		Path rutaProyecto = Paths.get(".").toAbsolutePath().normalize();
+		Path rutaDB = rutaProyecto.resolve("db/SGdP_DB.db");
+		
+		
 		setSize(new Dimension(1024, 768));
 		setResizable(false);
 		setMinimumSize(new Dimension(1024, 768));
 		setMaximumSize(new Dimension(1024, 768));
-		this.db = db;
-		this.usuario = usuario;
+		
 		setPreferredSize(new Dimension(1024, 768));
 		setTitle("Presentaci\u00F3n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +69,8 @@ public class Presentación extends JFrame {
 		
 		//LOGO UTP
 		//Cargar imagen
-		ImageIcon iconoUTPoriginal = new ImageIcon("C:\\Users\\aniel\\OneDrive\\Documentos\\Universidad\\III SEM\\Programaci\u00F3n de Software I\\ECLIPSE-WORKSPACE\\SGdP\\Resources\\logoUTP.png");
+		Path rutaLogoUTP = rutaProyecto.resolve("Resources/logoUTP.png");
+		ImageIcon iconoUTPoriginal = new ImageIcon(rutaLogoUTP.toString());
 		
 		//Redimensionar imagen
 		Image logoUTPoriginal = iconoUTPoriginal.getImage();
@@ -85,7 +86,8 @@ public class Presentación extends JFrame {
 		
 		//LOGO FISC
 		//Cargar imagen
-		ImageIcon iconoFISC = new ImageIcon("C:\\Users\\aniel\\OneDrive\\Documentos\\Universidad\\III SEM\\Programación de Software I\\ECLIPSE-WORKSPACE\\SGdP\\Resources\\logoFISC.png");
+		Path rutaLogoFISC = rutaProyecto.resolve("Resources/logoFISC.png");
+		ImageIcon iconoFISC = new ImageIcon(rutaLogoFISC.toString());
 				
 		//Redimensionar imagen
 		Image imgFISC = iconoFISC.getImage();
@@ -198,7 +200,8 @@ public class Presentación extends JFrame {
 		
 		//IMAGEN DE GATO NYEHEHE
 		//Cargar imagen
-		ImageIcon iconoGato = new ImageIcon("C:\\Users\\aniel\\OneDrive\\Documentos\\Universidad\\III SEM\\Programaci\u00F3n de Software I\\ECLIPSE-WORKSPACE\\SGdP\\Resources\\gato.jpg");
+		Path rutaGato = rutaProyecto.resolve("Resources/gato.jpg");
+		ImageIcon iconoGato = new ImageIcon(rutaGato.toString());
 				
 		//Redimensionar imagen
 		Image imagenGato = iconoGato.getImage();
