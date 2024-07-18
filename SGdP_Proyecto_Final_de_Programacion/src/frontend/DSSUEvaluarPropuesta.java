@@ -64,7 +64,6 @@ public class DSSUEvaluarPropuesta extends JFrame {
 		//CONTENEDOR DE CONTENIDO
 		JPanel contenedorGeneral = new JPanel();
 		contenedorGeneral.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//contenedorGeneral.setLayout(null);
 		
 		//CONTENEDOR SCROLLEABLE
 		JScrollPane contenedorScrolleable = new JScrollPane(contenedorGeneral);
