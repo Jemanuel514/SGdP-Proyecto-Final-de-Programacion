@@ -241,7 +241,7 @@ public class VerConvocatoria extends JFrame {
   				}
   				
   				// Comprobar si el estudiante está inscrito
-  				if(Validaciones.estaInscrito(id_convocatoria, usuario.getId(), db)) {
+  				if(Validaciones.estaInscrito(usuario.getId(), id_convocatoria, db)) {
   					JOptionPane.showMessageDialog(null, "Usted ya está inscrito en esta convocatoria.", "", JOptionPane.WARNING_MESSAGE);
   					return;
   				}
@@ -414,7 +414,7 @@ public class VerConvocatoria extends JFrame {
 					+ "INNER JOIN Usuarios ON Proyectos.or_id = Usuarios.id "
 					+ "INNER JOIN Convocatorias ON Proyectos.id = Convocatorias.proyecto_id "
 					+ "INNER JOIN Horarios ON Proyectos.id = Horarios.proyecto_id "
-					+ "INNER JOIN Inscripciones ON Convocatorias.id = Inscripciones.convocatoria_id "
+					+ "LEFT JOIN Inscripciones ON Convocatorias.id = Inscripciones.convocatoria_id "
 					+ "WHERE Convocatorias.id = " + id_convocatoria);
 			
 			lbl_titulo.setText("Título: " + db.datos.getString("titulo"));

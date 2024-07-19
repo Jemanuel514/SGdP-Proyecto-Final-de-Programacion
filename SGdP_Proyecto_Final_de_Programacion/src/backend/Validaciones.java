@@ -172,7 +172,7 @@ public class Validaciones {
 			// Consulta de datos
 			db.consultarDatos("SELECT estudiantes, count(Inscripciones.id) as inscritos FROM Proyectos "
 					+ "INNER JOIN Convocatorias ON Proyectos.id = Convocatorias.proyecto_id "
-					+ "INNER JOIN Inscripciones ON Convocatorias.id = Inscripciones.convocatoria_id "
+					+ "LEFT JOIN Inscripciones ON Convocatorias.id = Inscripciones.convocatoria_id "
 					+ "WHERE Convocatorias.id = " + id_convocatoria);
 			
 			if(db.datos.getInt("inscritos") < db.datos.getInt("estudiantes")) {
