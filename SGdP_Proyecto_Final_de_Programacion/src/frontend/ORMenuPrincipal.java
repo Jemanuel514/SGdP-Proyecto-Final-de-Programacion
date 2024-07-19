@@ -20,7 +20,7 @@ public class ORMenuPrincipal extends JFrame {
 	public ORMenuPrincipal(OrganismoReceptor usuario, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);

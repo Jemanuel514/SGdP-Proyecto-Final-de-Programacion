@@ -33,8 +33,8 @@ public class ORVerPropuestas extends JFrame {
 	public ORVerPropuestas(OrganismoReceptor usuario, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
-        setPreferredSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
+        setPreferredSize(ConstantesEstilo.VENTANA);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -72,7 +72,6 @@ public class ORVerPropuestas extends JFrame {
 		tabla_propuestas = new JTable();
 		tabla_propuestas.setEnabled(false);
 		tabla_propuestas.setFont(ConstantesEstilo.TEXTO);
-		tabla_propuestas.getTableHeader().setReorderingAllowed(false);
 		
         // Modelo de tabla (definición de columnas)
 		propuestas_modelo = new DefaultTableModel();
@@ -82,6 +81,7 @@ public class ORVerPropuestas extends JFrame {
 		// Títulos de columna
 		JTableHeader encabezado = tabla_propuestas.getTableHeader();
         encabezado.setFont(ConstantesEstilo.SUBTITULO);
+        encabezado.setReorderingAllowed(false);
 		
 		// Personalizar columnas
 		DefaultTableCellRenderer centrar_celda = new DefaultTableCellRenderer();

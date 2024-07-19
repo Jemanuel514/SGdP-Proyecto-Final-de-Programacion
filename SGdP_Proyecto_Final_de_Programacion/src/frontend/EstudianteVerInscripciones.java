@@ -34,8 +34,8 @@ public class EstudianteVerInscripciones extends JFrame {
 	public EstudianteVerInscripciones(Estudiante usuario, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
-        setPreferredSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
+        setPreferredSize(ConstantesEstilo.VENTANA);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -68,8 +68,8 @@ public class EstudianteVerInscripciones extends JFrame {
 		boton_menu.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
-  					EstudianteMenuPrincipal menu_estudiante = new EstudianteMenuPrincipal(usuario, db);
-  					menu_estudiante.setVisible(true);
+  				EstudianteMenuPrincipal menu_estudiante = new EstudianteMenuPrincipal(usuario, db);
+  				menu_estudiante.setVisible(true);
   				}
   			});
 		

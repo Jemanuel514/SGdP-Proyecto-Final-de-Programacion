@@ -61,7 +61,7 @@ public class ORProponerProyecto extends JFrame {
         
     public ORProponerProyecto(OrganismoReceptor usuario, ManejoSQL db) {
     	// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -72,7 +72,7 @@ public class ORProponerProyecto extends JFrame {
 		
 		//Contenedor scrolleable
 		JScrollPane contenedor_scrolleable = new JScrollPane(contenedor_general);
-		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.ventana);
+		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.VENTANA);
 		setContentPane(contenedor_scrolleable);
 		
 		// Título de la ventana

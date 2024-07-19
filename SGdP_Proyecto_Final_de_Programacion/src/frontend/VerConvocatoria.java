@@ -50,7 +50,7 @@ public class VerConvocatoria extends JFrame {
 	public VerConvocatoria(Usuario usuario, int id_convocatoria, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -61,7 +61,7 @@ public class VerConvocatoria extends JFrame {
 		
 		//Contenedor scrolleable
 		JScrollPane contenedor_scrolleable = new JScrollPane(contenedor_general);
-		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.ventana);
+		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.VENTANA);
 		setContentPane(contenedor_scrolleable);
 		
 		// General

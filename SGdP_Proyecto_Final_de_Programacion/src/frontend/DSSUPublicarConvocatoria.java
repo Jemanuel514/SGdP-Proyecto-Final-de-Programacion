@@ -50,7 +50,7 @@ public class DSSUPublicarConvocatoria extends JFrame {
 	public DSSUPublicarConvocatoria(DSSU usuario, int id_proyecto, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -61,7 +61,7 @@ public class DSSUPublicarConvocatoria extends JFrame {
 		
 		//Contenedor scrolleable
 		JScrollPane contenedor_scrolleable = new JScrollPane(contenedor_general);
-		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.ventana);
+		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.VENTANA);
 		setContentPane(contenedor_scrolleable);
 		
 		// General
@@ -217,7 +217,7 @@ public class DSSUPublicarConvocatoria extends JFrame {
   				
   				if(Validaciones.validarEnteroPositivo(txt_horas.getText())) {
   					usuario.publicarConvocatoria(id_proyecto, Integer.parseInt(txt_horas.getText()), db);
-  					JOptionPane.showMessageDialog(null, "Convocatoria publicada", "", JOptionPane.INFORMATION_MESSAGE);
+  					JOptionPane.showMessageDialog(null, "Convocatoria publicada.", "", JOptionPane.INFORMATION_MESSAGE);
   					
   					dispose();
   					DSSUProyectosAprobados proyectos_aprobados = new DSSUProyectosAprobados(usuario, db);
@@ -406,7 +406,6 @@ public class DSSUPublicarConvocatoria extends JFrame {
 			check_transporte.setSelected(db.datos.getInt("transporte") == 1 ? true : false);
 			check_almuerzo.setSelected(db.datos.getInt("almuerzo") == 1 ? true : false);
 			
-			System.out.println("Datos cargados.");
 		}
 		
 		catch(SQLException e){

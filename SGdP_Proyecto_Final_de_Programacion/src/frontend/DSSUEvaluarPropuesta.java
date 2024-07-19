@@ -53,7 +53,7 @@ public class DSSUEvaluarPropuesta extends JFrame {
 	public DSSUEvaluarPropuesta(DSSU usuario, int id_propuesta, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -64,7 +64,7 @@ public class DSSUEvaluarPropuesta extends JFrame {
 		
 		//Contenedor scrolleable
 		JScrollPane contenedor_scrolleable = new JScrollPane(contenedor_general);
-		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.ventana);
+		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.VENTANA);
 		setContentPane(contenedor_scrolleable);
 		
 		// General
@@ -227,7 +227,7 @@ public class DSSUEvaluarPropuesta extends JFrame {
   		btn_aprobar.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				usuario.evaluarPropuesta(id_propuesta, true, null, db);
-  				JOptionPane.showMessageDialog(null, "Proyecto aprobado", "", JOptionPane.INFORMATION_MESSAGE);
+  				JOptionPane.showMessageDialog(null, "Proyecto aprobado.", "", JOptionPane.INFORMATION_MESSAGE);
   				
   				dispose();
 				DSSUPropuestasSinEvaluar propuestasSinEvaluar = new DSSUPropuestasSinEvaluar(usuario, db);
@@ -241,7 +241,7 @@ public class DSSUEvaluarPropuesta extends JFrame {
   			public void actionPerformed(ActionEvent e) {
   				String motivo = JOptionPane.showInputDialog(null, "Motivo del rechazo:", "", JOptionPane.QUESTION_MESSAGE);
   				usuario.evaluarPropuesta(id_propuesta, false, motivo, db);
-  				JOptionPane.showMessageDialog(null, "Proyecto rechazado", "", JOptionPane.INFORMATION_MESSAGE);
+  				JOptionPane.showMessageDialog(null, "Proyecto rechazado.", "", JOptionPane.INFORMATION_MESSAGE);
   				
   				dispose();
 				DSSUPropuestasSinEvaluar propuestasSinEvaluar = new DSSUPropuestasSinEvaluar(usuario, db);

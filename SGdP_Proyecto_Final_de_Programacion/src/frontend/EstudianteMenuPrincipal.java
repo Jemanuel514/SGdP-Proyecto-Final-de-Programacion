@@ -22,7 +22,7 @@ public class EstudianteMenuPrincipal extends JFrame {
 	public EstudianteMenuPrincipal(Estudiante usuario, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -58,6 +58,7 @@ public class EstudianteMenuPrincipal extends JFrame {
 		lbl_facultad.setBounds(733, 70, 267, 38);
 		contenedor.add(lbl_facultad);
 		
+		// Botones
 		JButton btn_inscribirse_proyecto = new JButton("Ver Convocatorias");
 		btn_inscribirse_proyecto.setFont(ConstantesEstilo.BOTON);
 		btn_inscribirse_proyecto.setBounds(302, 219, 406, 91);

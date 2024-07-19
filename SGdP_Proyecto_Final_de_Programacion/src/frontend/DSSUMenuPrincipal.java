@@ -20,7 +20,7 @@ public class DSSUMenuPrincipal extends JFrame {
 	public DSSUMenuPrincipal(DSSU usuario, ManejoSQL db) {	
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
