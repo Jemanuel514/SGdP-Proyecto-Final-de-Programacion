@@ -32,8 +32,8 @@ public class VerInscritos extends JFrame {
 	public VerInscritos(Usuario usuario, int id_convocatoria, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
-        setPreferredSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
+        setPreferredSize(ConstantesEstilo.VENTANA);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -45,7 +45,7 @@ public class VerInscritos extends JFrame {
 		
 		// Etiquetas
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setFont(ConstantesEstilo.TEXTO);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		String tipo_usuario = "";
@@ -63,28 +63,28 @@ public class VerInscritos extends JFrame {
 		}
 		
 		JLabel lbl_tipo_usuario = new JLabel(tipo_usuario);
-		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setFont(ConstantesEstilo.TEXTO);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 	
 		JLabel lbl_inscripciones = new JLabel("Inscripciones");
 		lbl_inscripciones.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_inscripciones.setFont(ConstantesEstilo.titulo);
+		lbl_inscripciones.setFont(ConstantesEstilo.TITULO);
 		
 		// Botones
 		JButton btn_volver = new JButton("Volver");
-		btn_volver.setFont(ConstantesEstilo.boton);
+		btn_volver.setFont(ConstantesEstilo.BOTON);
 		btn_volver.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
-				//ORMenuPrincipal menuOR = new ORMenuPrincipal(usuario, db);
-				//menuOR.setVisible(true);
+  				VerConvocatoria ver_convocatoria = new VerConvocatoria(usuario, id_convocatoria, db);
+				ver_convocatoria.setVisible(true);
   			}
   		});
 		
 		// Tabla
 		tabla_inscripciones = new JTable();
 		tabla_inscripciones.setEnabled(false);
-		tabla_inscripciones.setFont(ConstantesEstilo.texto);
+		tabla_inscripciones.setFont(ConstantesEstilo.TEXTO);
 						
 		//Modelo de tabla (definición de columnas)
 		inscripciones_modelo = new DefaultTableModel();
@@ -93,7 +93,7 @@ public class VerInscritos extends JFrame {
 						
 		//Títulos de columna
 		JTableHeader encabezado = tabla_inscripciones.getTableHeader();
-		encabezado.setFont(ConstantesEstilo.subtitulo);
+		encabezado.setFont(ConstantesEstilo.SUBTITULO);
 		encabezado.setReorderingAllowed(false);
 						
 		//Personalizar columnas
@@ -103,7 +103,10 @@ public class VerInscritos extends JFrame {
 		tabla_inscripciones.getColumnModel().getColumn(0).setCellRenderer(centrar_celda);
 		tabla_inscripciones.getColumnModel().getColumn(1).setCellRenderer(centrar_celda);
 		tabla_inscripciones.getColumnModel().getColumn(2).setCellRenderer(centrar_celda);
-						
+		
+		// Personalizar filas
+		tabla_inscripciones.setRowHeight(30);
+		
 		JScrollPane contenedor_tabla = new JScrollPane(tabla_inscripciones);
 		
 		buscarInscritos(id_convocatoria, db);

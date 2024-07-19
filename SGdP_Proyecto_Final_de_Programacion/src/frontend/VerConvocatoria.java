@@ -50,7 +50,7 @@ public class VerConvocatoria extends JFrame {
 	public VerConvocatoria(Usuario usuario, int id_convocatoria, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -61,12 +61,12 @@ public class VerConvocatoria extends JFrame {
 		
 		//Contenedor scrolleable
 		JScrollPane contenedor_scrolleable = new JScrollPane(contenedor_general);
-		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.ventana);
+		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.VENTANA);
 		setContentPane(contenedor_scrolleable);
 		
 		// General
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setFont(ConstantesEstilo.TEXTO);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		String tipo_usuario = "";
@@ -88,129 +88,135 @@ public class VerConvocatoria extends JFrame {
 		}
 		
 		JLabel lbl_tipo_usuario = new JLabel(tipo_usuario);
-		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setFont(ConstantesEstilo.TEXTO);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JLabel lbl_convocatoria = new JLabel("Convocatoria");
-		lbl_convocatoria.setFont(ConstantesEstilo.titulo);
+		lbl_convocatoria.setFont(ConstantesEstilo.TITULO);
 		lbl_convocatoria.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		// Información de propuesta
 		// Título
 		lbl_titulo = new JLabel("Título: ");
-		lbl_titulo.setFont(ConstantesEstilo.texto);
+		lbl_titulo.setFont(ConstantesEstilo.TEXTO);
 		
 		// Organismo receptor
 		lbl_organismo_receptor = new JLabel("Organismo Receptor: ");
-		lbl_organismo_receptor.setFont(ConstantesEstilo.texto);
+		lbl_organismo_receptor.setFont(ConstantesEstilo.TEXTO);
 		
 		// Tipo de proyecto
 		lbl_tipo = new JLabel("Tipo: ");
-		lbl_tipo.setFont(ConstantesEstilo.texto);
+		lbl_tipo.setFont(ConstantesEstilo.TEXTO);
 		
 		// Horas otorgadas		
         lbl_horas = new JLabel();
-        lbl_horas.setFont(ConstantesEstilo.texto);
+        lbl_horas.setFont(ConstantesEstilo.TEXTO);
 		
 		// Resumen
 		JLabel lbl_resumen = new JLabel("Resumen: ");
-		lbl_resumen.setFont(ConstantesEstilo.texto);
+		lbl_resumen.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_resumen = new JTextArea();
 		txt_resumen.setEditable(false);
 		txt_resumen.setLineWrap(true);
-		txt_resumen.setFont(ConstantesEstilo.texto);
+		txt_resumen.setWrapStyleWord(true);
+		txt_resumen.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_resumen = new JScrollPane(txt_resumen);
 		
 		// Objetivo
 		JLabel lbl_objetivo = new JLabel("Objetivo: ");
-		lbl_objetivo.setFont(ConstantesEstilo.texto);	
+		lbl_objetivo.setFont(ConstantesEstilo.TEXTO);	
 		
 		txt_objetivo = new JTextArea();
 		txt_objetivo.setEditable(false);
 		txt_objetivo.setLineWrap(true);
-		txt_objetivo.setFont(ConstantesEstilo.texto);
+		txt_objetivo.setWrapStyleWord(true);
+		txt_objetivo.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_objetivo = new JScrollPane(txt_objetivo);
 		
 		// Beneficiarios
 		JLabel lbl_beneficiarios = new JLabel("Beneficiarios: ");
-		lbl_beneficiarios.setFont(ConstantesEstilo.texto);
+		lbl_beneficiarios.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_beneficiarios = new JTextArea();
 		txt_beneficiarios.setEditable(false);
 		txt_beneficiarios.setLineWrap(true);
-		txt_beneficiarios.setFont(ConstantesEstilo.texto);
+		txt_beneficiarios.setWrapStyleWord(true);
+		txt_beneficiarios.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_beneficiarios = new JScrollPane(txt_beneficiarios);
 		
 		// Objetivos de desarrollo sostenible
 		JLabel lbl_objetivosODS = new JLabel("Objetivos de desarrollo sostenible:");
-		lbl_objetivosODS.setFont(ConstantesEstilo.texto);
+		lbl_objetivosODS.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_objetivosODS = new JTextArea();
 		txt_objetivosODS.setEditable(false);
 		txt_objetivosODS.setLineWrap(true);
-		txt_objetivosODS.setFont(ConstantesEstilo.texto);
+		txt_objetivosODS.setWrapStyleWord(true);
+		txt_objetivosODS.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_objetivosODS = new JScrollPane(txt_objetivosODS);
 		
 		// Lugar
 		lbl_lugar = new JLabel("Lugar: ");
-		lbl_lugar.setFont(ConstantesEstilo.texto);
+		lbl_lugar.setFont(ConstantesEstilo.TEXTO);
 		
 		// Horario	
 		lbl_horario = new JLabel("Horario: ");
-		lbl_horario.setFont(ConstantesEstilo.texto);
+		lbl_horario.setFont(ConstantesEstilo.TEXTO);
 				
 		// Estudiantes
-		lbl_estudiantes = new JLabel("Cupos: ");
-		lbl_estudiantes.setFont(ConstantesEstilo.texto);
+		lbl_estudiantes = new JLabel("Inscritos: ");
+		lbl_estudiantes.setFont(ConstantesEstilo.TEXTO);
 		
 		// Facultad
 		lbl_facultad = new JLabel("Facultad: ");
-		lbl_facultad.setFont(ConstantesEstilo.texto);
+		lbl_facultad.setFont(ConstantesEstilo.TEXTO);
 		
 		// Perfil de estudiante
 		JLabel lbl_perfil_estudiante = new JLabel("Perfil de estudiante:");
-		lbl_perfil_estudiante.setFont(ConstantesEstilo.texto);
+		lbl_perfil_estudiante.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_perfil_estudiante = new JTextArea();
 		txt_perfil_estudiante.setEditable(false);
 		txt_perfil_estudiante.setLineWrap(true);
-		txt_perfil_estudiante.setFont(ConstantesEstilo.texto);
+		txt_perfil_estudiante.setWrapStyleWord(true);
+		txt_perfil_estudiante.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_perfil_estudiante = new JScrollPane(txt_perfil_estudiante);
 		
 		// Materiales
 		JLabel lbl_materiales = new JLabel("Materiales: ");
-		lbl_materiales.setFont(ConstantesEstilo.texto);
+		lbl_materiales.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_materiales = new JTextArea();
 		txt_materiales.setEditable(false);
 		txt_materiales.setLineWrap(true);
-		txt_materiales.setFont(ConstantesEstilo.texto);
+		txt_materiales.setWrapStyleWord(true);
+		txt_materiales.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_materiales = new JScrollPane(txt_materiales);
 		
 		// Transporte
 		JLabel lbl_transporte = new JLabel("Transporte ");
-		lbl_transporte.setFont(ConstantesEstilo.texto);
+		lbl_transporte.setFont(ConstantesEstilo.TEXTO);
 		
 		check_transporte = new JCheckBox();
 		check_transporte.setEnabled(false);
 		
 		// Almuerzo
 		JLabel lbl_almuerzo = new JLabel("Almuerzo ");
-		lbl_almuerzo.setFont(ConstantesEstilo.texto);
+		lbl_almuerzo.setFont(ConstantesEstilo.TEXTO);
 		
 		check_almuerzo = new JCheckBox();
 		check_almuerzo.setEnabled(false);
 		
 		// Botones
         JButton btn_volver = new JButton("Volver");
-  		btn_volver.setFont(ConstantesEstilo.boton);
+  		btn_volver.setFont(ConstantesEstilo.BOTON);
   		btn_volver.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
@@ -222,7 +228,7 @@ public class VerConvocatoria extends JFrame {
   		
   		String accion = usuario.getTipo() == 2 ? "Inscribirse" : "Ver Inscritos";
   		JButton btn_accion = new JButton(accion);
-  		btn_accion.setFont(ConstantesEstilo.boton);
+  		btn_accion.setFont(ConstantesEstilo.BOTON);
   		btn_accion.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				
@@ -235,13 +241,18 @@ public class VerConvocatoria extends JFrame {
   				}
   				
   				// Comprobar si el estudiante está inscrito
-  				if(Validaciones.estaInscrito(id_convocatoria, usuario.getId(), db)) {
+  				if(Validaciones.estaInscrito(usuario.getId(), id_convocatoria, db)) {
   					JOptionPane.showMessageDialog(null, "Usted ya está inscrito en esta convocatoria.", "", JOptionPane.WARNING_MESSAGE);
   					return;
   				}
   				
+  				if(!Validaciones.cuposDisponibles(id_convocatoria, db)) {
+  					JOptionPane.showMessageDialog(null, "La convocatoria está llena.", "", JOptionPane.WARNING_MESSAGE);
+  					return;
+  				}
+  				
   				// Inscribir al estudiante
-  				((Estudiante) usuario).inscribirseConvocatoria(id_convocatoria, usuario.getId(), db);
+  				((Estudiante) usuario).inscribirseConvocatoria(usuario.getId(), id_convocatoria, db);
 				JOptionPane.showMessageDialog(null, "Inscripción realizada correctamente.", "", JOptionPane.INFORMATION_MESSAGE);
 				
   			}
@@ -306,9 +317,9 @@ public class VerConvocatoria extends JFrame {
 		                .addComponent(check_almuerzo))
 		        
 		        .addGroup(layout.createSequentialGroup()
-		        		.addGap(200)
+		        		.addGap(360)
 		                .addComponent(btn_accion, 200, 200, 200)
-		                .addGap(200))
+		                .addGap(360))
 		        
 		);
 
@@ -375,7 +386,7 @@ public class VerConvocatoria extends JFrame {
 		contenedor_general.setLayout(layout);
 	}
 	
-	public void consultarConvocatoria(int id_propuesta, ManejoSQL db) {
+	public void consultarConvocatoria(int id_convocatoria, ManejoSQL db) {
 		
 		try {
 			// Consulta de datos
@@ -393,16 +404,18 @@ public class VerConvocatoria extends JFrame {
 					+ "inicio, "
 					+ "final, "
 					+ "estudiantes, "
+					+ "count(Inscripciones.id) as inscritos, "
 					+ "facultades, "
 					+ "perfil_estudiante, "
 					+ "materiales, "
 					+ "transporte, "
-					+ "almuerzo, "
+					+ "almuerzo "
 					+ "FROM Proyectos "
 					+ "INNER JOIN Usuarios ON Proyectos.or_id = Usuarios.id "
 					+ "INNER JOIN Convocatorias ON Proyectos.id = Convocatorias.proyecto_id "
 					+ "INNER JOIN Horarios ON Proyectos.id = Horarios.proyecto_id "
-					+ "WHERE Proyectos.id = " + id_propuesta);
+					+ "LEFT JOIN Inscripciones ON Convocatorias.id = Inscripciones.convocatoria_id "
+					+ "WHERE Convocatorias.id = " + id_convocatoria);
 			
 			lbl_titulo.setText("Título: " + db.datos.getString("titulo"));
 			lbl_organismo_receptor.setText("Organismo Receptor: " + db.datos.getString("usuario"));
@@ -414,7 +427,7 @@ public class VerConvocatoria extends JFrame {
 			txt_objetivosODS.setText(db.datos.getString("contribucionODS"));
 			lbl_lugar.setText("Lugar: " + db.datos.getString("lugar"));
 			lbl_horario.setText("Horario: " + db.datos.getString("dia") + " [" + db.datos.getString("inicio") + " - " + db.datos.getString("final") + "]");
-			lbl_estudiantes.setText("Cupos: " + Integer.toString(db.datos.getInt("estudiantes")));
+			lbl_estudiantes.setText("Inscritos: " + Integer.toString(db.datos.getInt("inscritos")) + "/" + Integer.toString(db.datos.getInt("estudiantes")));
 			lbl_facultad.setText("Facultad: " + db.datos.getString("facultades"));
 			txt_perfil_estudiante.setText(db.datos.getString("perfil_estudiante"));
 			txt_materiales.setText(db.datos.getString("materiales"));

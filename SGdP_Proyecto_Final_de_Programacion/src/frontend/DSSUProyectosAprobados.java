@@ -33,8 +33,8 @@ public class DSSUProyectosAprobados extends JFrame{
 	public DSSUProyectosAprobados(DSSU usuario, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
-        setPreferredSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
+        setPreferredSize(ConstantesEstilo.VENTANA);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -46,20 +46,20 @@ public class DSSUProyectosAprobados extends JFrame{
 		
 		// Etiquetas
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setFont(ConstantesEstilo.TEXTO);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		JLabel lbl_tipo_usuario = new JLabel("DSSU");
-		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setFont(ConstantesEstilo.TEXTO);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 	
 		JLabel lbl_propuestas = new JLabel("Proyectos Aprobados");
-		lbl_propuestas.setFont(ConstantesEstilo.titulo);
+		lbl_propuestas.setFont(ConstantesEstilo.TITULO);
 		lbl_propuestas.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		// Botones		
 		JButton boton_menu = new JButton("Menú");
-		boton_menu.setFont(ConstantesEstilo.boton);
+		boton_menu.setFont(ConstantesEstilo.BOTON);
 		boton_menu.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
@@ -71,7 +71,7 @@ public class DSSUProyectosAprobados extends JFrame{
 		// Tabla
 		proyectos_aprobados = new JTable();
 		proyectos_aprobados.setEnabled(false);
-		proyectos_aprobados.setFont(ConstantesEstilo.texto);
+		proyectos_aprobados.setFont(ConstantesEstilo.TEXTO);
 		
         // Modelo de tabla (definición de columnas)
 		proyectos_aprobados_modelo = new DefaultTableModel();
@@ -80,7 +80,7 @@ public class DSSUProyectosAprobados extends JFrame{
 		
 		// Títulos de columna
 		JTableHeader encabezado = proyectos_aprobados.getTableHeader();
-        encabezado.setFont(ConstantesEstilo.subtitulo);
+        encabezado.setFont(ConstantesEstilo.SUBTITULO);
         encabezado.setReorderingAllowed(false);
 		
 		// Personalizar columnas

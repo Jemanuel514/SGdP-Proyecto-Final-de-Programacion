@@ -50,7 +50,7 @@ public class DSSUPublicarConvocatoria extends JFrame {
 	public DSSUPublicarConvocatoria(DSSU usuario, int id_proyecto, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -61,141 +61,147 @@ public class DSSUPublicarConvocatoria extends JFrame {
 		
 		//Contenedor scrolleable
 		JScrollPane contenedor_scrolleable = new JScrollPane(contenedor_general);
-		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.ventana);
+		contenedor_scrolleable.setPreferredSize(ConstantesEstilo.VENTANA);
 		setContentPane(contenedor_scrolleable);
 		
 		// General
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setFont(ConstantesEstilo.TEXTO);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JLabel lbl_tipo_usuario = new JLabel("DSSU");
-		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setFont(ConstantesEstilo.TEXTO);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JLabel lbl_publicar_convocatoria = new JLabel("Publicar Convocatoria");
-		lbl_publicar_convocatoria.setFont(ConstantesEstilo.titulo);
+		lbl_publicar_convocatoria.setFont(ConstantesEstilo.TITULO);
 		lbl_publicar_convocatoria.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		// Información de propuesta
 		// Título
 		lbl_titulo = new JLabel("Título: ");
-		lbl_titulo.setFont(ConstantesEstilo.texto);
+		lbl_titulo.setFont(ConstantesEstilo.TEXTO);
 		
 		// Organismo receptor
 		lbl_organismo_receptor = new JLabel("Organismo Receptor: ");
-		lbl_organismo_receptor.setFont(ConstantesEstilo.texto);
+		lbl_organismo_receptor.setFont(ConstantesEstilo.TEXTO);
 		
 		// Tipo de proyecto
 		lbl_tipo = new JLabel("Tipo: ");
-		lbl_tipo.setFont(ConstantesEstilo.texto);
+		lbl_tipo.setFont(ConstantesEstilo.TEXTO);
 		
 		// Horas otorgadas
 		JLabel lbl_horas = new JLabel("Horas otorgadas: ");
-		lbl_horas.setFont(ConstantesEstilo.texto);
+		lbl_horas.setFont(ConstantesEstilo.TEXTO);
 		
         txt_horas = new JTextField();
-        txt_horas.setFont(ConstantesEstilo.texto);
+        txt_horas.setFont(ConstantesEstilo.TEXTO);
 		
 		// Resumen
 		JLabel lbl_resumen = new JLabel("Resumen: ");
-		lbl_resumen.setFont(ConstantesEstilo.texto);
+		lbl_resumen.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_resumen = new JTextArea();
 		txt_resumen.setEditable(false);
 		txt_resumen.setLineWrap(true);
-		txt_resumen.setFont(ConstantesEstilo.texto);
+		txt_resumen.setWrapStyleWord(true);
+		txt_resumen.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_resumen = new JScrollPane(txt_resumen);
 		
 		// Objetivo
 		JLabel lbl_objetivo = new JLabel("Objetivo: ");
-		lbl_objetivo.setFont(ConstantesEstilo.texto);	
+		lbl_objetivo.setFont(ConstantesEstilo.TEXTO);	
 		
 		txt_objetivo = new JTextArea();
 		txt_objetivo.setEditable(false);
 		txt_objetivo.setLineWrap(true);
-		txt_objetivo.setFont(ConstantesEstilo.texto);
+		txt_objetivo.setWrapStyleWord(true);
+		txt_objetivo.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_objetivo = new JScrollPane(txt_objetivo);
 		
 		// Beneficiarios
 		JLabel lbl_beneficiarios = new JLabel("Beneficiarios: ");
-		lbl_beneficiarios.setFont(ConstantesEstilo.texto);
+		lbl_beneficiarios.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_beneficiarios = new JTextArea();
 		txt_beneficiarios.setEditable(false);
 		txt_beneficiarios.setLineWrap(true);
-		txt_beneficiarios.setFont(ConstantesEstilo.texto);
+		txt_beneficiarios.setWrapStyleWord(true);
+		txt_beneficiarios.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_beneficiarios = new JScrollPane(txt_beneficiarios);
 		
 		// Objetivos de desarrollo sostenible
 		JLabel lbl_objetivosODS = new JLabel("Objetivos de desarrollo sostenible:");
-		lbl_objetivosODS.setFont(ConstantesEstilo.texto);
+		lbl_objetivosODS.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_objetivosODS = new JTextArea();
 		txt_objetivosODS.setEditable(false);
 		txt_objetivosODS.setLineWrap(true);
-		txt_objetivosODS.setFont(ConstantesEstilo.texto);
+		txt_objetivosODS.setWrapStyleWord(true);
+		txt_objetivosODS.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_objetivosODS = new JScrollPane(txt_objetivosODS);
 		
 		// Lugar
 		lbl_lugar = new JLabel("Lugar: ");
-		lbl_lugar.setFont(ConstantesEstilo.texto);
+		lbl_lugar.setFont(ConstantesEstilo.TEXTO);
 		
 		// Horario	
 		lbl_horario = new JLabel("Horario: ");
-		lbl_horario.setFont(ConstantesEstilo.texto);
+		lbl_horario.setFont(ConstantesEstilo.TEXTO);
 				
 		// Estudiantes
 		lbl_estudiantes = new JLabel("Cupos: ");
-		lbl_estudiantes.setFont(ConstantesEstilo.texto);
+		lbl_estudiantes.setFont(ConstantesEstilo.TEXTO);
 		
 		// Facultad
 		lbl_facultad = new JLabel("Facultad: ");
-		lbl_facultad.setFont(ConstantesEstilo.texto);
+		lbl_facultad.setFont(ConstantesEstilo.TEXTO);
 		
 		// Perfil de estudiante
 		JLabel lbl_perfil_estudiante = new JLabel("Perfil de estudiante:");
-		lbl_perfil_estudiante.setFont(ConstantesEstilo.texto);
+		lbl_perfil_estudiante.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_perfil_estudiante = new JTextArea();
 		txt_perfil_estudiante.setEditable(false);
 		txt_perfil_estudiante.setLineWrap(true);
-		txt_perfil_estudiante.setFont(ConstantesEstilo.texto);
+		txt_perfil_estudiante.setWrapStyleWord(true);
+		txt_perfil_estudiante.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_perfil_estudiante = new JScrollPane(txt_perfil_estudiante);
 		
 		// Materiales
 		JLabel lbl_materiales = new JLabel("Materiales: ");
-		lbl_materiales.setFont(ConstantesEstilo.texto);
+		lbl_materiales.setFont(ConstantesEstilo.TEXTO);
 		
 		txt_materiales = new JTextArea();
 		txt_materiales.setEditable(false);
 		txt_materiales.setLineWrap(true);
-		txt_materiales.setFont(ConstantesEstilo.texto);
+		txt_materiales.setWrapStyleWord(true);
+		txt_materiales.setFont(ConstantesEstilo.TEXTO);
 		
 		JScrollPane contenedor_materiales = new JScrollPane(txt_materiales);
 		
 		// Transporte
 		JLabel lbl_transporte = new JLabel("Transporte ");
-		lbl_transporte.setFont(ConstantesEstilo.texto);
+		lbl_transporte.setFont(ConstantesEstilo.TEXTO);
 		
 		check_transporte = new JCheckBox();
 		check_transporte.setEnabled(false);
 		
 		// Almuerzo
 		JLabel lbl_almuerzo = new JLabel("Almuerzo ");
-		lbl_almuerzo.setFont(ConstantesEstilo.texto);
+		lbl_almuerzo.setFont(ConstantesEstilo.TEXTO);
 		
 		check_almuerzo = new JCheckBox();
 		check_almuerzo.setEnabled(false);
 		
 		// Botones
         JButton btn_volver = new JButton("Volver");
-  		btn_volver.setFont(ConstantesEstilo.boton);
+  		btn_volver.setFont(ConstantesEstilo.BOTON);
   		btn_volver.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
@@ -205,21 +211,22 @@ public class DSSUPublicarConvocatoria extends JFrame {
   		});
   		
   		JButton btn_publicar = new JButton("Publicar");
-  		btn_publicar.setFont(ConstantesEstilo.boton);
+  		btn_publicar.setFont(ConstantesEstilo.BOTON);
   		btn_publicar.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				
   				if(Validaciones.validarEnteroPositivo(txt_horas.getText())) {
   					usuario.publicarConvocatoria(id_proyecto, Integer.parseInt(txt_horas.getText()), db);
-  					JOptionPane.showMessageDialog(null, "Convocatoria publicada", "", JOptionPane.INFORMATION_MESSAGE);
+  					JOptionPane.showMessageDialog(null, "Convocatoria publicada.", "", JOptionPane.INFORMATION_MESSAGE);
+  					
+  					dispose();
+  					DSSUProyectosAprobados proyectos_aprobados = new DSSUProyectosAprobados(usuario, db);
+  					proyectos_aprobados.setVisible(true);
   				}
   				else {
   					JOptionPane.showMessageDialog(null, "Horas otorgadas no válidas.", "", JOptionPane.ERROR_MESSAGE);
   				}
   				
-  				dispose();
-  				DSSUProyectosAprobados proyectos_aprobados = new DSSUProyectosAprobados(usuario, db);
-				proyectos_aprobados.setVisible(true);
   			}
   		});
 		
@@ -284,9 +291,9 @@ public class DSSUPublicarConvocatoria extends JFrame {
 		                .addComponent(check_almuerzo))
 		        
 		        .addGroup(layout.createSequentialGroup()
-		        		.addGap(200)
+		        		.addGap(360)
 		                .addComponent(btn_publicar, 200, 200, 200)
-		                .addGap(200))
+		                .addGap(360))
 		        
 		);
 
@@ -377,7 +384,7 @@ public class DSSUPublicarConvocatoria extends JFrame {
 					+ "perfil_estudiante, "
 					+ "materiales, "
 					+ "transporte, "
-					+ "almuerzo, "
+					+ "almuerzo "
 					+ "FROM Proyectos "
 					+ "INNER JOIN Usuarios ON Proyectos.or_id = Usuarios.id "
 					+ "INNER JOIN Horarios ON Proyectos.id = Horarios.proyecto_id "
@@ -398,7 +405,7 @@ public class DSSUPublicarConvocatoria extends JFrame {
 			txt_materiales.setText(db.datos.getString("materiales"));
 			check_transporte.setSelected(db.datos.getInt("transporte") == 1 ? true : false);
 			check_almuerzo.setSelected(db.datos.getInt("almuerzo") == 1 ? true : false);
-
+			
 		}
 		
 		catch(SQLException e){

@@ -39,8 +39,8 @@ public class Presentacion extends JFrame {
 	public Presentacion() {
 		Path rutaProyecto = Paths.get(".").toAbsolutePath().normalize();
 		
-		setSize(ConstantesEstilo.ventana);
-		setPreferredSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
+		setPreferredSize(ConstantesEstilo.VENTANA);
 		setResizable(false);		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

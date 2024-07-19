@@ -34,8 +34,8 @@ public class EstudianteVerInscripciones extends JFrame {
 	public EstudianteVerInscripciones(Estudiante usuario, ManejoSQL db) {
 		
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
-        setPreferredSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
+        setPreferredSize(ConstantesEstilo.VENTANA);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -47,36 +47,36 @@ public class EstudianteVerInscripciones extends JFrame {
 		
 		// Etiquetas
 		JLabel lbl_bienvenida = new JLabel("Bienvenido, " + usuario.getUsuario());
-		lbl_bienvenida.setFont(ConstantesEstilo.texto);
+		lbl_bienvenida.setFont(ConstantesEstilo.TEXTO);
 		lbl_bienvenida.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JLabel lbl_tipo_usuario = new JLabel("ESTUDIANTE");
-		lbl_tipo_usuario.setFont(ConstantesEstilo.texto);
+		lbl_tipo_usuario.setFont(ConstantesEstilo.TEXTO);
 		lbl_tipo_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JLabel lbl_facultad = new JLabel(usuario.getFacultad());
-		lbl_facultad.setFont(ConstantesEstilo.texto);
+		lbl_facultad.setFont(ConstantesEstilo.TEXTO);
 		lbl_facultad.setHorizontalAlignment(SwingConstants.RIGHT);
 	
 		JLabel lbl_convocatorias = new JLabel("Proyectos Inscritos");
-		lbl_convocatorias.setFont(ConstantesEstilo.titulo);
+		lbl_convocatorias.setFont(ConstantesEstilo.TITULO);
 		lbl_convocatorias.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		// Botones
 		JButton boton_menu = new JButton("Menú");
-		boton_menu.setFont(ConstantesEstilo.boton);
+		boton_menu.setFont(ConstantesEstilo.BOTON);
 		boton_menu.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent e) {
   				dispose();
-  					EstudianteMenuPrincipal menu_estudiante = new EstudianteMenuPrincipal(usuario, db);
-  					menu_estudiante.setVisible(true);
+  				EstudianteMenuPrincipal menu_estudiante = new EstudianteMenuPrincipal(usuario, db);
+  				menu_estudiante.setVisible(true);
   				}
   			});
 		
 		// Tabla
 		tabla_convocatorias = new JTable();
 		tabla_convocatorias.setEnabled(false);
-		tabla_convocatorias.setFont(ConstantesEstilo.texto);
+		tabla_convocatorias.setFont(ConstantesEstilo.TEXTO);
 		
         // Modelo de tabla (definición de columnas)
 		convocatorias_modelo = new DefaultTableModel();
@@ -85,7 +85,7 @@ public class EstudianteVerInscripciones extends JFrame {
 		
 		// Títulos de columna
 		JTableHeader encabezado = tabla_convocatorias.getTableHeader();
-        encabezado.setFont(ConstantesEstilo.subtitulo);
+        encabezado.setFont(ConstantesEstilo.SUBTITULO);
         encabezado.setReorderingAllowed(false);
 		
 		// Personalizar columnas

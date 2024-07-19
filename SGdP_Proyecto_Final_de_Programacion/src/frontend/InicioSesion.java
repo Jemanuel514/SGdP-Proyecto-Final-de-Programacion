@@ -48,7 +48,7 @@ public class InicioSesion extends JFrame {
 
 	public InicioSesion() {
 		// JFrame
-		setSize(ConstantesEstilo.ventana);
+		setSize(ConstantesEstilo.VENTANA);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -61,46 +61,46 @@ public class InicioSesion extends JFrame {
 		
 		// Etiquetas
 		JLabel etiqueta_SGdP = new JLabel("SISTEMA DE GESTIÓN DE PROYECTOS");
-		etiqueta_SGdP.setFont(ConstantesEstilo.titulo);
+		etiqueta_SGdP.setFont(ConstantesEstilo.TITULO);
 		etiqueta_SGdP.setHorizontalAlignment(SwingConstants.CENTER);
 		etiqueta_SGdP.setBounds(142, 215, 726, 48);
 		contenedor.add(etiqueta_SGdP);
 		
 		JLabel etiqueta_usuario = new JLabel("Usuario");
-		etiqueta_usuario.setFont(ConstantesEstilo.texto);
+		etiqueta_usuario.setFont(ConstantesEstilo.TEXTO);
 		etiqueta_usuario.setHorizontalAlignment(SwingConstants.CENTER);
 		etiqueta_usuario.setBounds(349, 290, 312, 36);
 		contenedor.add(etiqueta_usuario);
 		
 		JLabel lbl_contrasena = new JLabel("Contraseña");
-		lbl_contrasena.setFont(ConstantesEstilo.texto);
+		lbl_contrasena.setFont(ConstantesEstilo.TEXTO);
 		lbl_contrasena.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_contrasena.setBounds(349, 379, 312, 36);
 		contenedor.add(lbl_contrasena);
 		
 		// Campos de texto
 		txt_usuario = new JTextField();
-		txt_usuario.setFont(ConstantesEstilo.texto);
+		txt_usuario.setFont(ConstantesEstilo.TEXTO);
 		txt_usuario.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_usuario.setBounds(348, 336, 314, 36);
 		contenedor.add(txt_usuario);
 		
 		txt_contrasena = new JPasswordField();
-		txt_contrasena.setFont(ConstantesEstilo.texto);
+		txt_contrasena.setFont(ConstantesEstilo.TEXTO);
 		txt_contrasena.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_contrasena.setBounds(349, 425, 312, 36);
 		contenedor.add(txt_contrasena);
 		
 		// Botones
-		JButton btnIniciarSesion = new JButton("Iniciar Sesión");
-		btnIniciarSesion.setFont(ConstantesEstilo.boton);
-		btnIniciarSesion.setBounds(405, 501, 199, 36);
-		btnIniciarSesion.addActionListener(new ActionListener() {
+		JButton btn_iniciar_sesion = new JButton("Iniciar Sesión");
+		btn_iniciar_sesion.setFont(ConstantesEstilo.BOTON);
+		btn_iniciar_sesion.setBounds(405, 501, 199, 36);
+		btn_iniciar_sesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				iniciarSesion();
 			}
 		});
-		contenedor.add(btnIniciarSesion);
+		contenedor.add(btn_iniciar_sesion);
 		
 	}
 	
